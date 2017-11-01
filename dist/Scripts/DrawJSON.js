@@ -1,14 +1,11 @@
 var svgContainer;
 var typePie
 
-// $(document).ready(function () {
-
-
-// });
-
 // draw to SVG container 
 function drawJSON(json) {
 
+    //call threeJs method
+    threeModel();
     /////////////////////////////////////////////////
     ///////////////d3 Grid Visulazation /////////////
     /////////////////////////////////////////////////
@@ -30,7 +27,6 @@ function drawJSON(json) {
     // load SVG container on load of page 
     svgContainer = d3.select("#popup").append("svg");
 
-
     var rgbScale = d3.scale.linear()
         .domain([0, 30])
         .range([0, 255]);
@@ -39,8 +35,8 @@ function drawJSON(json) {
         .range([255, 0]);
 
     var circles = svgContainer.selectAll("circle")
-        .attr("width", 400)
-        .attr("height", 400)
+        .attr("width", 200)
+        .attr("height", 200)
         .data(grid)
         .enter()
         .append("circle");
@@ -75,7 +71,7 @@ function drawJSON(json) {
         .select("#popup")
         .groupBy("x")
         .data(grid);
-    typePie.innerRadius(100);
+    typePie.innerRadius(20);
     typePie.padPixel(1);
     typePie.render();
 }

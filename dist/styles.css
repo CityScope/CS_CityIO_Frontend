@@ -1,12 +1,17 @@
 #viz-container {
-  height: 700px;
+  height: 600px;
   width: 100%;
 }
 
 .single_viz {
-  height: 700px;
+  height: 600px;
 }
 
 #map {
-  height: 700px;
+  height: 600px;
+}
+
+#threeDiv {
+  height: 200px;
+  width: 200px;
 }
