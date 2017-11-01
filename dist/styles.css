@@ -1,4 +1,12 @@
-#viz {
-  height: 800px;
-  width: 800px;
+#viz-container {
+  height: 700px;
+  width: 100%;
+}
+
+.single_viz {
+  height: 700px;
+}
+
+#map {
+  height: 700px;
 }

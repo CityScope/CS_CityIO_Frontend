@@ -1,11 +1,11 @@
-$(document).ready(function () {
-  readCityIO();
-});
+// $(document).ready(function () {
+//   readCityIO();
+// });
 
 
 // setInterval(function () {
 //   readCityIO();
-// }, 5000);
+// }, 2000);
 
 /////////////////////////////////////////////////
 ///////////////URL //////////////////////////////

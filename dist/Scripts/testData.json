@@ -1,0 +1,113 @@
+[{
+    "city": "Ada",
+    "dma_code": 657,
+    "latitude": 34.774531000000003,
+    "longitude": -96.678344899999999,
+    "region": "OK",
+    "slug": "ada-ok"
+  },
+  {
+    "city": "Akron",
+    "dma_code": 510,
+    "latitude": 41.081444699999999,
+    "longitude": -81.519005300000003,
+    "region": "OH",
+    "slug": "akron-oh"
+  },
+  {
+    "city": "Albany",
+    "dma_code": 525,
+    "latitude": 31.578507399999999,
+    "longitude": -84.155741000000006,
+    "region": "GA",
+    "slug": "albany-ga"
+  },
+  {
+    "city": "Alexandria",
+    "dma_code": 644,
+    "latitude": 31.311293599999999,
+    "longitude": -92.445137099999997,
+    "region": "LA",
+    "slug": "alexandria-la"
+  },
+  {
+    "city": "Alpena",
+    "dma_code": 583,
+    "latitude": 45.061679400000003,
+    "longitude": -83.432752800000003,
+    "region": "MI",
+    "slug": "alpena-mi"
+  },
+  {
+    "city": "Altoona",
+    "dma_code": 574,
+    "latitude": 40.5186809,
+    "longitude": -78.394735900000001,
+    "region": "PA",
+    "slug": "altoona-pa"
+  },
+  {
+    "city": "Amarillo",
+    "dma_code": 634,
+    "latitude": 35.221997100000003,
+    "longitude": -101.8312969,
+    "region": "TX",
+    "slug": "amarillo-tx"
+  },
+  {
+    "city": "Ames",
+    "dma_code": 679,
+    "latitude": 42.023350000000001,
+    "longitude": -93.625622000000007,
+    "region": "IA",
+    "slug": "ames-ia"
+  },
+  {
+    "city": "Anderson",
+    "dma_code": 567,
+    "latitude": 34.503439399999998,
+    "longitude": -82.650133199999999,
+    "region": "SC",
+    "slug": "anderson-sc"
+  },
+  {
+    "city": "Appleton",
+    "dma_code": 658,
+    "latitude": 44.261930900000003,
+    "longitude": -88.415384700000004,
+    "region": "WI",
+    "slug": "appleton-wi"
+  },
+  {
+    "city": "Atlanta",
+    "dma_code": 524,
+    "latitude": 33.748995399999998,
+    "longitude": -84.387982399999999,
+    "region": "GA",
+    "slug": "atlanta-ga"
+  },
+  {
+    "city": "Auburn",
+    "dma_code": 500,
+    "latitude": 44.097850899999997,
+    "longitude": -70.231165500000003,
+    "region": "ME",
+    "slug": "auburn-me"
+  },
+  {
+    "city": "Augusta",
+    "dma_code": 520,
+    "latitude": 33.469999999999999,
+    "longitude": -81.974999999999994,
+    "region": "GA",
+    "slug": "augusta-ga"
+  },
+  {
+    "city": "Austin",
+    "dma_code": 611,
+    "latitude": 43.6666296,
+    "longitude": -92.974636700000005,
+    "region": "MN",
+    "slug": "austin-mn"
+  }
+]

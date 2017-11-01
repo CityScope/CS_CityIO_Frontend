@@ -1,17 +1,10 @@
 var svgContainer;
 var typePie
 
-$(document).ready(function () {
+// $(document).ready(function () {
 
-    // load SVG container on load of page 
-    svgContainer = d3.select("#viz").append("svg")
-        .attr("width", 400)
-        .attr("height", 400);
 
-    // setup the pie outside of json loop
-    typePie = new d3plus.Pie()
-        .select("#viz");
-});
+// });
 
 // draw to SVG container 
 function drawJSON(json) {
@@ -34,6 +27,9 @@ function drawJSON(json) {
     });
 
     //Draw CS grid 
+    // load SVG container on load of page 
+    svgContainer = d3.select("#popup").append("svg");
+
 
     var rgbScale = d3.scale.linear()
         .domain([0, 30])
@@ -43,6 +39,8 @@ function drawJSON(json) {
         .range([255, 0]);
 
     var circles = svgContainer.selectAll("circle")
+        .attr("width", 400)
+        .attr("height", 400)
         .data(grid)
         .enter()
         .append("circle");
@@ -55,7 +53,7 @@ function drawJSON(json) {
             return 20 + (d.y * 20);
         });
 
-        
+
     var circlesAttr = circles
         .style("fill", function (d) {
             return d3.rgb(rgbScale(d.value), rgbScaleRev(d.value), 0);
@@ -70,12 +68,14 @@ function drawJSON(json) {
     /////////////////////////////////////////////////
     ///////////////d3 plus ratio pie chart //////////
     /////////////////////////////////////////////////
-    
+
+    // setup the pie outside of json loop
+    typePie = new d3plus.Pie();
     typePie
-        // .Select(["#viz"])
+        .select("#popup")
         .groupBy("x")
         .data(grid);
     typePie.innerRadius(100);
-    typePie.padPixel(2);
+    typePie.padPixel(1);
     typePie.render();
 }
