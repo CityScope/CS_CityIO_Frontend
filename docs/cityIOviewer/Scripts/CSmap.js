@@ -24,11 +24,11 @@ function vizMap() {
 
     // create a costum map icon
     var legoIcon = L.icon({
-        iconUrl: '/img/lego.png',
+        iconUrl: 'img/lego.png',
         iconSize: [50, 50],
         iconAnchor: [0, 0],
         popupAnchor: [0, 0],
-        shadowUrl: '/img/shadow.png',
+        shadowUrl: 'img/shadow.png',
         shadowSize: [50, 50],
         shadowAnchor: [0, -20]
     });
