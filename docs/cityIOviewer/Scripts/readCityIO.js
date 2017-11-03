@@ -1,7 +1,4 @@
-// $(document).ready(function () {
-//   readCityIO();
-// });
-
+$(window).on("load", readCityIO);
 
 // setInterval(function () {
 //   readCityIO();
@@ -12,6 +9,7 @@
 /////////////////////////////////////////////////
 
 function readCityIO() {
+
   var cityIOurl = "https://cityio.media.mit.edu/api/table/citymatrix_volpe";
 
   /////////////////////////////////////////////////
@@ -24,8 +22,10 @@ function readCityIO() {
     callback: 'jsonData',
     type: 'GET',
     success: function (data) {
-      drawJSON(data);
-      // console.log(new Date(data.timestamp)); //print date of cityIO data
+      //call viz methods here 
+      // drawJSON(data);
+      threeModel(data);
+      console.log(new Date(data.timestamp)); //print date of cityIO data
 
     },
     error: function () {

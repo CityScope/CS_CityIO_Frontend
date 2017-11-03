@@ -1,36 +1,28 @@
-// $(document).ready(function () {});
+// $(document).ready(threeModel());
 
-function threeModel() {
-    var camera, scene, renderer, CANVAS_WIDTH = 200,
-        CANVAS_HEIGHT = 200;
+function threeModel(jsonData) {
+    console.log(jsonData)
+    var camera, scene, renderer
+    var CANVAS_WIDTH = 800,
+        CANVAS_HEIGHT = 500;
+
     var mesh;
     var holder = [];
 
     init();
-    animate();
 
     function init() {
-        camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-        camera.position.z = 200;
+        //set up the camera 
+        camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
         scene = new THREE.Scene();
-
-        for (var index = 0; index < 10; index++) {
-            var geometry = new THREE.BoxBufferGeometry((10 * index) + 10, (10 * index) + 10, 20);
-            var material = new THREE.MeshStandardMaterial({
-                color: 'white'
-            })
-            mesh = new THREE.Mesh(geometry, material);
-            mesh.position.set(index + 30, index + 30, index);
-            mesh.castShadow = true; //default is false
-            mesh.receiveShadow = true; //default
-            holder.push(mesh);
-            scene.add(mesh);
-        }
-
+        camera.position.set(0, 0, 40);
+        camera.up = new THREE.Vector3(1, 1, 1);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        // set up the renderer
         renderer = new THREE.WebGLRenderer({
             alpha: true
         });
-        renderer.setClearColor(0xff0000, 0);
+        renderer.setClearColor('#ff0000', 1);
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
         renderer.shadowMap.enabled = true;
@@ -39,10 +31,18 @@ function threeModel() {
         window.addEventListener('resize', onWindowResize, false);
     }
 
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
 
     //Create a PointLight and turn on shadows for the light
     var light = new THREE.PointLight(0xffffff, 1, 1000);
-    light.position.set(100, 45, 45);
+    light.position.set(0, 30, 30);
+    light.up = new THREE.Vector3(0, 0, 1);
+    light.lookAt(new THREE.Vector3(0, 0, 0));
     light.castShadow = true; // default false
     scene.add(light);
 
@@ -52,22 +52,43 @@ function threeModel() {
     light.shadow.camera.near = 0.5; // default
     light.shadow.camera.far = 500 // default
 
+    var lightAmb = new THREE.AmbientLight(0xffffff, .1);
+    // Add the light to the scene
+    scene.add(lightAmb);
 
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
 
-    function animate() {
-        requestAnimationFrame(animate);
-        // mesh.rotation.x += 0.005;
-        for (var index = 0; index < holder.length; index++) {
-            spd = 0.1 * Math.random();
-            holder[index].rotation.y += spd;
+    var i = 0;
+    for (var x = 0; x < Math.sqrt(jsonData.grid.length); x++) {
+        for (var y = 0; y < Math.sqrt(jsonData.grid.length); y++) {
+            var geometry = new THREE.BoxBufferGeometry(0.8, 0.8, 0.8);
+            var material = new THREE.MeshStandardMaterial({
+                color: 'white'
+            })
+            mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(x, y, jsonData.grid[i].type);
+            mesh.castShadow = true; //default is false
+            mesh.receiveShadow = true; //default
+            holder.push(mesh);
+            scene.add(mesh);
+            i += 1;
         }
-
-        renderer.render(scene, camera);
     }
-    document.getElementById('popup').appendChild(renderer.domElement);
+
+
+    var direction = new THREE.Vector3(0.1, 0.1, 0); // amount to move per frame
+    function animate() {
+        camera.position.add(direction); // add to position
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        renderer.render(scene, camera); // render new frame
+        requestAnimationFrame(animate); // keep looping
+    }
+    requestAnimationFrame(animate);
+
+
+    document.getElementById('threeDiv').appendChild(renderer.domElement);
+
+    // renderer.setSize($(threeDiv).width(), $(threeDiv).height());
+    // document.getElementById('body').appendChild(renderer.domElement);
+
 }

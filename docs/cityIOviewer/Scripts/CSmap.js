@@ -41,7 +41,7 @@ function vizMap() {
     });
     //setup popup options for clicking on marker 
     var popupOptions = {
-        'maxWidth': '200',
+        'minWidth': '200',
         'maxHeight': '200'
 
     }
