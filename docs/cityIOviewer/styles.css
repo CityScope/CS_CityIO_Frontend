@@ -1,12 +1,52 @@
-#viz-container {
-  height: 600px;
+body {
+  color: rgb(255, 255, 255);
+  background-color: #0B011C;
+  height: 100%;
   width: 100%;
 }
 
-.single_viz {
-  height: 600px;
+#map {
+  height: 50%;
 }
 
-#map {
-  height: 200px;
+#viz {
+  height: 50%;
+  width: 100%;
+}
+
+#tableInfoDiv {
+  float: left;
+  width: 31%;
+  border: 1px solid rgb(255, 255, 255);
+  position: fixed;
+}
+
+#threeDiv {
+  width: 32%;
+  height: 45%;
+  left: 34%;
+  border: 1px solid rgb(255, 255, 255);
+  position: fixed;
+}
+
+#d3Div {
+  width: 33%;
+  left: 68%;
+  position: fixed;
+}
+
+#d3Div1 {
+  float: left;
+  width: 33%;  
+  height: 150px;
+  border: 1px solid rgb(255, 255, 255);
+  position: fixed;
+}
+
+#d3Div2 {
+  height: 150px;
+  transform: translateY(100%);
+  border: 1px solid rgb(255, 255, 255);
+  position: fixed;
+  left: 68%;
 }

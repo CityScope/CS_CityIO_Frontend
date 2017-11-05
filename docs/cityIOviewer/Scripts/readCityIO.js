@@ -23,7 +23,7 @@ function readCityIO() {
     type: 'GET',
     success: function (data) {
       //call viz methods here 
-      // drawJSON(data);
+      drawJSON(data);
       threeModel(data);
       console.log(new Date(data.timestamp)); //print date of cityIO data
 
