@@ -1,5 +1,3 @@
-// $(document).ready(threeModel());
-
 function threeModel(jsonData) {
     // console.log(jsonData)
 
@@ -20,12 +18,18 @@ function threeModel(jsonData) {
         //set up the camera 
         // camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 1, 1000);
 
+
+        cancelAnimationFrame(this.id); // Stop the animation
+        renderer = null;
+
+
+
         var aspect = window.innerWidth / window.innerHeight;
-        camera = new THREE.OrthographicCamera(frustumSize * aspect / -2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / -2, 1, 2000);
+        camera = new THREE.OrthographicCamera(frustumSize * aspect / -2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / -2, 1, 5000);
         camera.position.y = 400;
         scene = new THREE.Scene();
         // set up the renderer
-        renderer = new THREE.WebGLRenderer({
+        renderer = window.renderer = new THREE.WebGLRenderer({
             alpha: true
         });
 
@@ -37,7 +41,7 @@ function threeModel(jsonData) {
         renderer.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
 
-        var gridHelper = new THREE.GridHelper(100, 100);
+        var gridHelper = new THREE.GridHelper(100, 100, 'white', '#404040');
         scene.add(gridHelper);
 
 
@@ -45,8 +49,8 @@ function threeModel(jsonData) {
 
         //Create a PointLight and turn on shadows for the light
         var light = new THREE.PointLight(0xffffff, 1, 1000);
-        light.position.set(0, 30, 30);
-        light.up = new THREE.Vector3(0, 0, 1);
+        light.position.set(0, 30, 45);
+        light.up = new THREE.Vector3(0, 1, 1);
         light.lookAt(new THREE.Vector3(0, 0, 0));
         light.castShadow = true; // default false
         scene.add(light);
@@ -64,14 +68,13 @@ function threeModel(jsonData) {
 
         /////////////// GEOMETRY ///////////////////////
 
-        // colors 
-        var colors = ['#8F4CFF', '#5E00FF', '#4C00CC', '#47267F', '#EB0DFF', '#2F007F'];
         var i = 0;
+        var voxelDim = 1;
         for (var x = 0; x < Math.sqrt(jsonData.grid.length); x++) {
             for (var y = 0; y < Math.sqrt(jsonData.grid.length); y++) {
-                var geometry = new THREE.BoxBufferGeometry(0.8, 0.8, 0.8);
-                if (jsonData.grid[i].type > -1 && jsonData.grid[i].type < 7) {
-                    thisCol = colors[jsonData.grid[i].type];
+                var geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (jsonData.grid[i].type + 3) / 3, voxelDim * 0.8);
+                if (jsonData.grid[i].type > -1 && jsonData.grid[i].type < 10) {
+                    thisCol = globalColors[jsonData.grid[i].type];
                 } else {
                     thisCol = 'gray'
                 }
@@ -79,7 +82,7 @@ function threeModel(jsonData) {
                     color: thisCol
                 });
                 mesh = new THREE.Mesh(geometry, material);
-                mesh.position.set(x, jsonData.grid[i].type, y);
+                mesh.position.set(x * voxelDim, (jsonData.grid[i].type + 3) / 2 / 2, y * voxelDim);
                 mesh.castShadow = true; //default is false
                 mesh.receiveShadow = true; //default
                 holder.push(mesh);
@@ -103,7 +106,7 @@ function threeModel(jsonData) {
         var timer = Date.now() * 0.0001;
         camera.position.x = Math.sin(timer) * 800;
         camera.position.z = Math.cos(timer) * 800;
-        camera.lookAt(scene.position);
+        camera.lookAt(new THREE.Vector3(7.5, 2.5, 5));
         renderer.render(scene, camera);
     }
 
@@ -117,6 +120,16 @@ function threeModel(jsonData) {
         camera.bottom = -frustumSize / 2;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    window.addEventListener('DOMMouseScroll', mousewheel, false);
+    window.addEventListener('mousewheel', mousewheel, false);
+
+    function mousewheel(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        camera.zoom -= event.wheelDeltaY * 0.001;
+        camera.updateProjectionMatrix();
     }
 
     document.getElementById('threeDiv').appendChild(renderer.domElement);

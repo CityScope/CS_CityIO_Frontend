@@ -10,8 +10,9 @@ function drawJSON(json) {
 
     //Data prep for d3
     var grid = json.grid;
-    // this loop push value data from json.object to each 
-    // gridcell so d3 could us this data
+
+    // this loop pushes value data from json.object field to each 
+    // x,y gridcell so that d3 could use this data
     grid.forEach(function (cell, index) {
         delete cell.rot; //removes useless data 
         if (cell.type > -1 && cell.type < 6) { //building types in data 
@@ -24,39 +25,33 @@ function drawJSON(json) {
     //Draw CS grid 
     // load SVG container on load of page 
     svgContainer = d3.select("#d3Div1").append("svg");
-
-    var rgbScale = d3.scale.linear()
-        .domain([0, 30])
-        .range([0, 255]);
-    var rgbScaleRev = d3.scale.linear()
-        .domain([0, 30])
-        .range([255, 0]);
-
     var circles = svgContainer.selectAll("circle")
-        // .attr("width", 20)
-        // .attr("height", 20)
         .data(grid)
         .enter()
         .append("circle");
 
     var circlesLocation = circles
         .attr("cx", function (d) {
-            return 5 + (d.x * 10);
+            return 20 + (d.x * 10);
         })
         .attr("cy", function (d) {
-            return 5 + (d.y * 10);
+            return 20 + (d.y * 10);
         });
-
 
     var circlesAttr = circles
         .style("fill", function (d) {
-            return d3.rgb(rgbScale(d.value), rgbScaleRev(d.value), 0);
+            var color = globalColors[d.type + 2];
+            return color;
+
         }) // set the fill colour 
         .style("stroke", "none")
         .transition()
         .duration(1000)
         .attr("r", function (d) {
-            return d.value / 2;
+            if (d.value > 1) {
+                return d.value / 5;
+            } else
+                return d.value;
         })
 
 
@@ -71,12 +66,45 @@ function drawJSON(json) {
         .groupBy("x")
         .data(grid)
         .legend(false)
+        .innerRadius(50)
+        .padPixel(1)
+        .render();
+
+    /////////////////////////////////////////////////
+    ///////////////d3 plus treemap //////////////////
+    /////////////////////////////////////////////////
+    var gridWithTypes = json.grid;
+
+    var typeId = [
+        'PARKING',
+        'PARK',
+        'RL',
+        'RM',
+        'RS',
+        'OL',
+        'OM',
+        'OS',
+        'ROAD',
+        'AMENITIES'
+    ]
+    gridWithTypes.forEach(function (cell, index) {
+        cell.type = cell.type + 2;
+        cell.color = globalColors[cell.type]
+        delete cell.rot; //removes useless data 
+        cell.name = typeId[cell.type]; //make 'Value' term for Desity, so d3plus will fill good 
+    });
+
+
+    new d3plus.Treemap()
+        .select("#d3Div3")
+        .data(gridWithTypes)
+        .legend(true)
+        .groupBy(["name"])
         .shapeConfig({
-            function (d) {
-                return d = "white";
+            fill: function (d) {
+                return [d.color];
             }
-        });
-    typePie.innerRadius(50);
-    typePie.padPixel(1);
-    typePie.render();
+        })
+
+        .render();
 }

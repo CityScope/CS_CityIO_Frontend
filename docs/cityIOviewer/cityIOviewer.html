@@ -1,33 +1,48 @@
 <html>
 
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto+Condensed" rel="stylesheet">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
     crossorigin="" />
   <link href="styles.css" rel="stylesheet">
-
   <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <script src="//d3plus.org/js/d3.js"></script>
 
-  <script src="lib/three.js"></script>
   <script src="//d3plus.org/js/topojson.js"></script>
   <script src="//d3plus.org/js/d3plus.v2.0.0-alpha.13.full.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
     crossorigin=""></script>
 
+  <!-- Three js -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script> -->
+  <script src="lib/three.js"></script>
+  <script src="lib/TrackballControls.js"></script>
+
+
+
 </head>
 
 <body>
-
+  <div id="title">
+    <h1>cityI/O
+      <br> dashboard
+    </h1>
+  </div>
   <div id="map"></div>
+  <hr/>
   <div id="viz">
     <div id='tableInfoDiv'> </div>
     <div id='threeDiv'></div>
     <div id="d3Div">
       <div id="d3Div1"></div>
       <div id="d3Div2"></div>
+      <div id="d3Div3"></div>
+      <div id="d3Div4"></div>
     </div>
   </div>
+
 
   <script type="text/javascript" src="scripts/readCityIO.js" async></script>
   <script type="text/javascript" src="scripts/DrawJSON.js"></script>
