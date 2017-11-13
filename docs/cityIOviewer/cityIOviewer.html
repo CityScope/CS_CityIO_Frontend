@@ -20,11 +20,26 @@
   <script src="lib/three.js"></script>
   <script src="lib/TrackballControls.js"></script>
 
+  <script type="text/javascript" src="scripts/readCityIO.js" async></script>
+  <script type="text/javascript" src="scripts/DrawJSON.js"></script>
+  <script type="text/javascript" src="scripts/CSmap.js"></script>
+  <script type="text/javascript" src="scripts/3d.js"></script>
 
 
 </head>
 
 <body>
+
+
+  <button class="projection" onclick="myFunction()">projection</button>
+  <script>
+    function myFunction() {
+      window.open("scripts/projection/projection.html");
+    }
+  </script>
+
+
+
   <div id="title">
     <h1>cityI/O
       <br> dashboard
@@ -34,7 +49,9 @@
   <hr/>
   <div id="viz">
     <div id='tableInfoDiv'> </div>
-    <div id='threeDiv'></div>
+    <div id='threeDiv'>
+    </div>
+
     <div id="d3Div">
       <div id="d3Div1"></div>
       <div id="d3Div2"></div>
@@ -44,10 +61,7 @@
   </div>
 
 
-  <script type="text/javascript" src="scripts/readCityIO.js" async></script>
-  <script type="text/javascript" src="scripts/DrawJSON.js"></script>
-  <script type="text/javascript" src="scripts/CSmap.js"></script>
-  <script type="text/javascript" src="scripts/3d.js"></script>
+
 
 </body>
 
