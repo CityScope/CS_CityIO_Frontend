@@ -73,12 +73,15 @@ function vizMap(locationsData) {
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
         console.log("city: ", e.target._popup._content)
-        readCityIO();
+
         $("#tableInfoDiv").empty();
         $("#d3Div1").empty();
         $("#d3Div2").empty();
         $("#d3Div3").empty();
         $("#threeDiv").empty();
+
+        readCityIO(e.target._popup._content.toString().toLowerCase());
+        
 
         /////////////////////////////////////////////////
         ///////////////CITY INFO ////////////////////////

@@ -7,7 +7,7 @@ function threeModel(jsonData) {
 
     var CANVAS_WIDTH = document.getElementById('threeDiv').clientWidth,
         CANVAS_HEIGHT = document.getElementById('threeDiv').clientHeight;
-    var frustumSize = 20;
+    var frustumSize = 10;
 
 
     var camera, scene, renderer;
@@ -15,6 +15,9 @@ function threeModel(jsonData) {
     var holder = [];
     init();
     animate();
+
+    console.log(jsonData)
+    
 
     function init() {
         //set up the camera 

@@ -1,16 +1,13 @@
 var svgContainer;
-var typePie
+var typePie;
+var grid;
+
 
 // draw to SVG container 
 function drawJSON(json) {
 
-    /////////////////////////////////////////////////
-    ///////////////d3 Grid Visulazation /////////////
-    /////////////////////////////////////////////////
-
     //Data prep for d3
-    var grid = json.grid;
-
+    grid = json.grid;
     // this loop pushes value data from json.object field to each 
     // x,y gridcell so that d3 could use this data
     grid.forEach(function (cell, index) {
@@ -21,6 +18,18 @@ function drawJSON(json) {
             cell.value = 1; //if this cell is not a type, give it an arb. value
         }
     });
+
+    circleGrid();
+    pieChart();
+    treeMap();
+}
+
+
+/////////////////////////////////////////////////
+///////////////d3 Grid Visulazation /////////////
+/////////////////////////////////////////////////
+
+function circleGrid() {
 
     //Draw CS grid 
     // load SVG container on load of page 
@@ -53,12 +62,14 @@ function drawJSON(json) {
             } else
                 return d.value;
         })
+}
 
 
-    /////////////////////////////////////////////////
-    ///////////////d3 plus ratio pie chart //////////
-    /////////////////////////////////////////////////
+/////////////////////////////////////////////////
+///////////////d3 plus ratio pie chart //////////
+/////////////////////////////////////////////////
 
+function pieChart() {
     // setup the pie outside of json loop
     typePie = new d3plus.Pie();
     typePie
@@ -69,11 +80,14 @@ function drawJSON(json) {
         .innerRadius(50)
         .padPixel(1)
         .render();
+}
 
+
+function treeMap() {
     /////////////////////////////////////////////////
     ///////////////d3 plus treemap //////////////////
     /////////////////////////////////////////////////
-    var gridWithTypes = json.grid;
+    var gridWithTypes = grid;
 
     var typeId = [
         'PARKING',
@@ -94,7 +108,7 @@ function drawJSON(json) {
         cell.name = typeId[cell.type]; //make 'Value' term for Desity, so d3plus will fill good 
     });
 
-
+    //drawing treemap 
     new d3plus.Treemap()
         .select("#d3Div3")
         .data(gridWithTypes)
@@ -105,6 +119,5 @@ function drawJSON(json) {
                 return [d.color];
             }
         })
-
         .render();
 }

@@ -5,10 +5,11 @@
 $(window).on("load", readCityIO);
 var data;
 
-function readCityIO() {
-  table = "citymatrix_volpe";
-  var cityIOurl = "https://cityio.media.mit.edu/api/table/" + table;
-
+function readCityIO(tableString) {
+  // table = "citymatrix_volpe";
+  var cityIOurl = "https://cityio.media.mit.edu/api/table/citymatrix_" + tableString;
+  console.log(cityIOurl)
+  
 
   $.ajax({
     url: cityIOurl,

@@ -142,3 +142,15 @@ svg {
   border-radius: 4px;
   font-size: 12px;
 }
+
+.leaflet-popup-content-wrapper {
+  font-family: "Roboto Condensed";
+  background: #2c3e50;
+  color: #ED5066;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+.leaflet-popup-tip {
+  background: #2c3e50;
+}
