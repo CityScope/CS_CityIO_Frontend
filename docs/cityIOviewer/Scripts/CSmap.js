@@ -19,10 +19,8 @@ var globalColors = [
 // decalre json location data globally 
 var locationsData;
 
-
 function readLocationJson() {
     $.getJSON("locations.json", function (locationsData) {
-            console.log(locationsData)
             vizMap(locationsData)
         })
         .fail(function () {
@@ -62,33 +60,55 @@ function vizMap(locationsData) {
         shadowAnchor: [0, -20]
     });
 
+    // add ocns to cities from locationsData JSON
     for (var i = 0; i < locationsData.length; i++) {
         marker = new L.marker([locationsData[i].latitude, locationsData[i].longitude], {
                 icon: legoIcon
             })
             .bindPopup(locationsData[i].city)
+
             .addTo(map).on('click', onClick);
     }
 
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
-        console.log("city: ", e.target._popup._content)
+        // console.log("city: ", e.target._popup._content)
 
+        // clear all divs for new data 
         $("#tableInfoDiv").empty();
+        $("#tableImgDiv").empty();
         $("#d3Div1").empty();
         $("#d3Div2").empty();
         $("#d3Div3").empty();
         $("#threeDiv").empty();
 
-        readCityIO(e.target._popup._content.toString().toLowerCase());
-        
+        //Find  if this is a cityIO table yes/no
+        var cityIObool = locationsData.find(x => x.city == e.target._popup._content).cityio;
+
+        //and then use it to initate data in viz divs
+        if (cityIObool) {
+            // get name of city from its icon popup 
+            var cityName = e.target._popup._content.toString().toLowerCase();
+
+            console.log("city: ", e.target._popup._content, cityIObool)
+            readCityIO(cityName);
+        }
+
 
         /////////////////////////////////////////////////
-        ///////////////CITY INFO ////////////////////////
+        ///////////////CITY DIV INFO ///////////////////
         /////////////////////////////////////////////////
 
+        //find inside JSON using only text string 
+        locText = locationsData.find(x => x.city == e.target._popup._content).text;
         var div = document.getElementById('tableInfoDiv');
-        locText = locationsData.find(x => x.city == e.target._popup._content).text
         div.innerHTML += locText;
+
+        //image  
+        var img = new Image();
+        img.src = ('img/' + locationsData.find(x => x.city == e.target._popup._content).image);
+        var imgDiv = document.getElementById('tableImgDiv');
+        imgDiv.appendChild(img);
+
     }
 }

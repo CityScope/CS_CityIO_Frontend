@@ -1,5 +1,3 @@
-
-
 function threeModel(jsonData) {
     // console.log(jsonData)
 
@@ -17,17 +15,12 @@ function threeModel(jsonData) {
     animate();
 
     console.log(jsonData)
-    
+
 
     function init() {
         //set up the camera 
-        // camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 1, 1000);
-
-
         cancelAnimationFrame(this.id); // Stop the animation
         renderer = null;
-
-
 
         var aspect = window.innerWidth / window.innerHeight;
         camera = new THREE.OrthographicCamera(frustumSize * aspect / -2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / -2, 1, 5000);

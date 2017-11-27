@@ -2,7 +2,6 @@ var svgContainer;
 var typePie;
 var grid;
 
-
 // draw to SVG container 
 function drawJSON(json) {
 
@@ -23,7 +22,6 @@ function drawJSON(json) {
     pieChart();
     treeMap();
 }
-
 
 /////////////////////////////////////////////////
 ///////////////d3 Grid Visulazation /////////////
