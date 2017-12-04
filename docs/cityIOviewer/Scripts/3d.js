@@ -70,7 +70,7 @@ function threeModel(jsonData) {
         var voxelDim = 1;
         for (var x = 0; x < Math.sqrt(jsonData.grid.length); x++) {
             for (var y = 0; y < Math.sqrt(jsonData.grid.length); y++) {
-                var geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (jsonData.grid[i].type + 3) / 3, voxelDim * 0.8);
+                var geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (jsonData.grid[i].type+6) / 3, voxelDim * 0.8);
                 if (jsonData.grid[i].type > -1 && jsonData.grid[i].type < 10) {
                     thisCol = globalColors[jsonData.grid[i].type];
                 } else {

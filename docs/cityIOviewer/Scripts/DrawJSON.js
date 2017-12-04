@@ -90,12 +90,12 @@ function treeMap() {
     var typeId = [
         'PARKING',
         'PARK',
-        'RL',
-        'RM',
-        'RS',
-        'OL',
-        'OM',
-        'OS',
+        'Residential Large',
+        'Residential Medium',
+        'Residential Small',
+        'Office Large',
+        'Office Medium',
+        'Office Small',
         'ROAD',
         'AMENITIES'
     ]

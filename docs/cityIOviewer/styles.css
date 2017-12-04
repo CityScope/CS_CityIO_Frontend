@@ -73,37 +73,51 @@
   #tableInfoDiv {
     float: left;
     left: 2%;
-    width: 30%;
-    margin-top: 205px;
+    max-width: 400px;
+    margin-top: 255px;
     height: 80px;
     position: fixed;
     font-family: "Roboto Condensed";
-    color: rgb(148, 148, 148);
-    font-size: 14px;
+    color: rgb(180, 180, 180);
+    font-size: 12px;
     line-height: 1.5em;
     cursor: text;
-    overflow-y: scroll;
-    /* padding-right: 17px; */
-  }
-
-  img {
-    max-width: 100%;
-    -webkit-transition: all 1s;
-    -webkit-filter: hue-rotate(160deg) saturate(.2);
-  }
-
-  img:hover {
-    filter: none;
-    -webkit-filter: hue-rotate(0) saturate(1);
-    cursor: pointer;
+    overflow: auto;
+    padding-right: 10px;
+    z-index: 999;
   }
 
   #tableImgDiv {
     float: left;
     left: 2%;
-    max-width: 30%;
-    height: 200px;
     position: fixed;
+  }
+
+  #tableImgDiv img {
+    max-height: 250px;
+    max-width: 100%;
+    -webkit-transition: all 1s;
+    -webkit-filter: hue-rotate(160deg) saturate(.2);
+  }
+
+  #tableImgDiv img:hover {
+    filter: none;
+    -webkit-filter: hue-rotate(0) saturate(1);
+    cursor: pointer;
+  }
+
+   ::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+  }
+
+   ::-webkit-scrollbar-track-piece {
+    background-color: rgb(68, 68, 68);
+  }
+
+   ::-webkit-scrollbar-thumb:vertical {
+    height: 30px;
+    background-color: rgb(179, 179, 179);
   }
 
   #threeDiv {
@@ -150,7 +164,6 @@
     position: fixed;
   }
 
-
   .d3-tip {
     line-height: 1;
     padding: 6px;
@@ -162,12 +175,12 @@
 
   .leaflet-popup-content-wrapper {
     font-family: "Roboto Condensed";
-    background: #2c3e50;
+    background: #5f5f5f;
     color: #ED5066;
     font-size: 12px;
     line-height: 24px;
   }
 
   .leaflet-popup-tip {
-    background: #2c3e50;
+    background: #5f5f5f;
   }

@@ -7,7 +7,8 @@ var data;
 
 // get table name from map click on icon 
 function readCityIO(tableString) {
-  var cityIOurl = "https://cityio.media.mit.edu/api/table/citymatrix_" + tableString;
+  var cityIOurl = "https://cityio.media.mit.edu/api/table/" + tableString;
+  console.log (cityIOurl); 
 
   // GET method 
   $.ajax({
@@ -18,10 +19,11 @@ function readCityIO(tableString) {
     success: function (data) {
       //call viz methods here 
       console.log(new Date(data.timestamp)); //print date of cityIO data
-      //Draw 2d 
-      drawJSON(data);
       //Draw 3d 
       threeModel(data);
+      //Draw 2d 
+      drawJSON(data);
+
     },
     // or error 
     error: function () {

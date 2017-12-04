@@ -55,7 +55,7 @@ function vizMap(locationsData) {
         iconSize: [iconSize, iconSize],
         iconAnchor: [0, 0],
         popupAnchor: [0, 0],
-        shadowUrl: 'img/shadow.png',
+        shadowUrl: 'img/shadow.png', // put different icon for cityIO
         shadowSize: [iconSize, iconSize],
         shadowAnchor: [0, -20]
     });
@@ -91,9 +91,12 @@ function vizMap(locationsData) {
             var cityName = e.target._popup._content.toString().toLowerCase();
 
             console.log("city: ", e.target._popup._content, cityIObool)
-            readCityIO(cityName);
+            if (cityName.length < 1) { // to allow a nameless table 
+                readCityIO("citymatrix");
+            } else {
+                readCityIO("citymatrix_" + cityName);
+            }
         }
-
 
         /////////////////////////////////////////////////
         ///////////////CITY DIV INFO ///////////////////
