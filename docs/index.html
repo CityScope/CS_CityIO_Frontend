@@ -1,78 +1,70 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="cityI/O Front End Website">
-  <meta name="author" content="Ariel Noyman">
-  <title>MIT Media Lab | CityScience Group | CityI/O</title>
-  <!-- Bootstrap Core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom Fonts -->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet"
-    type="text/css">
-  <!-- Custom CSS -->
-  <link href="css/stylish-portfolio.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto+Condensed" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+    crossorigin="" />
+  <link href="styles.css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script src="//d3plus.org/js/d3.js"></script>
+
+  <script src="//d3plus.org/js/topojson.js"></script>
+  <script src="//d3plus.org/js/d3plus.v2.0.0-alpha.13.full.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+    crossorigin=""></script>
+
+  <!-- Three js -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script> -->
+  <script src="lib/three.js"></script>
+  <script src="lib/TrackballControls.js"></script>
+
+  <script type="text/javascript" src="scripts/readCityIO.js" async></script>
+  <script type="text/javascript" src="scripts/DrawJSON.js"></script>
+  <script type="text/javascript" src="scripts/CSmap.js"></script>
+  <script type="text/javascript" src="scripts/3d.js"></script>
+
+
 </head>
 
 <body>
-  <!-- Navigation -->
-  <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
-    <i class="fa fa-bars"></i>
-  </a>
-  <nav id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
-        <i class="fa fa-times"></i>
-      </a>
-      <li class="sidebar-brand">
-        <a class="js-scroll-trigger" href="#top">cityI/O</a>
-      </li>
-      <li>
-        <a class="js-scroll-trigger" href="#top">Home</a>
-      </li>
-      <li>
-        <a class="js-scroll-trigger" href="#network">Network</a>
-      </li>
-    </ul>
-  </nav>
 
 
-  <!-- Header -->
-  <header class="header" id="top">
-    <div class="text-vertical-center">
-      <h1 class="">cityI/O</h1>
-      <h4>Data Framework
-        <br>for MIT Media Lab
-        <br>CityScope Project</h4>
-      <br>
-      <a href="#network" class="btn btn-dark btn-lg js-scroll-trigger">Learn more</a>
+  <button class="projection" onclick="myFunction()">projection</button>
+  <script>
+    function myFunction() {
+      window.open("scripts/projection/projection.html");
+    }
+  </script>
+
+
+
+  <div id="title">
+    <h1>cityI/O
+      <br> dashboard
+    </h1>
+  </div>
+  <div id="map"></div>
+  <hr/>
+
+
+
+  <div id="viz">
+    <div id='tableImgDiv'></div>
+    <div id='tableInfoDiv'></div>
+    <div id='threeDiv'></div>
+
+    <div id="d3Div">
+      <div id="d3Div1"></div>
+      <div id="d3Div2"></div>
+      <div id="d3Div3"></div>
     </div>
-  </header>
-
-  <!-- network -->
-
-  <section id="network" class="map">
-    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="cityIOviewer/cityIOviewer.html"></iframe>
-    <br/>
-    <a id="to-top" href="#top" class="btn btn-dark btn-lg js-scroll-trigger">
-      <i class="fa fa-chevron-up fa-fw fa-1x"></i>
-    </a>
-  </section>
+  </div>
 
 
 
 
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
-  <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <!-- Custom scripts for this template -->
-  <script src="js/stylish-portfolio.js"></script>
 </body>
 
 </html>
