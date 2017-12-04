@@ -14,9 +14,6 @@ function threeModel(jsonData) {
     init();
     animate();
 
-    console.log(jsonData)
-
-
     function init() {
         //set up the camera 
         cancelAnimationFrame(this.id); // Stop the animation

@@ -17,10 +17,9 @@ function drawJSON(json) {
             cell.value = 1; //if this cell is not a type, give it an arb. value
         }
     });
-
+    treeMap();
     circleGrid();
     pieChart();
-    treeMap();
 }
 
 /////////////////////////////////////////////////
@@ -64,27 +63,84 @@ function circleGrid() {
 
 
 /////////////////////////////////////////////////
-///////////////d3 plus ratio pie chart //////////
+///////////////d3  ratio pie chart //////////
 /////////////////////////////////////////////////
 
 function pieChart() {
-    // setup the pie outside of json loop
-    typePie = new d3plus.Pie();
-    typePie
-        .select("#d3Div2")
-        .groupBy("x")
-        .data(grid)
-        .legend(false)
-        .innerRadius(50)
-        .padPixel(1)
-        .render();
+
+    var pieGrid = grid;
+    //     // setup the pie outside of json loop
+    //     typePie = new d3plus.Pie();
+    //     typePie
+    //         .select("#d3Div2")
+    //         .groupBy("x")
+    //         .data(grid)
+    //         .legend(false)
+    //         .innerRadius(50)
+    //         .padPixel(1)
+    //         .render();
+
+
+    var typeId = [
+        'PARKING',
+        'PARK',
+        'Residential Large',
+        'Residential Medium',
+        'Residential Small',
+        'Office Large',
+        'Office Medium',
+        'Office Small',
+        'ROAD',
+        'AMENITIES',
+        'Misc'
+    ]
+    pieGrid.forEach(function (cell, index) {
+        cell.label = typeId[cell.type + 2]; //make 'Value' term for Desity, so d3plus will fill good 
+        
+    });
+
+    console.log(pieGrid)
+
+
+    var pie = new d3pie("d3Div2", {
+        "size": {
+            "canvasHeight": 170,
+            "canvasWidth": 170,
+            pieInnerRadius: "70%"
+
+        },
+        "labels": {
+            "lines": {
+                "enabled": false
+            }
+        },
+
+        "data": {
+            smallSegmentGrouping: {
+                enabled: true,
+                value: 1,
+                valueType: "percentage",
+                label: "Smaller"
+            },
+            "content": pieGrid
+        },
+        "misc": {
+            "colors": {
+                "segments": function (d) {
+                    var color = globalColors[d.type];
+                    return color;
+                }
+            }
+        }
+    })
 }
 
 
+
+/////////////////////////////////////////////////
+///////////////d3 plus treemap //////////////////
+/////////////////////////////////////////////////
 function treeMap() {
-    /////////////////////////////////////////////////
-    ///////////////d3 plus treemap //////////////////
-    /////////////////////////////////////////////////
     var gridWithTypes = grid;
 
     var typeId = [
