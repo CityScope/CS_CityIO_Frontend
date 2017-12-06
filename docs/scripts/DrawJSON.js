@@ -1,12 +1,21 @@
 var svgContainer;
-var typePie;
 var grid;
 
 // draw to SVG container 
 function drawJSON(json) {
+    circleGrid(json);
+    treeMap(json);
+    pieChart(json);
+}
 
-    //Data prep for d3
-    grid = json.grid;
+/////////////////////////////////////////////////
+///////////////d3 Grid Visulazation /////////////
+/////////////////////////////////////////////////
+
+function circleGrid(json) {
+
+    grid = json.grid
+
     // this loop pushes value data from json.object field to each 
     // x,y gridcell so that d3 could use this data
     grid.forEach(function (cell, index) {
@@ -17,16 +26,8 @@ function drawJSON(json) {
             cell.value = 1; //if this cell is not a type, give it an arb. value
         }
     });
-    treeMap();
-    circleGrid();
-    pieChart();
-}
 
-/////////////////////////////////////////////////
-///////////////d3 Grid Visulazation /////////////
-/////////////////////////////////////////////////
-
-function circleGrid() {
+    ///////////////////////////////////////////////////////
 
     //Draw CS grid 
     // load SVG container on load of page 
@@ -63,24 +64,11 @@ function circleGrid() {
 
 
 /////////////////////////////////////////////////
-///////////////d3  ratio pie chart //////////
+////////////////////////////pie chart //////////
 /////////////////////////////////////////////////
 
-function pieChart() {
-
-    var pieGrid = grid;
-    //     // setup the pie outside of json loop
-    //     typePie = new d3plus.Pie();
-    //     typePie
-    //         .select("#d3Div2")
-    //         .groupBy("x")
-    //         .data(grid)
-    //         .legend(false)
-    //         .innerRadius(50)
-    //         .padPixel(1)
-    //         .render();
-
-
+function pieChart(json) {
+    var pieGrid = json.grid;
     var typeId = [
         'PARKING',
         'PARK',
@@ -94,19 +82,17 @@ function pieChart() {
         'AMENITIES',
         'Misc'
     ]
-    pieGrid.forEach(function (cell, index) {
-        cell.label = typeId[cell.type + 2]; //make 'Value' term for Desity, so d3plus will fill good 
-        
-    });
+
+    // gridWithTypes.forEach(function (cell, index) {
+    //     cell.label = typeId[cell.type]; //make 'Value' term for Desity, so d3plus will fill good 
+    // });
 
     console.log(pieGrid)
-
-
-    var pie = new d3pie("d3Div2", {
+    new d3pie("d3Div2", {
         "size": {
-            "canvasHeight": 170,
-            "canvasWidth": 170,
-            pieInnerRadius: "70%"
+            "canvasHeight": document.getElementById("d3Div2").offsetHeight,
+            "canvasWidth": document.getElementById("d3Div2").offsetWidth,
+            pieInnerRadius: "65%"
 
         },
         "labels": {
@@ -129,20 +115,19 @@ function pieChart() {
                 "segments": function (d) {
                     var color = globalColors[d.type];
                     return color;
-                }
+                },
+                "segmentStroke": "#00000000",
+                "segmentStroke": "#00000000"
             }
         }
     })
 }
 
-
-
 /////////////////////////////////////////////////
 ///////////////d3 plus treemap //////////////////
 /////////////////////////////////////////////////
-function treeMap() {
-    var gridWithTypes = grid;
-
+function treeMap(json) {
+    var gridWithTypes = json.grid;
     var typeId = [
         'PARKING',
         'PARK',
@@ -153,13 +138,16 @@ function treeMap() {
         'Office Medium',
         'Office Small',
         'ROAD',
-        'AMENITIES'
+        'AMENITIES',
+        'MISC'
     ]
     gridWithTypes.forEach(function (cell, index) {
         cell.type = cell.type + 2;
         cell.color = globalColors[cell.type]
+        delete cell.x; //removes useless data 
+        delete cell.y; //removes useless data 
         delete cell.rot; //removes useless data 
-        cell.name = typeId[cell.type]; //make 'Value' term for Desity, so d3plus will fill good 
+        cell.label = typeId[cell.type]; //make 'Value' term for Desity, so d3plus will fill good 
     });
 
     //drawing treemap 
@@ -167,7 +155,7 @@ function treeMap() {
         .select("#d3Div3")
         .data(gridWithTypes)
         .legend(true)
-        .groupBy(["name"])
+        .groupBy(["label"])
         .shapeConfig({
             fill: function (d) {
                 return [d.color];

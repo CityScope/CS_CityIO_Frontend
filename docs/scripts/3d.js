@@ -1,5 +1,4 @@
 function threeModel(jsonData) {
-    // console.log(jsonData)
 
     ///////////////SETUP SCENE///////////////////////
 
@@ -43,7 +42,7 @@ function threeModel(jsonData) {
         /////////////// LIGHTS ///////////////////////
 
         //Create a PointLight and turn on shadows for the light
-        var light = new THREE.PointLight(0xffffff, 1, 1000);
+        var light = new THREE.PointLight(0xf4eaea, .8, 500); 
         light.position.set(0, 30, 45);
         light.up = new THREE.Vector3(0, 1, 1);
         light.lookAt(new THREE.Vector3(0, 0, 0));
@@ -51,12 +50,12 @@ function threeModel(jsonData) {
         scene.add(light);
 
         //Set up shadow properties for the light
-        light.shadow.mapSize.width = 512; // default
-        light.shadow.mapSize.height = 512; // default
-        light.shadow.camera.near = 0.5; // default
+        light.shadow.mapSize.width = 1000; // default
+        light.shadow.mapSize.height = 1000; // default
+        light.shadow.camera.near = 1; // default
         light.shadow.camera.far = 500 // default
-
-        var lightAmb = new THREE.AmbientLight(0xffffff, .5);
+ 
+        var lightAmb = new THREE.AmbientLight(0xc8d6d8, .5); 
         // Add the light to the scene
         scene.add(lightAmb);
 

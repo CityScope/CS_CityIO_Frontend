@@ -3,12 +3,12 @@
 /////////////////////////////////////////////////
 
 // global data var for API data 
-var data;
+var jsonData;
 
 // get table name from map click on icon 
 function readCityIO(tableString) {
   var cityIOurl = "https://cityio.media.mit.edu/api/table/" + tableString;
-  console.log (cityIOurl); 
+  console.log(cityIOurl);
 
   // GET method 
   $.ajax({
@@ -16,13 +16,13 @@ function readCityIO(tableString) {
     dataType: 'JSONP',
     callback: 'jsonData',
     type: 'GET',
-    success: function (data) {
+    success: function (jsonData) {
       //call viz methods here 
-      console.log(new Date(data.timestamp)); //print date of cityIO data
+      console.log(new Date(jsonData.timestamp)); //print date of cityIO data
       //Draw 3d 
-      threeModel(data);
+      threeModel(jsonData);
       //Draw 2d 
-      drawJSON(data);
+      drawJSON(jsonData);
 
     },
     // or error 

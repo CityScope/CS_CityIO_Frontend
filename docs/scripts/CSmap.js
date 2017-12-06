@@ -13,7 +13,9 @@ var globalColors = [
     '#80ADA9',
     '#668a87',
     '#405654',
-    '#263C3A'
+    '#263C3A',
+    '#263C3A',
+    '#14181a'
 ];
 
 // decalre json location data globally 
@@ -49,8 +51,17 @@ function vizMap(locationsData) {
     /////////////////////////////////////////////////
 
     // create a costum map icon
-    var iconSize = 30;
-    var legoIcon = L.icon({
+    var iconSize = 55;
+    var IOIcon = L.icon({
+        iconUrl: 'img/legoio.png',
+        iconSize: [iconSize, iconSize],
+        iconAnchor: [0, 0],
+        popupAnchor: [0, 0],
+        shadowUrl: 'img/shadow.png', // put different icon for cityIO
+        shadowSize: [iconSize, iconSize],
+        shadowAnchor: [0, -20]
+    });
+    var NoIOIcon = L.icon({
         iconUrl: 'img/lego.png',
         iconSize: [iconSize, iconSize],
         iconAnchor: [0, 0],
@@ -62,17 +73,18 @@ function vizMap(locationsData) {
 
     // add ocns to cities from locationsData JSON
     for (var i = 0; i < locationsData.length; i++) {
-        marker = new L.marker([locationsData[i].latitude, locationsData[i].longitude], {
-                icon: legoIcon
-            })
-            .bindPopup(locationsData[i].city)
-
-            .addTo(map).on('click', onClick);
+        if (locationsData[i].cityio) {
+            marker = new L.marker([locationsData[i].latitude, locationsData[i].longitude], {
+                icon: IOIcon
+            }).bindPopup(locationsData[i].city).addTo(map).on('click', onClick);
+        } else {
+            marker = new L.marker([locationsData[i].latitude, locationsData[i].longitude], {
+                icon: NoIOIcon
+            }).bindPopup(locationsData[i].city).addTo(map).on('click', onClick);
+        }
     }
-
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
-        // console.log("city: ", e.target._popup._content)
 
         // clear all divs for new data 
         $("#tableInfoDiv").empty();
@@ -84,34 +96,48 @@ function vizMap(locationsData) {
 
         //Find  if this is a cityIO table yes/no
         var cityIObool = locationsData.find(x => x.city == e.target._popup._content).cityio;
+        locText = locationsData.find(x => x.city == e.target._popup._content).text;
+        var img = new Image();
+        img.src = ('img/' + locationsData.find(x => x.city == e.target._popup._content).image);
 
         //and then use it to initate data in viz divs
         if (cityIObool) {
             // get name of city from its icon popup 
             var cityName = e.target._popup._content.toString().toLowerCase();
 
-            console.log("city: ", e.target._popup._content, cityIObool)
             if (cityName.length < 1) { // to allow a nameless table 
                 readCityIO("citymatrix");
             } else {
                 readCityIO("citymatrix_" + cityName);
             }
+
+            /////////////////////////////////////////////////
+            ///////////////CITYIO DIV INFO //////////////////
+            /////////////////////////////////////////////////
+
+            //find inside JSON using only text string 
+            var div = document.getElementById('tableInfoDiv');
+            div.innerHTML += locText;
+
+            //image  
+            var imgDiv = document.getElementById('tableImgDiv');
+            imgDiv.appendChild(img);
+
+        } else {
+
+            /////////////////////////////////////////////////
+            ///////////////Non-IO DIV INFO ///////////////////
+            /////////////////////////////////////////////////
+
+            //find inside JSON using only text string 
+            var div = document.getElementById('threeDiv');
+            div.innerHTML += locText;
+
+            //image  
+            var imgDiv = document.getElementById('tableImgDiv');
+            imgDiv.appendChild(img);
+
         }
-
-        /////////////////////////////////////////////////
-        ///////////////CITY DIV INFO ///////////////////
-        /////////////////////////////////////////////////
-
-        //find inside JSON using only text string 
-        locText = locationsData.find(x => x.city == e.target._popup._content).text;
-        var div = document.getElementById('tableInfoDiv');
-        div.innerHTML += locText;
-
-        //image  
-        var img = new Image();
-        img.src = ('img/' + locationsData.find(x => x.city == e.target._popup._content).image);
-        var imgDiv = document.getElementById('tableImgDiv');
-        imgDiv.appendChild(img);
 
     }
 }
