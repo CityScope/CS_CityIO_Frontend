@@ -32,16 +32,6 @@
 
 <body>
 
-
-  <button class="projection" onclick="myFunction()">projection</button>
-  <script>
-    function myFunction() {
-      window.open("scripts/projection/projection.html");
-    }
-  </script>
-
-
-
   <div id="title">
     <h1>cityI/O
       <br> dashboard
@@ -50,9 +40,7 @@
   <div id="map"></div>
   <hr/>
 
-
   <div id="logo"></div>
-  
   <div id="viz">
     <div id='tableImgDiv'></div>
     <div id='tableInfoDiv'>
@@ -64,9 +52,7 @@
         <a href="https://www.media.mit.edu/projects/cityscope/overview/" target="_blank">Click here for more details about the CityScope project</a>
       </h2>
     </div>
-
     <div id="d3Div">
-
       <div id="d3Div1">
       </div>
       <div id="d3Div2"></div>
@@ -74,9 +60,14 @@
     </div>
   </div>
 
-
+  <button class="projection" onclick="button()">projection</button>
+  <script>
+    function button() {
+      window.open("scripts/projection/projection.html");
+    }
+  </script>
 
 
 </body>
 
-</html>
+</html> 
