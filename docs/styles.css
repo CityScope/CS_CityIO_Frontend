@@ -88,7 +88,7 @@
   #tableInfoDiv {
     float: left;
     left: 2%;
-    max-width: 300px;
+    width: 350px;
     margin-top: 255px;
     height: 80px;
     position: fixed;
@@ -165,7 +165,7 @@
   svg {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 
   #d3Div2 {
@@ -179,7 +179,7 @@
   #d3Div3 {
     left: 83%;
     top: 53%;
-    height: 40%;
+    height: 45%;
     width: 220px;
     position: fixed;
   }

@@ -10,14 +10,15 @@ function threeModel(jsonData) {
     var camera, scene, renderer;
     var mesh;
     var holder = [];
+
     init();
     animate();
 
     function init() {
-        //set up the camera 
         cancelAnimationFrame(this.id); // Stop the animation
-        renderer = null;
+      
 
+        //set up the camera 
         var aspect = window.innerWidth / window.innerHeight;
         camera = new THREE.OrthographicCamera(frustumSize * aspect / -2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / -2, 1, 5000);
         camera.position.y = 400;
@@ -42,7 +43,7 @@ function threeModel(jsonData) {
         /////////////// LIGHTS ///////////////////////
 
         //Create a PointLight and turn on shadows for the light
-        var light = new THREE.PointLight(0xf4eaea, .8, 500); 
+        var light = new THREE.PointLight(0xf4eaea, .8, 500);
         light.position.set(0, 30, 45);
         light.up = new THREE.Vector3(0, 1, 1);
         light.lookAt(new THREE.Vector3(0, 0, 0));
@@ -54,8 +55,8 @@ function threeModel(jsonData) {
         light.shadow.mapSize.height = 1000; // default
         light.shadow.camera.near = 1; // default
         light.shadow.camera.far = 500 // default
- 
-        var lightAmb = new THREE.AmbientLight(0xc8d6d8, .5); 
+
+        var lightAmb = new THREE.AmbientLight(0xc8d6d8, .5);
         // Add the light to the scene
         scene.add(lightAmb);
 
@@ -66,7 +67,7 @@ function threeModel(jsonData) {
         var voxelDim = 1;
         for (var x = 0; x < Math.sqrt(jsonData.grid.length); x++) {
             for (var y = 0; y < Math.sqrt(jsonData.grid.length); y++) {
-                var geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (jsonData.grid[i].type+6) / 3, voxelDim * 0.8);
+                var geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (jsonData.grid[i].type + 6) / 3, voxelDim * 0.8);
                 if (jsonData.grid[i].type > -1 && jsonData.grid[i].type < 10) {
                     thisCol = globalColors[jsonData.grid[i].type];
                 } else {

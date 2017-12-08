@@ -101,6 +101,7 @@ function treeMap(json) {
         .data(gridWithTypes)
         .legend(true)
         .groupBy(["label"])
+        .padding(5)
         .shapeConfig({
             fill: function (d) {
                 return [d.color];
