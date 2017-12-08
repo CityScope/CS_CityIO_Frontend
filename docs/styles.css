@@ -1,7 +1,7 @@
   .projection {
     float: left;
-    left: 5%;
-    top: 2%;
+    left: 50%;
+    top: 95%;
     width: 100px;
     height: 20px;
     position: fixed;
@@ -20,10 +20,9 @@
     z-index: 1000;
   }
 
-
   #logo {
     top: 5%;
-    left: 5%;
+    left: 90%;
     position: fixed;
     z-index: 1000;
   }
@@ -78,6 +77,12 @@
 
   .leaflet-container {
     background-color: #2D393E;
+  }
+
+  .leaflet-bar.disabled,
+  .leaflet-bar button.disabled {
+    opacity: 0;
+    border: none;
   }
 
   #viz {

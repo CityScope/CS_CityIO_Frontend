@@ -33,7 +33,10 @@ function readLocationJson() {
 
 function vizMap(locationsData) {
 
-    var map = L.map('map').setView([51.505, -0.09], 2);
+    var map = L.map('map').setView([51.505, -0.09], 2, {
+        zoomControl = false
+    });
+
 
     //setup the map API
     L.tileLayer('https://api.mapbox.com/styles/v1/relnox/cj9oqs09o4n4t2rn2ymwrxxug/tiles/512/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVsbm94IiwiYSI6ImNpa2VhdzN2bzAwM2t0b2x5bmZ0czF6MzgifQ.KtqxBH_3rkMaHCn_Pm3Pag', {
