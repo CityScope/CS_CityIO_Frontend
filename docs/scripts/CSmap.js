@@ -45,7 +45,7 @@ function vizMap(locationsData) {
     //hide leaflet link
     document.getElementsByClassName('leaflet-control-attribution')[0].style.display = 'none';
     document.getElementsByClassName('leaflet-top leaflet-left')[0].style.display = 'none';
-    
+
     map.setMaxBounds(map.getBounds());
 
 
@@ -96,6 +96,11 @@ function vizMap(locationsData) {
         $("#d3Div2").empty();
         $("#d3Div3").empty();
         $("#threeDiv").empty();
+
+        if (document.getElementById("tmpbg")) {
+            document.getElementById("tmpbg").outerHTML = "";
+            delete document.getElementById("tmpbg");
+        }
 
         //Find  if this is a cityIO table yes/no
         var cityIObool = locationsData.find(x => x.city == e.target._popup._content).cityio;
