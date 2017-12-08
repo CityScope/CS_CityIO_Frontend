@@ -33,9 +33,7 @@ function readLocationJson() {
 
 function vizMap(locationsData) {
 
-    var map = L.map('map').setView([51.505, -0.09], 2, {
-        zoomControl = false
-    });
+    var map = L.map('map').setView([51.505, -0.09], 2);
 
 
     //setup the map API
@@ -46,6 +44,8 @@ function vizMap(locationsData) {
 
     //hide leaflet link
     document.getElementsByClassName('leaflet-control-attribution')[0].style.display = 'none';
+    document.getElementsByClassName('leaflet-top leaflet-left')[0].style.display = 'none';
+    
     map.setMaxBounds(map.getBounds());
 
 

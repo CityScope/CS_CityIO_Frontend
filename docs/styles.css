@@ -14,15 +14,15 @@
   }
 
   #title {
-    top: 5%;
-    left: 5%;
+    top: 30%;
+    left: 3%;
     position: fixed;
     z-index: 1000;
   }
 
   #logo {
-    top: 5%;
-    left: 90%;
+    top: 10%;
+    left: 3%;
     position: fixed;
     z-index: 1000;
   }
