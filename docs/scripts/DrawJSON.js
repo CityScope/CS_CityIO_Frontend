@@ -15,8 +15,8 @@ var typeId = [
 
 // draw to SVG container 
 function drawJSON(json) {
-    circleGrid(json);
-    pieChart(json);
+    // circleGrid(json);
+    // pieChart(json);
     treeMap(json);
 }
 
@@ -40,12 +40,12 @@ function circleGrid(json) {
 
     ///////////////////////////////////////////////////////
 
-    var divHeight = document.getElementById("d3Div1").offsetHeight;
-    var divWidth = document.getElementById("d3Div1").offsetWidth;
+    var divHeight = document.getElementById("d3Div").offsetHeight;
+    var divWidth = document.getElementById("d3Div").offsetWidth;
 
     //Draw CS grid 
     // load SVG container on load of page 
-    svgContainer = d3.select("#d3Div1").append("svg");
+    svgContainer = d3.select("#d3Div").append("svg");
     var circles = svgContainer.selectAll("circle")
         .data(d3Grid)
         .enter()
@@ -97,7 +97,7 @@ function treeMap(json) {
     });
     //drawing treemap 
     new d3plus.Treemap()
-        .select("#d3Div3")
+        .select("#modal-body")
         .data(gridWithTypes)
         .legend(true)
         .groupBy(["label"])
@@ -134,10 +134,10 @@ function pieChart(json) {
     });
     console.log(resCount, officeCount)
 
-    var pie = new d3pie("d3Div2", {
+    var pie = new d3pie("d3Div", {
         "size": {
-            "canvasHeight": document.getElementById("d3Div2").offsetHeight,
-            "canvasWidth": document.getElementById("d3Div2").offsetWidth,
+            "canvasHeight": 200, //document.getElementById("d3Div2").offsetHeight,
+            "canvasWidth": 200, //document.getElementById("d3Div2").offsetWidth,
             pieInnerRadius: "65%"
         },
         "labels": {

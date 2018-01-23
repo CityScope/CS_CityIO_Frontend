@@ -2,8 +2,8 @@ function threeModel(jsonData) {
 
     ///////////////SETUP SCENE///////////////////////
 
-    var CANVAS_WIDTH = document.getElementById('threeDiv').clientWidth,
-        CANVAS_HEIGHT = document.getElementById('threeDiv').clientHeight;
+    var CANVAS_WIDTH = 300 //document.getElementById('threeDiv').clientWidth,
+    CANVAS_HEIGHT = 300 // document.getElementById('threeDiv').clientHeight;
     var frustumSize = 10;
 
 

@@ -24,6 +24,7 @@ var locationsData;
 function readLocationJson() {
     $.getJSON("locations.json", function (locationsData) {
             vizMap(locationsData)
+            console.log(locationsData)
         })
         .fail(function () {
             console.log("error");
@@ -32,9 +33,7 @@ function readLocationJson() {
 
 
 function vizMap(locationsData) {
-
     var map = L.map('map').setView([51.505, -0.09], 2);
-
 
     //setup the map API
     L.tileLayer('https://api.mapbox.com/styles/v1/relnox/cj9oqs09o4n4t2rn2ymwrxxug/tiles/512/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVsbm94IiwiYSI6ImNpa2VhdzN2bzAwM2t0b2x5bmZ0czF6MzgifQ.KtqxBH_3rkMaHCn_Pm3Pag', {
@@ -74,7 +73,7 @@ function vizMap(locationsData) {
         shadowAnchor: [0, -20]
     });
 
-    // add ocns to cities from locationsData JSON
+    // add icons to cities from locationsData JSON
     for (var i = 0; i < locationsData.length; i++) {
         if (locationsData[i].cityio) {
             marker = new L.marker([locationsData[i].latitude, locationsData[i].longitude], {
@@ -88,19 +87,23 @@ function vizMap(locationsData) {
     }
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
+        $('#PortfolioModal').modal({
+            show: true
+        });
+
 
         // clear all divs for new data 
         $("#tableInfoDiv").empty();
         $("#tableImgDiv").empty();
-        $("#d3Div1").empty();
-        $("#d3Div2").empty();
-        $("#d3Div3").empty();
+        $("#d3Div").empty();
         $("#threeDiv").empty();
 
-        if (document.getElementById("tmpbg")) {
-            document.getElementById("tmpbg").outerHTML = "";
-            delete document.getElementById("tmpbg");
-        }
+
+        // if (document.getElementById("tmpbg")) {
+        //     document.getElementById("tmpbg").outerHTML = "";
+        //     delete document.getElementById("tmpbg");
+        // }
+
 
         //Find  if this is a cityIO table yes/no
         var cityIObool = locationsData.find(x => x.city == e.target._popup._content).cityio;
@@ -125,7 +128,7 @@ function vizMap(locationsData) {
 
             //find inside JSON using only text string 
             var div = document.getElementById('tableInfoDiv');
-            div.innerHTML += locText;
+            div.innerHTML = locText;
 
             //image  
             var imgDiv = document.getElementById('tableImgDiv');
@@ -139,13 +142,11 @@ function vizMap(locationsData) {
 
             //find inside JSON using only text string 
             var div = document.getElementById('threeDiv');
-            div.innerHTML += locText;
+            div.innerHTML = locText;
 
             //image  
             var imgDiv = document.getElementById('tableImgDiv');
             imgDiv.appendChild(img);
-
         }
-
     }
 }
