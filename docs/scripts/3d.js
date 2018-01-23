@@ -2,10 +2,9 @@ function threeModel(jsonData) {
 
     ///////////////SETUP SCENE///////////////////////
 
-    var CANVAS_WIDTH = 300 //document.getElementById('threeDiv').clientWidth,
-    CANVAS_HEIGHT = 300 // document.getElementById('threeDiv').clientHeight;
+    var CANVAS_WIDTH = 300,
+        CANVAS_HEIGHT = 300;
     var frustumSize = 10;
-
 
     var camera, scene, renderer;
     var mesh;
@@ -34,10 +33,8 @@ function threeModel(jsonData) {
         document.body.appendChild(renderer.domElement);
         renderer.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
-
         var gridHelper = new THREE.GridHelper(100, 100, 'white', '#404040');
         scene.add(gridHelper);
-
 
         /////////////// LIGHTS ///////////////////////
 
@@ -95,7 +92,6 @@ function threeModel(jsonData) {
     }
 
 
-
     function render() {
         var timer = Date.now() * 0.0001;
         camera.position.x = Math.sin(timer) * 800;
@@ -105,6 +101,7 @@ function threeModel(jsonData) {
     }
 
     // //window resizing method
+    window.addEventListener('resize', onWindowResize, false);
 
     function onWindowResize() {
         var aspect = window.innerWidth / window.innerHeight;
@@ -113,7 +110,9 @@ function threeModel(jsonData) {
         camera.top = frustumSize / 2;
         camera.bottom = -frustumSize / 2;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        // renderer.setSize(window.innerWidth, window.innerHeight);
+
+        renderer.setSize(document.getElementById('threeDiv').clientWidth, document.getElementById('threeDiv').clientHeight);
     }
 
     window.addEventListener('DOMMouseScroll', mousewheel, false);
@@ -125,6 +124,5 @@ function threeModel(jsonData) {
         camera.zoom -= event.wheelDeltaY * 0.001;
         camera.updateProjectionMatrix();
     }
-
     document.getElementById('threeDiv').appendChild(renderer.domElement);
 }

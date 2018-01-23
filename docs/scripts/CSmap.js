@@ -24,16 +24,15 @@ var locationsData;
 function readLocationJson() {
     $.getJSON("locations.json", function (locationsData) {
             vizMap(locationsData)
-            console.log(locationsData)
         })
         .fail(function () {
-            console.log("error");
+            console.log("map loc error");
         });
 }
 
 
 function vizMap(locationsData) {
-    var map = L.map('map').setView([51.505, -0.09], 2);
+    var map = L.map('map').setView([51.505, -0.09], 1);
 
     //setup the map API
     L.tileLayer('https://api.mapbox.com/styles/v1/relnox/cj9oqs09o4n4t2rn2ymwrxxug/tiles/512/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVsbm94IiwiYSI6ImNpa2VhdzN2bzAwM2t0b2x5bmZ0czF6MzgifQ.KtqxBH_3rkMaHCn_Pm3Pag', {
@@ -44,7 +43,7 @@ function vizMap(locationsData) {
     //hide leaflet link
     document.getElementsByClassName('leaflet-control-attribution')[0].style.display = 'none';
     document.getElementsByClassName('leaflet-top leaflet-left')[0].style.display = 'none';
-
+    //lock map to relevant area view 
     map.setMaxBounds(map.getBounds());
 
 
@@ -52,29 +51,33 @@ function vizMap(locationsData) {
     ///////////////Map icons  ///////////////////////
     /////////////////////////////////////////////////
 
-    // create a costum map icon
+    // create a costum map icon [cityIO or non]
     var iconSize = 55;
     var IOIcon = L.icon({
         iconUrl: 'img/legoio.png',
         iconSize: [iconSize, iconSize],
         iconAnchor: [0, 0],
         popupAnchor: [0, 0],
-        shadowUrl: 'img/shadow.png', // put different icon for cityIO
+        // put different icon for cityIO
+        shadowUrl: 'img/shadow.png',
         shadowSize: [iconSize, iconSize],
         shadowAnchor: [0, -20]
     });
+
     var NoIOIcon = L.icon({
         iconUrl: 'img/lego.png',
         iconSize: [iconSize, iconSize],
         iconAnchor: [0, 0],
         popupAnchor: [0, 0],
-        shadowUrl: 'img/shadow.png', // put different icon for cityIO
+        // put different icon for cityIO
+        shadowUrl: 'img/shadow.png',
         shadowSize: [iconSize, iconSize],
         shadowAnchor: [0, -20]
     });
 
     // add icons to cities from locationsData JSON
     for (var i = 0; i < locationsData.length; i++) {
+        //check json if this table has cityIO connectivity 
         if (locationsData[i].cityio) {
             marker = new L.marker([locationsData[i].latitude, locationsData[i].longitude], {
                 icon: IOIcon
@@ -98,14 +101,7 @@ function vizMap(locationsData) {
         $("#d3Div").empty();
         $("#threeDiv").empty();
 
-
-        // if (document.getElementById("tmpbg")) {
-        //     document.getElementById("tmpbg").outerHTML = "";
-        //     delete document.getElementById("tmpbg");
-        // }
-
-
-        //Find  if this is a cityIO table yes/no
+        //Find  if clicked location is a cityIO table yes/no
         var cityIObool = locationsData.find(x => x.city == e.target._popup._content).cityio;
         locText = locationsData.find(x => x.city == e.target._popup._content).text;
         var img = new Image();
@@ -133,6 +129,7 @@ function vizMap(locationsData) {
             //image  
             var imgDiv = document.getElementById('tableImgDiv');
             imgDiv.appendChild(img);
+            img.className = "img-fluid";
 
         } else {
 
@@ -141,7 +138,7 @@ function vizMap(locationsData) {
             /////////////////////////////////////////////////
 
             //find inside JSON using only text string 
-            var div = document.getElementById('threeDiv');
+            var div = document.getElementById('tableInfoDiv');
             div.innerHTML = locText;
 
             //image  

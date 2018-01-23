@@ -16,9 +16,51 @@ var typeId = [
 // draw to SVG container 
 function drawJSON(json) {
     // circleGrid(json);
-    // pieChart(json);
+    pieChart(json);
     treeMap(json);
 }
+
+/////////////////////////////////////////////////
+///////////////d3 plus treemap //////////////////
+/////////////////////////////////////////////////
+function treeMap(json) {
+    gridWithTypes = JSON.parse(JSON.stringify(json.grid));
+    gridWithTypes.forEach(function (cell, index) {
+        //building types in data 
+        if (cell.type > -1 && cell.type < 6) {
+            //make 'Value' term for Desity, so d3plus will fill good 
+            cell.value = json.objects.density[cell.type];
+        } else {
+            //if this cell is not a type, give it an arb. value
+            cell.value = 1;
+        }
+        cell.type = cell.type + 2;
+        //removes useless data 
+        delete cell.x;
+        delete cell.y;
+        delete cell.rot;
+        //make 'Value' term for Desity, so d3plus will fill good 
+        cell.label = typeId[cell.type];
+        cell.color = globalColors[cell.type]
+    });
+
+    console.log(gridWithTypes);
+
+    //drawing treemap 
+    new d3plus.Treemap()
+        .select("#temp")
+        .data(gridWithTypes)
+        .legend(true)
+        .groupBy(["label"])
+        .padding(5)
+        .shapeConfig({
+            fill: function (d) {
+                return [d.color];
+            }
+        })
+        .render();
+}
+
 
 /////////////////////////////////////////////////
 ///////////////d3 Grid Visulazation /////////////
@@ -76,39 +118,6 @@ function circleGrid(json) {
                 return d.value;
         })
 }
-/////////////////////////////////////////////////
-///////////////d3 plus treemap //////////////////
-/////////////////////////////////////////////////
-function treeMap(json) {
-    gridWithTypes = JSON.parse(JSON.stringify(json.grid));
-    gridWithTypes.forEach(function (cell, index) {
-        if (cell.type > -1 && cell.type < 6) { //building types in data 
-            cell.value = json.objects.density[cell.type]; //make 'Value' term for Desity, so d3plus will fill good 
-        } else {
-            cell.value = 1; //if this cell is not a type, give it an arb. value
-        }
-        cell.type = cell.type + 2;
-        delete cell.x; //removes useless data 
-        delete cell.y; //removes useless data 
-        delete cell.rot; //removes useless data 
-        cell.label = typeId[cell.type]; //make 'Value' term for Desity, so d3plus will fill good 
-        cell.color = globalColors[cell.type]
-
-    });
-    //drawing treemap 
-    new d3plus.Treemap()
-        .select("#modal-body")
-        .data(gridWithTypes)
-        .legend(true)
-        .groupBy(["label"])
-        .padding(5)
-        .shapeConfig({
-            fill: function (d) {
-                return [d.color];
-            }
-        })
-        .render();
-}
 
 /////////////////////////////////////////////////
 ////////////////////////////pie chart //////////
@@ -132,7 +141,6 @@ function pieChart(json) {
             officeCount = officeCount + 1;
         }
     });
-    console.log(resCount, officeCount)
 
     var pie = new d3pie("d3Div", {
         "size": {

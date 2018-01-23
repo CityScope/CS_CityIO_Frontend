@@ -1,9 +1,9 @@
   .projection {
     float: left;
     left: 50%;
-    top: 95%;
+    top: 90%;
     width: 100px;
-    height: 20px;
+    height: 25px;
     position: fixed;
     font-family: "Roboto Condensed";
     color: rgb(102, 126, 136);
@@ -14,11 +14,18 @@
   }
 
   .modal-content {
-    background-color: rgba(45, 57, 62, 0.9) !important;
+    background-color: #2D393E !important;
   }
 
   #title {
-    top: 50%;
+    top: 70%;
+    left: 3%;
+    position: fixed;
+    z-index: 1000;
+  }
+
+  #logo {
+    top: 10%;
     left: 3%;
     position: fixed;
     z-index: 1000;
@@ -35,13 +42,6 @@
     z-index: -1;
   }
 
-  #logo {
-    top: 10%;
-    left: 3%;
-    position: fixed;
-    z-index: 1000;
-  }
-
   h1 {
     font-family: "Press Start 2P";
     color: #ffffff;
@@ -53,28 +53,19 @@
 
   h2 {
     font-family: "Roboto Condensed";
-    color: rgb(80, 100, 107);
-    text-shadow: 5px 5px 20px #000000;
-    font-size: 30px;
-    line-height: 35px;
+    color: rgb(134, 147, 151);
+    text-shadow: 3px 3px 20px #000000;
+    font-size: 1rem;
+    line-height: 2rem;
   }
 
   h2 a:link,
    :visited {
-    color: rgb(99, 122, 131);
+    color: rgb(99, 125, 134);
   }
 
   h2 :hover {
-    color: #ED5066;
-  }
-
-  hr {
-    display: block;
-    height: 10px;
-    border: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0);
-    margin: 5px 0;
-    padding: 0;
+    color: #ED5066 !important;
   }
 
   body {
@@ -103,16 +94,13 @@
   #tableInfoDiv {
     font-family: "Roboto Condensed";
     color: rgb(180, 180, 180);
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5em;
-    cursor: text;
-    overflow: auto;
-    padding-right: 10px;
     z-index: 999;
   }
 
   #tableImgDiv img {
-    max-height: 250px;
+    /* max-height: 250px; */
     max-width: 100%;
     -webkit-transition: all 1s;
     -webkit-filter: hue-rotate(160deg) saturate(.2);
@@ -148,10 +136,9 @@
   #d3Div {
     z-index: 100;
   }
-
-  svg {
+  /* svg {
     display: block;
-  }
+  } */
 
   .d3-tip {
     line-height: 1;
