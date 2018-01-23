@@ -16,9 +16,9 @@ function threeModel(jsonData) {
 
     function init() {
         cancelAnimationFrame(this.id); // Stop the animation
-      
 
-        //set up the camera 
+
+        //set up the camera
         var aspect = window.innerWidth / window.innerHeight;
         camera = new THREE.OrthographicCamera(frustumSize * aspect / -2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / -2, 1, 5000);
         camera.position.y = 400;
@@ -27,7 +27,6 @@ function threeModel(jsonData) {
         renderer = window.renderer = new THREE.WebGLRenderer({
             alpha: true
         });
-
         renderer.setClearColor('#ff0000', 0);
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.shadowMap.enabled = true;
@@ -105,7 +104,7 @@ function threeModel(jsonData) {
         renderer.render(scene, camera);
     }
 
-    // //window resizing method 
+    // //window resizing method
 
     function onWindowResize() {
         var aspect = window.innerWidth / window.innerHeight;
