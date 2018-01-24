@@ -105,6 +105,7 @@ function vizMap(locationsData) {
         var cityIObool = locationsData.find(x => x.city == e.target._popup._content).cityio;
         locText = locationsData.find(x => x.city == e.target._popup._content).text;
         var img = new Image();
+        locText = locationsData.find(x => x.city == e.target._popup._content).text;
         img.src = ('img/' + locationsData.find(x => x.city == e.target._popup._content).image);
 
         //and then use it to initate data in viz divs
