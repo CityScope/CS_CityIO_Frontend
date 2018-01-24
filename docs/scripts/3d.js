@@ -2,13 +2,21 @@ function threeModel(jsonData) {
 
     ///////////////SETUP SCENE///////////////////////
 
-    var CANVAS_WIDTH = 300,
-        CANVAS_HEIGHT = 300;
+    var CANVAS_WIDTH = 300;
+    var CANVAS_HEIGHT = 300;
     var frustumSize = 10;
-
-    var camera, scene, renderer;
-    var mesh;
+    var camera = null;
+    var scene = null;
+    var renderer = null;
+    var mesh = null;
     var holder = [];
+    var light = null;
+    var lightAmb = null;
+    var gridHelper = null;
+    var aspect = null;
+    var timer = null;
+    var geometry = null;
+    var material = null;
 
     init();
     animate();
@@ -18,10 +26,11 @@ function threeModel(jsonData) {
 
 
         //set up the camera
-        var aspect = window.innerWidth / window.innerHeight;
+        aspect = window.innerWidth / window.innerHeight;
         camera = new THREE.OrthographicCamera(frustumSize * aspect / -2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / -2, 1, 5000);
         camera.position.y = 400;
         scene = new THREE.Scene();
+
         // set up the renderer
         renderer = window.renderer = new THREE.WebGLRenderer({
             alpha: true
@@ -33,13 +42,13 @@ function threeModel(jsonData) {
         document.body.appendChild(renderer.domElement);
         renderer.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
-        var gridHelper = new THREE.GridHelper(100, 100, 'white', '#404040');
+        gridHelper = new THREE.GridHelper(100, 100, 'white', '#404040');
         scene.add(gridHelper);
 
         /////////////// LIGHTS ///////////////////////
 
         //Create a PointLight and turn on shadows for the light
-        var light = new THREE.PointLight(0xf4eaea, .8, 500);
+        light = new THREE.PointLight(0xf4eaea, .8, 500);
         light.position.set(0, 30, 45);
         light.up = new THREE.Vector3(0, 1, 1);
         light.lookAt(new THREE.Vector3(0, 0, 0));
@@ -52,7 +61,7 @@ function threeModel(jsonData) {
         light.shadow.camera.near = 1; // default
         light.shadow.camera.far = 500 // default
 
-        var lightAmb = new THREE.AmbientLight(0xc8d6d8, .5);
+        lightAmb = new THREE.AmbientLight(0xc8d6d8, .5);
         // Add the light to the scene
         scene.add(lightAmb);
 
@@ -63,13 +72,13 @@ function threeModel(jsonData) {
         var voxelDim = 1;
         for (var x = 0; x < Math.sqrt(jsonData.grid.length); x++) {
             for (var y = 0; y < Math.sqrt(jsonData.grid.length); y++) {
-                var geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (jsonData.grid[i].type + 6) / 3, voxelDim * 0.8);
+                geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (jsonData.grid[i].type + 6) / 3, voxelDim * 0.8);
                 if (jsonData.grid[i].type > -1 && jsonData.grid[i].type < 10) {
                     thisCol = globalColors[jsonData.grid[i].type];
                 } else {
                     thisCol = 'gray'
                 }
-                var material = new THREE.MeshStandardMaterial({
+                material = new THREE.MeshStandardMaterial({
                     color: thisCol
                 });
                 mesh = new THREE.Mesh(geometry, material);
@@ -93,7 +102,7 @@ function threeModel(jsonData) {
 
 
     function render() {
-        var timer = Date.now() * 0.0001;
+        timer = Date.now() * 0.0001;
         camera.position.x = Math.sin(timer) * 800;
         camera.position.z = Math.cos(timer) * 800;
         camera.lookAt(new THREE.Vector3(7.5, 2.5, 5));
@@ -104,7 +113,7 @@ function threeModel(jsonData) {
     window.addEventListener('resize', onWindowResize, false);
 
     function onWindowResize() {
-        var aspect = window.innerWidth / window.innerHeight;
+        aspect = window.innerWidth / window.innerHeight;
         camera.left = -frustumSize * aspect / 2;
         camera.right = frustumSize * aspect / 2;
         camera.top = frustumSize / 2;
@@ -112,7 +121,7 @@ function threeModel(jsonData) {
         camera.updateProjectionMatrix();
         // renderer.setSize(window.innerWidth, window.innerHeight);
 
-        renderer.setSize(document.getElementById('threeDiv').clientWidth, document.getElementById('threeDiv').clientHeight);
+        renderer.setSize(document.getElementById('3d').clientWidth, document.getElementById('3d').clientHeight);
     }
 
     window.addEventListener('DOMMouseScroll', mousewheel, false);
@@ -124,5 +133,5 @@ function threeModel(jsonData) {
         camera.zoom -= event.wheelDeltaY * 0.001;
         camera.updateProjectionMatrix();
     }
-    document.getElementById('threeDiv').appendChild(renderer.domElement);
+    document.getElementById('3d').appendChild(renderer.domElement);
 }

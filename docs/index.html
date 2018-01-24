@@ -13,21 +13,18 @@
 
   <!-- ///////////////////////////////////////////////// -->
   <!-- scripts -->
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="//d3plus.org/js/d3.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/4.7.2/d3.min.js"></script>
-  <script src="//d3plus.org/js/d3plus.v2.0.0-alpha.13.full.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
     crossorigin=""></script>
-  <script src="lib/d3/d3pie.min.js"></script>
   <!-- Three js -->
   <script src="lib/three/three.js"></script>
   <script src="lib/three/TrackballControls.js"></script>
   <!-- own scripts -->
-  <script type="text/javascript" src="scripts/readCityIO.js" async></script>
-  <script type="text/javascript" src="scripts/DrawJSON.js"></script>
-  <script type="text/javascript" src="scripts/CSmap.js"></script>
+  <script type="text/javascript" src="scripts/map.js" async></script>
   <script type="text/javascript" src="scripts/3d.js"></script>
+  <script type="text/javascript" src="scripts/2d.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ///////////////////////////////////////////////// -->
@@ -82,11 +79,10 @@
           </div>
           <div class="row">
             <div class="col">
-              <div id="d3Div"></div>
+              <div id="2d"></div>
             </div>
             <div class="col">
-              <div id='threeDiv'></div>
-              <div id="temp"></div>
+              <div id='3d'></div>
             </div>
           </div>
         </div>

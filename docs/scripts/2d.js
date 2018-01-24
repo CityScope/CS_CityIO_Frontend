@@ -16,7 +16,7 @@ var typeId = [
 // draw to SVG container 
 function drawJSON(json) {
     // circleGrid(json);
-    pieChart(json);
+    // pieChart(json);
     treeMap(json);
 }
 
@@ -24,41 +24,61 @@ function drawJSON(json) {
 ///////////////d3 plus treemap //////////////////
 /////////////////////////////////////////////////
 function treeMap(json) {
-    gridWithTypes = JSON.parse(JSON.stringify(json.grid));
-    gridWithTypes.forEach(function (cell, index) {
-        //building types in data 
-        if (cell.type > -1 && cell.type < 6) {
-            //make 'Value' term for Desity, so d3plus will fill good 
-            cell.value = json.objects.density[cell.type];
-        } else {
-            //if this cell is not a type, give it an arb. value
-            cell.value = 1;
-        }
-        cell.type = cell.type + 2;
-        //removes useless data 
-        delete cell.x;
-        delete cell.y;
-        delete cell.rot;
-        //make 'Value' term for Desity, so d3plus will fill good 
-        cell.label = typeId[cell.type];
-        cell.color = globalColors[cell.type]
-    });
-
-    console.log(gridWithTypes);
 
     //drawing treemap 
-    new d3plus.Treemap()
-        .select("#temp")
-        .data(gridWithTypes)
-        .legend(true)
-        .groupBy(["label"])
-        .padding(5)
-        .shapeConfig({
-            fill: function (d) {
-                return [d.color];
+    google.charts.load('current', {
+        'packages': ['treemap']
+    });
+
+    google.charts.setOnLoadCallback(drawChart);
+
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        // Declare columns
+        data.addColumn('string', 'label');
+        data.addColumn('number', 'value');
+
+        // Data prep
+        gridWithTypes = JSON.parse(JSON.stringify(json.grid));
+        gridWithTypes.forEach(function (cell, index) {
+            //building types in data 
+            if (cell.type > -1 && cell.type < 6) {
+                //make 'Value' term for Desity
+                cell.value = json.objects.density[cell.type];
+            } else {
+                //if this cell is not a type, give it an arb. value
+                cell.value = 1;
             }
-        })
-        .render();
+            cell.type = cell.type + 2;
+            //removes useless data 
+            delete cell.x;
+            delete cell.y;
+            delete cell.rot;
+            //make 'Value' term for Desity
+            cell.label = typeId[cell.type];
+            cell.color = globalColors[cell.type];
+            delete cell.type;
+            // Add data
+            data.addRows([
+                [cell.label, cell.value]
+            ]);
+        });
+
+        console.log(data)
+
+        // draw
+        tree = new google.visualization.TreeMap(document.getElementById('2d'));
+        tree.draw(data, {
+            minColor: '#f00',
+            midColor: '#ddd',
+            maxColor: '#0d0',
+            headerHeight: 15,
+            fontColor: 'black',
+            showScale: true
+        });
+    }
 }
 
 
@@ -139,59 +159,6 @@ function pieChart(json) {
             resCount = resCount + 1;
         } else if (cell.type > 3 && cell.type < 7) {
             officeCount = officeCount + 1;
-        }
-    });
-
-    var pie = new d3pie("d3Div", {
-        "size": {
-            "canvasHeight": 200, //document.getElementById("d3Div2").offsetHeight,
-            "canvasWidth": 200, //document.getElementById("d3Div2").offsetWidth,
-            pieInnerRadius: "65%"
-        },
-        "labels": {
-            "lines": {
-                "enabled": true
-            },
-            "outer": {
-                "pieDistance": 4
-            },
-            "inner": {
-                "hideWhenLessThanPercentage": 3
-            },
-            "mainLabel": {
-                "color": "#F6ECD4",
-                "fontSize": 10
-            },
-            "percentage": {
-                "color": "#F6ECD4",
-                "decimalPlaces": 0
-            },
-            "value": {
-                "color": "#F6ECD4",
-                "fontSize": 5
-            },
-            "truncation": {
-                "enabled": true
-            }
-        },
-        "data": {
-            content: [{
-                    label: "Living",
-                    value: resCount,
-                    caption: "Living"
-                },
-                {
-                    label: "Working",
-                    value: officeCount,
-                    caption: "Working"
-                }
-            ]
-        },
-        "misc": {
-            "colors": {
-                "segments": ["#F4827D", "#A3BFA2"],
-                "segmentStroke": "#00000000"
-            }
         }
     });
 }

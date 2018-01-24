@@ -1,5 +1,3 @@
-$(window).on("load", readLocationJson());
-
 // global holder for theme colors 
 var globalColors = [
     '#ED5066',
@@ -17,9 +15,13 @@ var globalColors = [
     '#263C3A',
     '#14181a'
 ];
-
 // decalre json location data globally 
 var locationsData;
+// global data var for API data 
+var jsonData;
+
+$(window).on("load", readLocationJson());
+
 
 function readLocationJson() {
     $.getJSON("locations.json", function (locationsData) {
@@ -46,13 +48,9 @@ function vizMap(locationsData) {
     //lock map to relevant area view 
     map.setMaxBounds(map.getBounds());
 
-
-    /////////////////////////////////////////////////
-    ///////////////Map icons  ///////////////////////
-    /////////////////////////////////////////////////
-
+    ///////////////Map icons///////////////////////
     // create a costum map icon [cityIO or non]
-    var iconSize = 55;
+    var iconSize = 40;
     var IOIcon = L.icon({
         iconUrl: 'img/legoio.png',
         iconSize: [iconSize, iconSize],
@@ -72,7 +70,7 @@ function vizMap(locationsData) {
         // put different icon for cityIO
         shadowUrl: 'img/shadow.png',
         shadowSize: [iconSize, iconSize],
-        shadowAnchor: [0, -20]
+        shadowAnchor: [0, -10]
     });
 
     // add icons to cities from locationsData JSON
@@ -90,61 +88,65 @@ function vizMap(locationsData) {
     }
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
-        $('#PortfolioModal').modal({
-            show: true
-        });
-
-
         // clear all divs for new data 
         $("#tableInfoDiv").empty();
         $("#tableImgDiv").empty();
         $("#d3Div").empty();
         $("#threeDiv").empty();
 
-        //Find  if clicked location is a cityIO table yes/no
-        var cityIObool = locationsData.find(x => x.city == e.target._popup._content).cityio;
-        locText = locationsData.find(x => x.city == e.target._popup._content).text;
+        //find image and text
         var img = new Image();
+        boolCityIO = locText = locationsData.find(x => x.city == e.target._popup._content).cityio;
         locText = locationsData.find(x => x.city == e.target._popup._content).text;
         img.src = ('img/' + locationsData.find(x => x.city == e.target._popup._content).image);
+        // get name of city from its icon popup 
+        var cityName = e.target._popup._content.toString().toLowerCase();
+        readCityIO("citymatrix_" + cityName, boolCityIO);
 
-        //and then use it to initate data in viz divs
-        if (cityIObool) {
-            // get name of city from its icon popup 
-            var cityName = e.target._popup._content.toString().toLowerCase();
-
-            if (cityName.length < 1) { // to allow a nameless table 
-                readCityIO("citymatrix");
-            } else {
-                readCityIO("citymatrix_" + cityName);
-            }
-
-            /////////////////////////////////////////////////
-            ///////////////CITYIO DIV INFO //////////////////
-            /////////////////////////////////////////////////
-
-            //find inside JSON using only text string 
-            var div = document.getElementById('tableInfoDiv');
-            div.innerHTML = locText;
-
-            //image  
-            var imgDiv = document.getElementById('tableImgDiv');
-            imgDiv.appendChild(img);
-            img.className = "img-fluid";
-
-        } else {
-
-            /////////////////////////////////////////////////
-            ///////////////Non-IO DIV INFO ///////////////////
-            /////////////////////////////////////////////////
-
-            //find inside JSON using only text string 
-            var div = document.getElementById('tableInfoDiv');
-            div.innerHTML = locText;
-
-            //image  
-            var imgDiv = document.getElementById('tableImgDiv');
-            imgDiv.appendChild(img);
-        }
+        /////////////////////////////////////////////////
+        /////////////// DIV INFO ////////////////////////
+        /////////////////////////////////////////////////
+        //find inside JSON using only text string 
+        var div = document.getElementById('tableInfoDiv');
+        div.innerHTML = locText;
+        //image  
+        var imgDiv = document.getElementById('tableImgDiv');
+        imgDiv.appendChild(img);
+        img.className = "img-fluid";
+        // show modal
+        $('#PortfolioModal').modal({
+            show: true
+        });
     }
+}
+
+/////////////////////////////////////////////////
+//////////////JQuary GET Medthod/////////////////
+/////////////////////////////////////////////////
+
+// get table name from map click on icon 
+function readCityIO(tableString, boolCityIO) {
+    var cityIOurl = "https://cityio.media.mit.edu/api/table/" + tableString;
+
+    // GET method 
+    $.ajax({
+        url: cityIOurl,
+        dataType: 'JSONP',
+        callback: 'jsonData',
+        type: 'GET',
+        success: function (jsonData) {
+            //call viz methods here 
+            console.log(cityIOurl, new Date(jsonData.timestamp), " ", boolCityIO); //print date of cityIO data
+            if (boolCityIO) {
+                //Draw 3d 
+                threeModel(jsonData);
+                //Draw 2d 
+                drawJSON(jsonData);
+            }
+        },
+        // or error 
+        error: function () {
+            console.log('ERROR');
+        }
+    });
 }
