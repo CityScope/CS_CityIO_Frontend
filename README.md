@@ -14,4 +14,6 @@ Front end for cityIO endpoint
 
 webpack and other usefull libiries will be introduced step by step
 
+---
 
+[Maintained by Ariel Noyman](https://github.com/RELNO)
