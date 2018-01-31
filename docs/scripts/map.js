@@ -115,7 +115,7 @@ function vizMap(locationsData) {
         imgDiv.appendChild(img);
         img.className = "img-fluid";
         // show modal
-        $('#PortfolioModal').modal({
+        $('#cityio').modal({
             show: true
         });
     }
