@@ -15,6 +15,7 @@ var globalColors = [
     '#263C3A',
     '#14181a'
 ];
+
 // decalre json location data globally 
 var locationsData;
 // global data var for API data 
@@ -89,10 +90,10 @@ function vizMap(locationsData) {
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
         // clear all divs for new data 
-        $("#tableInfoDiv").empty();
-        $("#tableImgDiv").empty();
-        $("#d3Div").empty();
-        $("#threeDiv").empty();
+        $("#tableImg").empty();
+        $("#tableInfo").empty();
+        $("#2d").empty();
+        $("#3d").empty();
 
         //find image and text
         var img = new Image();
@@ -107,10 +108,10 @@ function vizMap(locationsData) {
         /////////////// DIV INFO ////////////////////////
         /////////////////////////////////////////////////
         //find inside JSON using only text string 
-        var div = document.getElementById('tableInfoDiv');
+        var div = document.getElementById('tableInfo');
         div.innerHTML = locText;
         //image  
-        var imgDiv = document.getElementById('tableImgDiv');
+        var imgDiv = document.getElementById('tableImg');
         imgDiv.appendChild(img);
         img.className = "img-fluid";
         // show modal

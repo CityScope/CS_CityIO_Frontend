@@ -60,7 +60,7 @@
   }
 
   h2 a:link,
-   :visited {
+  :visited {
     color: rgb(99, 125, 134);
   }
 
@@ -91,7 +91,7 @@
     border: none;
   }
 
-  #tableInfoDiv {
+  #tableInfo {
     font-family: "Roboto Condensed";
     color: rgb(180, 180, 180);
     font-size: 15px;
@@ -99,29 +99,29 @@
     z-index: 999;
   }
 
-  #tableImgDiv img {
+  #tableImg img {
     /* max-height: 250px; */
     max-width: 100%;
     -webkit-transition: all 1s;
     -webkit-filter: hue-rotate(160deg) saturate(.2);
   }
 
-  #tableImgDiv img:hover {
+  #tableImg img:hover {
     filter: none;
     -webkit-filter: hue-rotate(0) saturate(1);
     cursor: pointer;
   }
 
-   ::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 5px;
     height: 10px;
   }
 
-   ::-webkit-scrollbar-track-piece {
+  ::-webkit-scrollbar-track-piece {
     background-color: rgb(68, 68, 68);
   }
 
-   ::-webkit-scrollbar-thumb:vertical {
+  ::-webkit-scrollbar-thumb:vertical {
     height: 30px;
     background-color: rgb(179, 179, 179);
   }
@@ -136,6 +136,7 @@
   #d3Div {
     z-index: 100;
   }
+
   /* svg {
     display: block;
   } */
@@ -148,6 +149,7 @@
     border-radius: 4px;
     font-size: 12px;
   }
+
   /* leaflet design */
 
   .leaflet-popup-content-wrapper {
