@@ -1,4 +1,5 @@
-[{
+[
+  {
     "city": "Shanghai",
     "image": "shanghai.jpg",
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elitat tortor at magna gravida, sed sollicitudin erat molestie. Nunc quis nunc euismod, lacinia nibh varius, semper lectus. Cras velit lorem, sodales nec congue quis, volutpat ac sapien. Proin at enim lorem. nas nec felis nec neque posuere lacinia eu vitae est. Nunc a risus ultricies, accumsan nibh id, fringilla mauris. Mauris eu neque porttitor, volutpat enim id, mollis erat.",
@@ -22,7 +23,6 @@
     "longitude": -82.0884123,
     "cityio": false
   },
-
   {
     "city": "Volpe",
     "image": "volpe.jpg",
