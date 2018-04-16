@@ -23,8 +23,8 @@ var locationsData;
 
 function readLocationJson() {
     $.getJSON("locations.json", function (locationsData) {
-            vizMap(locationsData)
-        })
+        vizMap(locationsData)
+    })
         .fail(function () {
             console.log("error");
         });
@@ -37,7 +37,7 @@ function vizMap(locationsData) {
 
 
     //setup the map API
-    L.tileLayer('https://api.mapbox.com/styles/v1/relnox/cj9oqs09o4n4t2rn2ymwrxxug/tiles/512/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVsbm94IiwiYSI6ImNpa2VhdzN2bzAwM2t0b2x5bmZ0czF6MzgifQ.KtqxBH_3rkMaHCn_Pm3Pag', {
+    L.tileLayer('https://api.mapbox.com/styles/v1/relnox/cjg1ixe5s2ubp2rl3eqzjz2ud/tiles/512/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVsbm94IiwiYSI6ImNpa2VhdzN2bzAwM2t0b2x5bmZ0czF6MzgifQ.KtqxBH_3rkMaHCn_Pm3Pag', {
         maxZoom: 15,
         minZoom: 2,
     }).addTo(map);
