@@ -3,6 +3,7 @@ import * as L from "leaflet";
 import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
+// import "/img";
 
 
 // global holder for theme colors 
@@ -73,21 +74,24 @@ function vizMap(locationsData) {
             }).bindPopup(locationsData[i].city).addTo(map).on('click', onClick);
         } else {
             let marker = new L.marker([locationsData[i].latitude, locationsData[i].longitude], {
-                icon: NoIOIcon
+                icon: NoIOIcon,
             }).bindPopup(locationsData[i].city).addTo(map).on('click', onClick);
         }
     }
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
-        //find image and text
-        var img = new Image();
-        img.src = ('img/' + locationsData.find(x => x.city == e.target._popup._content).image);
-        //find inside JSON using only text string 
-        var div = document.getElementById('tableInfo');
-        div.innerHTML = locText;
-        //image  
-        var imgDiv = document.getElementById('tableImg');
-        imgDiv.appendChild(img);
-        img.className = "img-fluid";
+        for (var i = 0; i < locDat.length - 1; i++) {
+            if (e.latlng.lat == locationsData[i].latitude) {
+                //find image and text
+                var img = new Image();
+                img.src = ('img/' + locationsData[i].image);
+                //find inside JSON using only text string 
+                // var div = document.getElementById('tableInfo');
+                // div.innerHTML = locText;
+                var imgDiv = document.createElement('tableImg');
+                imgDiv.appendChild(img);
+                img.className = "img-fluid";
+            }
+        }
     }
 }

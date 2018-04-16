@@ -77,7 +77,7 @@ parcelRequire = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({8:[function(require,module,exports) {
+})({6:[function(require,module,exports) {
 module.exports = [
   {
     "city": "Shanghai",
@@ -120,7 +120,7 @@ module.exports = [
     "cityio": true
   }
 ];
-},{}],12:[function(require,module,exports) {
+},{}],10:[function(require,module,exports) {
 var global = (1,eval)("this");
 /* @preserve
  * Leaflet 1.3.1, a JS library for interactive maps. http://leafletjs.com
@@ -13925,11 +13925,11 @@ exports.map = createMap;
 })));
 //# sourceMappingURL=leaflet-src.js.map
 
-},{}],9:[function(require,module,exports) {
+},{}],7:[function(require,module,exports) {
 module.exports="/lego.a179ac50.png";
-},{}],10:[function(require,module,exports) {
+},{}],8:[function(require,module,exports) {
 module.exports="/legoio.f71e8d2d.png";
-},{}],11:[function(require,module,exports) {
+},{}],9:[function(require,module,exports) {
 module.exports="/shadow.0991638a.png";
 },{}],3:[function(require,module,exports) {
 "use strict";
@@ -13955,6 +13955,9 @@ var _shadow = require("/img/shadow.png");
 var shadow = _interopRequireWildcard(_shadow);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// import "/img";
+
 
 // global holder for theme colors 
 var globalColors = ['#ED5066', '#F4827D', '#F4B99E', '#FDCAA2', '#F6ECD4', '#CCD9CE', '#A5BBB9', '#A3BFA2', '#80ADA9', '#668a87', '#405654', '#263C3A', '#263C3A', '#14181a'];
@@ -14013,21 +14016,22 @@ function vizMap(locationsData) {
     }
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
-        //find image and text
-        var img = new Image();
-        img.src = 'img/' + locationsData.find(function (x) {
-            return x.city == e.target._popup._content;
-        }).image;
-        //find inside JSON using only text string 
-        var div = document.getElementById('tableInfo');
-        div.innerHTML = locText;
-        //image  
-        var imgDiv = document.getElementById('tableImg');
-        imgDiv.appendChild(img);
-        img.className = "img-fluid";
+        for (var i = 0; i < locDat.length - 1; i++) {
+            if (e.latlng.lat == locationsData[i].latitude) {
+                //find image and text
+                var img = new Image();
+                img.src = 'img/' + locationsData[i].image;
+                //find inside JSON using only text string 
+                // var div = document.getElementById('tableInfo');
+                // div.innerHTML = locText;
+                var imgDiv = document.createElement('tableImg');
+                imgDiv.appendChild(img);
+                img.className = "img-fluid";
+            }
+        }
     }
 }
-},{"/locations.json":8,"leaflet":12,"/img/lego.png":9,"/img/legoio.png":10,"/img/shadow.png":11}],14:[function(require,module,exports) {
+},{"/locations.json":6,"leaflet":10,"/img/lego.png":7,"/img/legoio.png":8,"/img/shadow.png":9}],16:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -14057,7 +14061,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51585' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56472' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -14196,5 +14200,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[14,3])
+},{}]},{},[16,3])
 //# sourceMappingURL=/map.f10110b2.map
