@@ -1,9 +1,13 @@
-import * as jsonData from "/locations.json"
-import * as L from "leaflet";
+import * as L from 'leaflet';
+window.$ = require('jquery');
+import 'bootstrap';
+
+
 import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
-// import "/img";
+import images from '../img/*';
+import * as jsonData from "/locations.json";
 
 
 // global holder for theme colors 
@@ -48,20 +52,19 @@ function vizMap(locationsData) {
         iconSize: [iconSize, iconSize],
         iconAnchor: [0, 0],
         popupAnchor: [0, 0],
-        // put different icon for cityIO
         shadowUrl: shadow.default,
         shadowSize: [iconSize, iconSize],
-        shadowAnchor: [0, 0]
+        shadowAnchor: [0, -20]
     });
+    // put different icon for cityIO
     var NoIOIcon = L.icon({
         iconUrl: lego.default,
         iconSize: [iconSize, iconSize],
         iconAnchor: [0, 0],
         popupAnchor: [0, 0],
-        // put different icon for cityIO
         shadowUrl: shadow.default,
         shadowSize: [iconSize, iconSize],
-        shadowAnchor: [0, 0]
+        shadowAnchor: [0, -20]
     });
     // obj to array 
     let locDat = Object.keys(locationsData);
@@ -80,17 +83,24 @@ function vizMap(locationsData) {
     }
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
+        document.getElementById('imgDiv').innerHTML = "";
+
+        $('#modal').modal('toggle');
+
         for (var i = 0; i < locDat.length - 1; i++) {
+            //compare the map icon to the json data 
             if (e.latlng.lat == locationsData[i].latitude) {
                 //find image and text
                 var img = new Image();
-                img.src = ('img/' + locationsData[i].image);
-                //find inside JSON using only text string 
-                // var div = document.getElementById('tableInfo');
-                // div.innerHTML = locText;
-                var imgDiv = document.createElement('tableImg');
+                var path = images[locationsData[i].image]
+                img.src = path;
+                var imgDiv = document.getElementById('imgDiv');
                 imgDiv.appendChild(img);
                 img.className = "img-fluid";
+
+                //find inside JSON using only text string 
+                var infoDiv = document.getElementById('infoDiv');
+                infoDiv.innerHTML = locationsData[i].text;
             }
         }
     }

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto+Condensed');
 @import url('https://unpkg.com/leaflet@1.3.1/dist/leaflet.css');
-
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
 
   .modal-content {
     background-color: #2D393E !important;
@@ -53,22 +53,21 @@
     background-color: #2D393E;
   }
 
-  #tableInfo {
+  .tableInfo {
+    margin: 1rem;
     font-family: "Roboto Condensed";
     color: rgb(180, 180, 180);
-    font-size: 15px;
+    font-size: 12px;
     line-height: 1.5em;
     z-index: 999;
   }
 
-  #tableImg img {
-    /* max-height: 250px; */
-    max-width: 100%;
-    -webkit-transition: all 1s;
+  .tableImg img {
+    -webkit-transition: all 0.5s;
     -webkit-filter: hue-rotate(160deg) saturate(.2);
   }
 
-  #tableImg img:hover {
+  .tableImg img:hover {
     filter: none;
     -webkit-filter: hue-rotate(0) saturate(1);
     cursor: pointer;
