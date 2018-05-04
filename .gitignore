@@ -1,5 +1,6 @@
 */**/.gitignore
+/[.]cache
+/.vscode
+/.cache
 /node_modules
 .[D]d[S]s_s[S]tore 
-/.cache
-/.vscode

@@ -1,32 +1,13 @@
 import * as L from 'leaflet';
 window.$ = require('jquery');
 import 'bootstrap';
-
-
 import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
 import images from '../img/*';
 import * as jsonData from "/locations.json";
+import * as viz from '../scripts/viz'
 
-
-// global holder for theme colors 
-var globalColors = [
-    '#ED5066',
-    '#F4827D',
-    '#F4B99E',
-    '#FDCAA2',
-    '#F6ECD4',
-    '#CCD9CE',
-    '#A5BBB9',
-    '#A3BFA2',
-    '#80ADA9',
-    '#668a87',
-    '#405654',
-    '#263C3A',
-    '#263C3A',
-    '#14181a'
-];
 
 // decalre json location data globally 
 vizMap(jsonData);
@@ -83,10 +64,10 @@ function vizMap(locationsData) {
     }
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
-        document.getElementById('imgDiv').innerHTML = "";
-
+        var infoDiv = document.getElementById('infoDiv');
+        var imgDiv = document.getElementById('imgDiv');
+        imgDiv.innerHTML = "";
         $('#modal').modal('toggle');
-
         for (var i = 0; i < locDat.length - 1; i++) {
             //compare the map icon to the json data 
             if (e.latlng.lat == locationsData[i].latitude) {
@@ -94,13 +75,13 @@ function vizMap(locationsData) {
                 var img = new Image();
                 var path = images[locationsData[i].image]
                 img.src = path;
-                var imgDiv = document.getElementById('imgDiv');
                 imgDiv.appendChild(img);
                 img.className = "img-fluid";
 
                 //find inside JSON using only text string 
-                var infoDiv = document.getElementById('infoDiv');
                 infoDiv.innerHTML = locationsData[i].text;
+                viz.getCityIO();
+
             }
         }
     }
