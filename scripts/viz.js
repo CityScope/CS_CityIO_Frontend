@@ -19,14 +19,28 @@ var globalColors = [
 ];
 
 export function getCityIO() {
-    fetch('https://cityio.media.mit.edu/api/table/citymatrix_volpe')
-        .then(function (response) {
-            return response.json();
+
+    fetch('https://cityio.media.mit.edu/api/table/citymatrix_volpe',
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
-        .then(function (myJson) {
-            threeModel(myJson);
-            drawJSON(myJson);
+        .then((response) => {
+            console.log(response);
+            try {
+                JSON.parse(response)
+            }
+            catch (err) {
+                console.log("parsing err ", err)
+            }
+        })
+        .catch((err) => {
+            console.log("err ", err)
         });
+
+
 }
 
 

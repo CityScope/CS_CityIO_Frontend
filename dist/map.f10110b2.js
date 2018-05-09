@@ -13882,7 +13882,7 @@ exports.map = createMap;
 })));
 //# sourceMappingURL=leaflet-src.js.map
 
-},{}],34:[function(require,module,exports) {
+},{}],27:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -24437,7 +24437,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{"process":34}],33:[function(require,module,exports) {
+},{"process":27}],29:[function(require,module,exports) {
 var global = (1,eval)("this");
 'use strict';
 
@@ -26961,7 +26961,7 @@ exports.default = Popper;
 },{}],26:[function(require,module,exports) {
 var global = (1,eval)("this");
 /*!
-  * Bootstrap v4.1.0 (https://getbootstrap.com/)
+  * Bootstrap v4.1.1 (https://getbootstrap.com/)
   * Copyright 2011-2018 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
@@ -27031,7 +27031,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): util.js
+   * Bootstrap (v4.1.1): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -27163,7 +27163,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): alert.js
+   * Bootstrap (v4.1.1): alert.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -27175,7 +27175,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'alert';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.alert';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -27212,9 +27212,11 @@ var global = (1,eval)("this");
 
       // Public
       _proto.close = function close(element) {
-        element = element || this._element;
+        var rootElement = this._element;
 
-        var rootElement = this._getRootElement(element);
+        if (element) {
+          rootElement = this._getRootElement(element);
+        }
 
         var customEvent = this._triggerCloseEvent(rootElement);
 
@@ -27335,7 +27337,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): button.js
+   * Bootstrap (v4.1.1): button.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -27347,7 +27349,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'button';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.button';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -27498,7 +27500,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): carousel.js
+   * Bootstrap (v4.1.1): carousel.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -27510,7 +27512,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'carousel';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.carousel';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -27998,7 +28000,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): collapse.js
+   * Bootstrap (v4.1.1): collapse.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -28010,7 +28012,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'collapse';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.collapse';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -28281,7 +28283,7 @@ var global = (1,eval)("this");
           var $this = $$$1(this);
           var data = $this.data(DATA_KEY);
 
-          var _config = _objectSpread({}, Default, $this.data(), typeof config === 'object' && config);
+          var _config = _objectSpread({}, Default, $this.data(), typeof config === 'object' && config ? config : {});
 
           if (!data && _config.toggle && /show|hide/.test(config)) {
             _config.toggle = false;
@@ -28357,7 +28359,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): dropdown.js
+   * Bootstrap (v4.1.1): dropdown.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -28369,7 +28371,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'dropdown';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.dropdown';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -28837,7 +28839,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): modal.js
+   * Bootstrap (v4.1.1): modal.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -28849,7 +28851,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'modal';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.modal';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -29325,7 +29327,7 @@ var global = (1,eval)("this");
         return this.each(function () {
           var data = $$$1(this).data(DATA_KEY);
 
-          var _config = _objectSpread({}, Modal.Default, $$$1(this).data(), typeof config === 'object' && config);
+          var _config = _objectSpread({}, Default, $$$1(this).data(), typeof config === 'object' && config ? config : {});
 
           if (!data) {
             data = new Modal(this, _config);
@@ -29414,7 +29416,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): tooltip.js
+   * Bootstrap (v4.1.1): tooltip.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -29426,7 +29428,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'tooltip';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.tooltip';
     var EVENT_KEY = "." + DATA_KEY;
     var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
@@ -29931,7 +29933,7 @@ var global = (1,eval)("this");
       };
 
       _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, this.constructor.Default, $$$1(this.element).data(), config);
+        config = _objectSpread({}, this.constructor.Default, $$$1(this.element).data(), typeof config === 'object' && config ? config : {});
 
         if (typeof config.delay === 'number') {
           config.delay = {
@@ -30080,7 +30082,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): popover.js
+   * Bootstrap (v4.1.1): popover.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -30092,7 +30094,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'popover';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.popover';
     var EVENT_KEY = "." + DATA_KEY;
     var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
@@ -30276,7 +30278,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): scrollspy.js
+   * Bootstrap (v4.1.1): scrollspy.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -30288,7 +30290,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'scrollspy';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.scrollspy';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -30415,7 +30417,7 @@ var global = (1,eval)("this");
 
 
       _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, Default, config);
+        config = _objectSpread({}, Default, typeof config === 'object' && config ? config : {});
 
         if (typeof config.target !== 'string') {
           var id = $$$1(config.target).attr('id');
@@ -30587,7 +30589,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.1.0): tab.js
+   * Bootstrap (v4.1.1): tab.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -30599,7 +30601,7 @@ var global = (1,eval)("this");
      * ------------------------------------------------------------------------
      */
     var NAME = 'tab';
-    var VERSION = '4.1.0';
+    var VERSION = '4.1.1';
     var DATA_KEY = 'bs.tab';
     var EVENT_KEY = "." + DATA_KEY;
     var DATA_API_KEY = '.data-api';
@@ -30834,7 +30836,7 @@ var global = (1,eval)("this");
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.0.0): index.js
+   * Bootstrap (v4.1.1): index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -30871,7 +30873,7 @@ var global = (1,eval)("this");
   Object.defineProperty(exports, '__esModule', { value: true });
 });
 //# sourceMappingURL=bootstrap.js.map
-},{"jquery":25,"popper.js":33}],11:[function(require,module,exports) {
+},{"jquery":25,"popper.js":29}],11:[function(require,module,exports) {
 module.exports="/lego.a179ac50.png";
 },{}],12:[function(require,module,exports) {
 module.exports="/legoio.f71e8d2d.png";
@@ -30956,7 +30958,7 @@ module.exports = [
     "cityio": true
   }
 ];
-},{}],31:[function(require,module,exports) {
+},{}],28:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -72261,11 +72263,21 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var globalColors = ['#ED5066', '#F4827D', '#F4B99E', '#FDCAA2', '#F6ECD4', '#CCD9CE', '#A5BBB9', '#A3BFA2', '#80ADA9', '#668a87', '#405654', '#263C3A', '#263C3A', '#14181a'];
 
 function getCityIO() {
-    fetch('https://cityio.media.mit.edu/api/table/citymatrix_volpe').then(function (response) {
-        return response.json();
-    }).then(function (myJson) {
-        threeModel(myJson);
-        drawJSON(myJson);
+
+    fetch('https://cityio.media.mit.edu/api/table/citymatrix_volpe', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (response) {
+        console.log(response);
+        try {
+            JSON.parse(response);
+        } catch (err) {
+            console.log("parsing err ", err);
+        }
+    }).catch(function (err) {
+        console.log("err ", err);
     });
 }
 
@@ -72403,7 +72415,7 @@ var typeId = ['PARKING', 'PARK', 'Residential Large', 'Residential Medium', 'Res
 
 // draw to SVG container 
 function drawJSON(json) {}
-},{"THREE":31}],3:[function(require,module,exports) {
+},{"THREE":28}],3:[function(require,module,exports) {
 'use strict';
 
 var _leaflet = require('leaflet');
@@ -72428,7 +72440,7 @@ var _ = require('../img/*');
 
 var _2 = _interopRequireDefault(_);
 
-var _locations = require('/locations.json');
+var _locations = require('../locations.json');
 
 var jsonData = _interopRequireWildcard(_locations);
 
@@ -72517,7 +72529,7 @@ function vizMap(locationsData) {
         }
     }
 }
-},{"leaflet":24,"jquery":25,"bootstrap":26,"/img/lego.png":11,"/img/legoio.png":12,"/img/shadow.png":13,"../img/*":8,"/locations.json":10,"../scripts/viz":14}],37:[function(require,module,exports) {
+},{"leaflet":24,"jquery":25,"bootstrap":26,"/img/lego.png":11,"/img/legoio.png":12,"/img/shadow.png":13,"../img/*":8,"../locations.json":10,"../scripts/viz":14}],40:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -72547,7 +72559,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51406' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58780' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -72686,5 +72698,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[37,3])
+},{}]},{},[40,3])
 //# sourceMappingURL=/map.f10110b2.map

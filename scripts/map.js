@@ -5,7 +5,7 @@ import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
 import images from '../img/*';
-import * as jsonData from "/locations.json";
+import * as jsonData from "../locations.json";
 import * as viz from '../scripts/viz'
 
 
