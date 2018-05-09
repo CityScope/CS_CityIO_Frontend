@@ -1,55 +1,28 @@
-
 import * as THREE from 'THREE';
-// global holder for theme colors 
-var globalColors = [
-    '#ED5066',
-    '#F4827D',
-    '#F4B99E',
-    '#FDCAA2',
-    '#F6ECD4',
-    '#CCD9CE',
-    '#A5BBB9',
-    '#A3BFA2',
-    '#80ADA9',
-    '#668a87',
-    '#405654',
-    '#263C3A',
-    '#263C3A',
-    '#14181a'
-];
 
-export function getCityIO() {
-
-    fetch('https://cityio.media.mit.edu/api/table/citymatrix_volpe',
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then((response) => {
-            console.log(response);
-            try {
-                JSON.parse(response)
-            }
-            catch (err) {
-                console.log("parsing err ", err)
-            }
-        })
-        .catch((err) => {
-            console.log("err ", err)
-        });
-
-
-}
-
-
-function threeModel(jsonData) {
+export function threeViz(jsonData) {
+    // global holder for theme colors 
+    var globalColors = [
+        '#ED5066',
+        '#F4827D',
+        '#F4B99E',
+        '#FDCAA2',
+        '#F6ECD4',
+        '#CCD9CE',
+        '#A5BBB9',
+        '#A3BFA2',
+        '#80ADA9',
+        '#668a87',
+        '#405654',
+        '#263C3A',
+        '#263C3A',
+        '#14181a'
+    ];
 
     ///////////////SETUP SCENE///////////////////////
 
-    var CANVAS_WIDTH = '100';
-    var CANVAS_HEIGHT = '100';
+    var CANVAS_WIDTH = window.innerWidth / 4;
+    var CANVAS_HEIGHT = window.innerHeight / 4;
     var frustumSize = 10;
     var camera = null;
     var scene = null;
@@ -112,7 +85,6 @@ function threeModel(jsonData) {
         scene.add(lightAmb);
 
         /////////////// GEOMETRY ///////////////////////
-
         var i = 0;
         var voxelDim = 1;
         var thisCol;
@@ -162,38 +134,5 @@ function threeModel(jsonData) {
         camera.updateProjectionMatrix();
         renderer.setSize(document.getElementById('threeDiv').clientWidth, document.getElementById('threeDiv').clientHeight);
     }
-    window.addEventListener('DOMMouseScroll', mousewheel, false);
-    window.addEventListener('mousewheel', mousewheel, false);
-    function mousewheel(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        camera.zoom -= event.wheelDeltaY * 0.001;
-        camera.updateProjectionMatrix();
-    }
     document.getElementById('threeDiv').appendChild(renderer.domElement);
 }
-
-
-///////////////////////////////////////////////////////////////////////////
-////////////////////////////2d GRAPHIC/////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-var svgContainer;
-var typeId = [
-    'PARKING',
-    'PARK',
-    'Residential Large',
-    'Residential Medium',
-    'Residential Small',
-    'Office Large',
-    'Office Medium',
-    'Office Small',
-    'ROAD',
-    'AMENITIES',
-    'MISC'
-]
-
-// draw to SVG container 
-function drawJSON(json) {
-
-}
-

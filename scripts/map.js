@@ -6,7 +6,7 @@ import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
 import images from '../img/*';
 import * as jsonData from "../locations.json";
-import * as viz from '../scripts/viz'
+import * as vizSetup from '../scripts/vizSetup'
 
 
 // decalre json location data globally 
@@ -66,6 +66,7 @@ function vizMap(locationsData) {
     function onClick(e) {
         var infoDiv = document.getElementById('infoDiv');
         var imgDiv = document.getElementById('imgDiv');
+
         imgDiv.innerHTML = "";
         $('#modal').modal('toggle');
         for (var i = 0; i < locDat.length - 1; i++) {
@@ -80,7 +81,7 @@ function vizMap(locationsData) {
 
                 //find inside JSON using only text string 
                 infoDiv.innerHTML = locationsData[i].text;
-                viz.getCityIO();
+                vizSetup.getCityIO();
 
             }
         }
