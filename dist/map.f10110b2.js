@@ -13882,7 +13882,7 @@ exports.map = createMap;
 })));
 //# sourceMappingURL=leaflet-src.js.map
 
-},{}],29:[function(require,module,exports) {
+},{}],28:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -24437,7 +24437,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{"process":29}],30:[function(require,module,exports) {
+},{"process":28}],29:[function(require,module,exports) {
 var global = (1,eval)("this");
 'use strict';
 
@@ -30873,7 +30873,7 @@ var global = (1,eval)("this");
   Object.defineProperty(exports, '__esModule', { value: true });
 });
 //# sourceMappingURL=bootstrap.js.map
-},{"jquery":23,"popper.js":30}],9:[function(require,module,exports) {
+},{"jquery":23,"popper.js":29}],9:[function(require,module,exports) {
 module.exports="/lego.a179ac50.png";
 },{}],10:[function(require,module,exports) {
 module.exports="/legoio.f71e8d2d.png";
@@ -72377,7 +72377,7 @@ function threeViz(jsonData) {
     }
     document.getElementById('threeDiv').appendChild(renderer.domElement);
 }
-},{"THREE":31}],33:[function(require,module,exports) {
+},{"THREE":31}],32:[function(require,module,exports) {
 !function() {
   var d3 = {
     version: "3.5.6"
@@ -81882,7 +81882,7 @@ function threeViz(jsonData) {
   if (typeof define === "function" && define.amd) define(d3); else if (typeof module === "object" && module.exports) module.exports = d3;
   this.d3 = d3;
 }();
-},{}],32:[function(require,module,exports) {
+},{}],30:[function(require,module,exports) {
 var global = (1,eval)("this");
 var globals = {};
 
@@ -81894,7 +81894,7 @@ module.exports = require("./d3");
 // Restore old global.
 if ("d3" in globals) global.d3 = globals.d3; else delete global.d3;
 
-},{"./d3":33}],26:[function(require,module,exports) {
+},{"./d3":32}],26:[function(require,module,exports) {
 "use strict";
 
 var _d = require("d3");
@@ -81910,7 +81910,7 @@ console.log("d3 version: ", d3.version);
 ////////////////////////////////////////////////////////////// 
 
 var margin = { top: 100, right: 100, bottom: 100, left: 100 },
-    width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+    width = Math.min(600, window.innerWidth - 10) - margin.left - margin.right,
     height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
 ////////////////////////////////////////////////////////////// 
@@ -82166,7 +82166,7 @@ function RadarChart(id, data, options) {
         });
     } //wrap	
 } //RadarChart
-},{"d3":32}],12:[function(require,module,exports) {
+},{"d3":30}],12:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -82321,7 +82321,7 @@ function vizMap(locationsData) {
         }
     }
 }
-},{"leaflet":22,"jquery":23,"bootstrap":24,"/img/lego.png":9,"/img/legoio.png":10,"/img/shadow.png":11,"../img/*":6,"../locations.json":8,"../scripts/vizSetup":12}],34:[function(require,module,exports) {
+},{"leaflet":22,"jquery":23,"bootstrap":24,"/img/lego.png":9,"/img/legoio.png":10,"/img/shadow.png":11,"../img/*":6,"../locations.json":8,"../scripts/vizSetup":12}],33:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -82351,7 +82351,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59041' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61259' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -82490,5 +82490,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[34,4])
+},{}]},{},[33,4])
 //# sourceMappingURL=/map.f10110b2.map
