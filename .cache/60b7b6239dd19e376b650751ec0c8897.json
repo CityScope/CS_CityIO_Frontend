@@ -1,1 +1,0 @@
-{"dependencies":[],"generated":{"js":"module.exports = {\n  \"$id\": \"har.json#\",\n  \"$schema\": \"http://json-schema.org/draft-06/schema#\",\n  \"type\": \"object\",\n  \"required\": [\n    \"log\"\n  ],\n  \"properties\": {\n    \"log\": {\n      \"$ref\": \"log.json#\"\n    }\n  }\n}\n;"},"hash":"6877ea6b73f4e593c0c40392fd75f797","cacheData":{}}
