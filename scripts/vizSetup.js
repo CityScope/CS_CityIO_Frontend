@@ -14,9 +14,10 @@ export function getCityIO() {
         type: 'GET',
         success: function (jsonData) {
             //call viz methods here 
-            console.log(new Date(jsonData.timestamp)); //print date of cityIO data
+            console.log("cityIO read at: ", new Date(jsonData.timestamp)); //print date of cityIO data
             ///
             threeViz.threeViz(jsonData);
+            radarViz.initRadar(jsonData);
         },
         // or error 
         error: function () {

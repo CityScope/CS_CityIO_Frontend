@@ -1,75 +1,79 @@
 import * as d3 from 'd3';
 console.log("d3 version: ", d3.version);
 
-////////////////////////////////////////////////////////////// 
-//////////////////////// Set-Up ////////////////////////////// 
-////////////////////////////////////////////////////////////// 
+export function initRadar(jsonData) {
+    console.log(jsonData, 'time stamp', jsonData.timestamp);
 
-var margin = { top: 100, right: 100, bottom: 100, left: 100 },
-    width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
-    height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-var globalColors = [
-    '#ED5066',
-    '#F4827D',
-    '#F4B99E',
-    '#FDCAA2',
-    '#F6ECD4',
-    '#CCD9CE',
-    '#A5BBB9',
-    '#A3BFA2',
-    '#80ADA9',
-    '#668a87',
-    '#405654',
-    '#263C3A',
-    '#263C3A',
-    '#14181a'
-];
+    ////////////////////////////////////////////////////////////// 
+    //////////////////////// Set-Up ////////////////////////////// 
+    ////////////////////////////////////////////////////////////// 
 
-////////////////////////////////////////////////////////////// 
-////////////////////////// Data ////////////////////////////// 
-////////////////////////////////////////////////////////////// 
+    var margin = { top: 50, right: 50, bottom: 50, left: 50 },
+        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-var data = [
-    [//iPhone
-        { axis: "Smart city", value: 0.22 },
-        { axis: "Deep Learning", value: 0.28 },
-        { axis: "Tactilness", value: 0.29 },
-        { axis: "Matrixness", value: 0.17 },
-        { axis: "Blockchain level", value: 0.22 },
-        { axis: "Mars travel ready", value: 0.02 },
-        { axis: "Best city for Tinder", value: 0.5 },
-        { axis: "Matrixness", value: 0.17 },
-        { axis: "Blockchain level", value: 0.22 },
-        { axis: "Mars travel ready", value: 0.02 },
-        { axis: "Best city for Tinder", value: 0.21 },
-        { axis: "Amenities", value: 0.50 }
-    ]
-];
-////////////////////////////////////////////////////////////// 
-//////////////////// Draw the Chart ////////////////////////// 
-////////////////////////////////////////////////////////////// 
+    var globalColors = [
+        '#ED5066',
+        '#F4827D',
+        '#F4B99E',
+        '#FDCAA2',
+        '#F6ECD4',
+        '#CCD9CE',
+        '#A5BBB9',
+        '#A3BFA2',
+        '#80ADA9',
+        '#668a87',
+        '#405654',
+        '#263C3A',
+        '#263C3A',
+        '#14181a'
+    ];
 
-// var color = d3.scale.ordinal().range(["#EDC951", "#CC333F", "#00A0B0"]);
-var color = d3.scale.ordinal().range(globalColors);
+    ////////////////////////////////////////////////////////////// 
+    ////////////////////////// Data ////////////////////////////// 
+    ////////////////////////////////////////////////////////////// 
 
-var radarChartOptions = {
-    w: width,
-    h: height,
-    margin: margin,
-    maxValue: 0.5,
-    levels: 5,
-    roundStrokes: true,
-    color: color
-};
-//Call function to draw the Radar chart
-RadarChart(".radarDiv", data, radarChartOptions);
+    var data = [
+        [
+            { axis: "Slider", value: jsonData.objects.slider1 },
+            { axis: "Deep Learning", value: 0.48 },
+            { axis: "Tactilness", value: 0.29 },
+            { axis: "Matrixness", value: 0.37 },
+            { axis: "Blockchain level", value: 0.22 },
+            { axis: "Mars travel ready", value: 0.32 },
+            { axis: "Best city for Tinder", value: 0.5 },
+            { axis: "Matrixness", value: 0.77 },
+            { axis: "Blockchain level", value: 0.22 },
+            { axis: "Mars travel ready", value: 0.02 },
+            { axis: "Best city for Tinder", value: 0.21 },
+            { axis: "Amenities", value: 0.50 }
+        ]
+    ];
+    ////////////////////////////////////////////////////////////// 
+    //////////////////// Draw the Chart ////////////////////////// 
+    ////////////////////////////////////////////////////////////// 
+
+    // var color = d3.scale.ordinal().range(["#EDC951", "#CC333F", "#00A0B0"]);
+    var color = d3.scale.ordinal().range(globalColors);
+
+    var radarChartOptions = {
+        w: width,
+        h: height,
+        margin: margin,
+        maxValue: 1,
+        levels: 5,
+        roundStrokes: true,
+        color: color
+    };
+    //Call function to draw the Radar chart
+    RadarChart(".radarDiv", data, radarChartOptions);
+
+}
+
 
 /////////////////////////////////////////////////////////
 /////////////// The Radar Chart Function ////////////////
-/////////////// Written by Nadieh Bremer ////////////////
-////////////////// VisualCinnamon.com ///////////////////
-/////////// Inspired by the code of alangrafu ///////////
 /////////////////////////////////////////////////////////
 
 function RadarChart(id, data, options) {
@@ -187,7 +191,7 @@ function RadarChart(id, data, options) {
         .attr("y2", function (d, i) { return rScale(maxValue * 1.1) * Math.sin(angleSlice * i - Math.PI / 2); })
         .attr("class", "line")
         .style("stroke", "white")
-        .style("stroke-width", "2px");
+        .style("stroke-width", "0.5px");
 
     //Append the labels at each axis
     axis.append("text")

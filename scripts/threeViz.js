@@ -21,8 +21,8 @@ export function threeViz(jsonData) {
 
     ///////////////SETUP SCENE///////////////////////
 
-    var CANVAS_WIDTH = window.innerWidth / 4;
-    var CANVAS_HEIGHT = window.innerHeight / 4;
+    var CANVAS_WIDTH = '350';
+    var CANVAS_HEIGHT = '350';
 
 
     var frustumSize = 10;
@@ -119,22 +119,24 @@ export function threeViz(jsonData) {
         render();
     }
     function render() {
-        timer = Date.now() * 0.0001;
-        camera.position.x = Math.sin(timer) * 800;
-        camera.position.z = Math.cos(timer) * 800;
+        timer = Date.now() * 0.00025;
+        camera.position.x = Math.sin(timer) * 1000;
+        camera.position.z = Math.cos(timer) * 1000;
         camera.lookAt(new THREE.Vector3(7.5, 2.5, 5));
         renderer.render(scene, camera);
     }
     // //window resizing method
-    window.addEventListener('resize', onWindowResize, false);
-    function onWindowResize() {
-        aspect = window.innerWidth / window.innerHeight;
-        camera.left = -frustumSize * aspect / 2;
-        camera.right = frustumSize * aspect / 2;
-        camera.top = frustumSize / 2;
-        camera.bottom = -frustumSize / 2;
-        camera.updateProjectionMatrix();
-        renderer.setSize(document.getElementById('threeDiv').clientWidth, document.getElementById('threeDiv').clientHeight);
-    }
+    // window.addEventListener('resize', onWindowResize, false);
+    // function onWindowResize() {
+    //     aspect = window.innerWidth / window.innerHeight;
+    //     camera.left = -frustumSize * aspect / 2;
+    //     camera.right = frustumSize * aspect / 2;
+    //     camera.top = frustumSize / 2;
+    //     camera.bottom = -frustumSize / 2;
+    //     camera.updateProjectionMatrix();
+    //     renderer.setSize(document.getElementById('threeDiv').clientWidth, document.getElementById('threeDiv').clientHeight);
+    // }
+
+    //put to div
     document.getElementById('threeDiv').appendChild(renderer.domElement);
 }
