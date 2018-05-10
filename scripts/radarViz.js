@@ -6,8 +6,25 @@ console.log("d3 version: ", d3.version);
 ////////////////////////////////////////////////////////////// 
 
 var margin = { top: 100, right: 100, bottom: 100, left: 100 },
-    width = Math.min(600, window.innerWidth - 10) - margin.left - margin.right,
+    width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
     height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+var globalColors = [
+    '#ED5066',
+    '#F4827D',
+    '#F4B99E',
+    '#FDCAA2',
+    '#F6ECD4',
+    '#CCD9CE',
+    '#A5BBB9',
+    '#A3BFA2',
+    '#80ADA9',
+    '#668a87',
+    '#405654',
+    '#263C3A',
+    '#263C3A',
+    '#14181a'
+];
 
 ////////////////////////////////////////////////////////////// 
 ////////////////////////// Data ////////////////////////////// 
@@ -15,21 +32,26 @@ var margin = { top: 100, right: 100, bottom: 100, left: 100 },
 
 var data = [
     [//iPhone
-        { axis: "Battery Life", value: 0.22 },
-        { axis: "Brand", value: 0.28 },
-        { axis: "Contract Cost", value: 0.29 },
-        { axis: "Design And Quality", value: 0.17 },
-        { axis: "Have Internet Connectivity", value: 0.22 },
-        { axis: "Large Screen", value: 0.02 },
-        { axis: "Price Of Device", value: 0.21 },
-        { axis: "To Be A Smartphone", value: 0.50 }
+        { axis: "Smart city", value: 0.22 },
+        { axis: "Deep Learning", value: 0.28 },
+        { axis: "Tactilness", value: 0.29 },
+        { axis: "Matrixness", value: 0.17 },
+        { axis: "Blockchain level", value: 0.22 },
+        { axis: "Mars travel ready", value: 0.02 },
+        { axis: "Best city for Tinder", value: 0.5 },
+        { axis: "Matrixness", value: 0.17 },
+        { axis: "Blockchain level", value: 0.22 },
+        { axis: "Mars travel ready", value: 0.02 },
+        { axis: "Best city for Tinder", value: 0.21 },
+        { axis: "Amenities", value: 0.50 }
     ]
 ];
 ////////////////////////////////////////////////////////////// 
 //////////////////// Draw the Chart ////////////////////////// 
 ////////////////////////////////////////////////////////////// 
 
-var color = d3.scale.ordinal().range(["#EDC951", "#CC333F", "#00A0B0"]);
+// var color = d3.scale.ordinal().range(["#EDC951", "#CC333F", "#00A0B0"]);
+var color = d3.scale.ordinal().range(globalColors);
 
 var radarChartOptions = {
     w: width,
@@ -140,11 +162,11 @@ function RadarChart(id, data, options) {
         .data(d3.range(1, (cfg.levels + 1)).reverse())
         .enter().append("text")
         .attr("class", "axisLabel")
-        .attr("x", 4)
+        .attr("x", 5)
         .attr("y", function (d) { return -d * radius / cfg.levels; })
         .attr("dy", "0.4em")
-        .style("font-size", "10px")
-        .attr("fill", "#737373")
+        .style("font-size", "8px")
+        .attr("fill", "#CCD9CE")
         .text(function (d, i) { return Format(maxValue * d / cfg.levels); });
 
     /////////////////////////////////////////////////////////
@@ -172,10 +194,12 @@ function RadarChart(id, data, options) {
         .attr("class", "legend")
         .style("font-size", "11px")
         .attr("text-anchor", "middle")
-        .attr("dy", "0.35em")
+        .attr("dy", "1em")
         .attr("x", function (d, i) { return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2); })
         .attr("y", function (d, i) { return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2); })
         .text(function (d) { return d })
+        .attr("fill", "#CCD9CE")
+
         .call(wrap, cfg.wrapWidth);
 
     /////////////////////////////////////////////////////////

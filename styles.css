@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto+Condensed');
 @import url('https://unpkg.com/leaflet@1.3.1/dist/leaflet.css');
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
-
-  .modal-content {
-    background-color: #2D393E !important;
-  }
+  
+/* ______________ */
+/* BODY */
+  /* ______________ */
 
   #title {
     top: 70%;
@@ -53,6 +53,14 @@
     background-color: #2D393E;
   }
 
+/* ______________ */
+/* MODAL  */
+/* ______________ */
+
+  .modal-content {
+    background-color: #2D393E !important;
+  }
+
   .tableInfo {
     margin: 1rem;
     font-family: "Roboto Condensed";
@@ -79,7 +87,7 @@
   }
 
   ::-webkit-scrollbar-track-piece {
-    background-color: rgb(68, 68, 68);
+    background-color: rgb(46, 46, 46);
   }
 
   ::-webkit-scrollbar-thumb:vertical {
@@ -88,30 +96,22 @@
   }
 
   #threeDiv {
+
     z-index: 100;
     font-family: "Roboto Condensed";
     color: rgb(99, 122, 131);
     text-shadow: 5px 5px 20px #000000;
   }
 
-  #d3Div {
-    z-index: 100;
-  }
-
   svg {
     display: block;
   }
 
-  .d3-tip {
-    line-height: 1;
-    padding: 6px;
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    border-radius: 4px;
-    font-size: 12px;
-  }
 
+  /* ______________ */
   /* leaflet design */
+  /* _______________*/
+
   .leaflet-popup-content-wrapper {
     font-family: "Roboto Condensed";
     background: #2D393E;

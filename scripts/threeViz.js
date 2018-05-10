@@ -23,6 +23,8 @@ export function threeViz(jsonData) {
 
     var CANVAS_WIDTH = window.innerWidth / 4;
     var CANVAS_HEIGHT = window.innerHeight / 4;
+
+
     var frustumSize = 10;
     var camera = null;
     var scene = null;

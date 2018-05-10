@@ -66,8 +66,12 @@ function vizMap(locationsData) {
     function onClick(e) {
         var infoDiv = document.getElementById('infoDiv');
         var imgDiv = document.getElementById('imgDiv');
+        var threeDiv = document.getElementById('threeDiv');
+
 
         imgDiv.innerHTML = "";
+        threeDiv.innerHTML = "";
+
         $('#modal').modal('toggle');
         for (var i = 0; i < locDat.length - 1; i++) {
             //compare the map icon to the json data 
