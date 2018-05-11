@@ -3,9 +3,9 @@ Landing page for cityIO endpoint
 
 ## how to build using `parcel` for GH pages 
 
-parcel build index.html --public-url https://cityscope.github.io/CS_CityIO_Frontend/
+`parcel build index.html --public-url https://cityscope.github.io/CS_CityIO_Frontend/`
 
-## Deploying a subfolder to GitHub Pages
+## Deploying a subfolder [dist] to GitHub Pages
 
 Sometimes you want to have a subdirectory on the `master` branch be the root directory of a repository’s `gh-pages` branch. Here's how to do it:
 
