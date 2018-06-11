@@ -1,5 +1,14 @@
-# cityIO Forntend
-Landing page for cityIO endpoint 
+# cityIO
+####Front-End for CityIO: MIT CityScope Distributed System
+
+This page provides a front-end interface for cityIO backend server. This can be used to display an overview of current active CityScope deployments around the world and a real-time dashboard of the cityIO API data for each table. 
+
+
+
+![alt text](/img/cityIOfe.png "cityIO frontend")
+
+
+ ____
 
 ## how to build using `parcel` for GH pages 
 
@@ -65,4 +74,4 @@ git gh-deploy path/to/your/site
 ```
 
 ____
-[Maintained by Ariel Noyman](https://github.com/RELNO)
+[Developed & Maintained by Ariel Noyman](https://github.com/RELNO)
