@@ -68,7 +68,7 @@ function vizMap(locationsData) {
         var imgDiv = document.getElementById('imgDiv');
         var threeDiv = document.getElementById('threeDiv');
 
-
+        //clearing the divs 
         imgDiv.innerHTML = "";
         threeDiv.innerHTML = "";
 

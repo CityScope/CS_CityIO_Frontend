@@ -3,7 +3,7 @@ import * as radarViz from '../scripts/radarViz'
 
 
 export function getCityIO() {
-    var cityIOurl = "https://cityio.media.mit.edu/api/table/citymatrix_volpe";
+    var cityIOurl = "https://cityio.media.mit.edu/api/table/CityScopeJS";
     console.log(cityIOurl);
 
     // GET method 
