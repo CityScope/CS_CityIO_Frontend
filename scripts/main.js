@@ -5,8 +5,6 @@ import 'bootstrap';
 import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
-import * as images from '../img/*';
-import * as locationsJSON from "../locations.json";
 import * as threeViz from '../scripts/threeViz'
 import * as radarViz from '../scripts/radarViz'
 
@@ -38,16 +36,27 @@ async function getCityIO(cityIOurl) {
 
 
 async function getTables() {
+    let tableArray = [];
     let cityIOurl = "https://cityio.media.mit.edu/api/tables/list";
     const tables = await getCityIO(cityIOurl);
+    console.log(tables.length + " total CS tables");
 
     for (let i = 0; i < tables.length; i++) {
         let thisTable = await getCityIO(tables[i]);
-        if (thisTable.header) {
-            console.log(thisTable.header.name, thisTable.header.spatial);
-        }
 
+        //check id API v2 [to replace with proper check later] 
+        if (thisTable.header) {
+            thisTable = thisTable.header;
+            tableArray.push({
+                url: tables[i],
+                name: thisTable.name,
+                lat: thisTable.spatial.latitude,
+                lon: thisTable.spatial.longitude
+            });
+        }
     }
+    vizMap(tableArray);
+
     // let urls = d.toString();
     // urls = urls.replace("https://cityio.media.mit.edu/api/tables/", "");
     // console.log(urls);
@@ -57,7 +66,7 @@ async function getTables() {
     // // radarViz.initRadar(jsonData);
 }
 
-function vizMap(locationsData) {
+function vizMap(tablesArray) {
     var map = L.map('map').setView([51.505, -0.09], 1);
     // setup the map API
     L.tileLayer(
@@ -71,6 +80,7 @@ function vizMap(locationsData) {
     document.getElementsByClassName('leaflet-top leaflet-left')[0].style.display = 'none';
     //lock map to relevant area view 
     map.setMaxBounds(map.getBounds());
+
     ///////////////Map icons///////////////////////
     // create a costum map icon [cityIO or non]
     var iconSize = 40;
@@ -93,48 +103,32 @@ function vizMap(locationsData) {
         shadowSize: [iconSize, iconSize],
         shadowAnchor: [0, -20]
     });
-    // obj to array 
-    let locDat = Object.keys(locationsData);
+
     // add icons to cities from locationsData JSON
-    for (var i = 0; i < locDat.length - 1; i++) {
-        //check json if this table has cityIO connectivity 
-        if (locationsData[i].cityio) {
-            let marker = new L.marker([locationsData[i].latitude, locationsData[i].longitude], {
-                icon: IOIcon
-            }).bindPopup(locationsData[i].city).addTo(map).on('click', onClick);
-        } else {
-            let marker = new L.marker([locationsData[i].latitude, locationsData[i].longitude], {
-                icon: NoIOIcon,
-            }).bindPopup(locationsData[i].city).addTo(map).on('click', onClick);
-        }
+    for (var i = 0; i < tablesArray.length; i++) {
+        new L.marker([tablesArray[i].lat, tablesArray[i].lon], { icon: IOIcon })
+            .title(tablesArray[i].name)
+            // .bindPopup(tablesArray[i].name)
+            .addTo(map).on('click', onClick);
     }
+
     // click event handler to creat a chart and show it in the popup
     function onClick(e) {
-        var infoDiv = document.getElementById('infoDiv');
-        var imgDiv = document.getElementById('imgDiv');
-        var threeDiv = document.getElementById('threeDiv');
+        console.log(e);
 
+        var infoDiv = document.getElementById('infoDiv');
+        var threeDiv = document.getElementById('threeDiv');
         //clearing the divs 
-        imgDiv.innerHTML = "";
         threeDiv.innerHTML = "";
 
         $('#modal').modal('toggle');
-        for (var i = 0; i < locDat.length - 1; i++) {
-            //compare the map icon to the json data 
-            if (e.latlng.lat == locationsData[i].latitude) {
-                //find image and text
-                var img = new Image();
-                var path = images[locationsData[i].image]
-                img.src = path;
-                imgDiv.appendChild(img);
-                img.className = "img-fluid";
 
-                //find inside JSON using only text string 
-                infoDiv.innerHTML = locationsData[i].text;
-                // vizSetup.getCityIO();
+        //find inside JSON using only text string 
+        infoDiv.innerHTML = tablesArray[i].name;
+        // vizSetup.getCityIO();
 
-            }
-        }
+
+
     }
 }
 //////////////////////////////////////////
@@ -142,6 +136,4 @@ function vizMap(locationsData) {
 //////////////////////////////////////////
 
 getTables()
-
 // decalre json location data globally 
-vizMap(locationsJSON);

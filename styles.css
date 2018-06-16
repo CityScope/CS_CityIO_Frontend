@@ -33,13 +33,14 @@
     font-family: "Roboto Condensed";
     color: rgb(134, 147, 151);
     text-shadow: 3px 3px 20px #000000;
-    font-size: 1rem;
-    line-height: 2rem;
+    font-size: 1.5vw;
   }
 
   h2 a:link,
   :visited {
-    color: rgb(99, 125, 134);
+    /* color: rgb(99, 125, 134); */
+    color: rgb(134, 147, 151);
+
   }
 
   h2 :hover {
