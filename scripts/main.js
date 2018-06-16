@@ -5,18 +5,57 @@ import 'bootstrap';
 import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
-import images from '../img/*';
+import * as images from '../img/*';
 import * as locationsJSON from "../locations.json";
-import * as vizSetup from '../scripts/vizSetup'
+import * as threeViz from '../scripts/threeViz'
+import * as radarViz from '../scripts/radarViz'
 
 /*logic: run call to cityIO for all tables. 
 get only header and parse only API v2.
 On icon click, render table grid 
 */
 
-// decalre json location data globally 
-vizMap(locationsJSON);
-console.log(locationsJSON);
+// console.log([Object.keys(images)[0]]);
+
+/////////////////////
+
+async function getCityIO(cityIOurl) {
+    // GET method 
+    return $.ajax({
+        url: cityIOurl,
+        dataType: 'JSONP',
+        callback: 'jsonData',
+        type: 'GET',
+        success: function (d) {
+            return d;
+        },
+        // or error 
+        error: function (e) {
+            console.log('GET error: ' + e.status.toString());
+        }
+    });
+}
+
+
+async function getTables() {
+    let cityIOurl = "https://cityio.media.mit.edu/api/tables/list";
+    const tables = await getCityIO(cityIOurl);
+
+    for (let i = 0; i < tables.length; i++) {
+        let thisTable = await getCityIO(tables[i]);
+        if (thisTable.header) {
+            console.log(thisTable.header.name, thisTable.header.spatial);
+        }
+
+    }
+    // let urls = d.toString();
+    // urls = urls.replace("https://cityio.media.mit.edu/api/tables/", "");
+    // console.log(urls);
+    // // console.log("cityIO read at: ", new Date(jsonData.timestamp)); //print date of cityIO data
+    // ///
+    // // threeViz.threeViz(jsonData);
+    // // radarViz.initRadar(jsonData);
+}
 
 function vizMap(locationsData) {
     var map = L.map('map').setView([51.505, -0.09], 1);
@@ -92,9 +131,17 @@ function vizMap(locationsData) {
 
                 //find inside JSON using only text string 
                 infoDiv.innerHTML = locationsData[i].text;
-                vizSetup.getCityIO();
+                // vizSetup.getCityIO();
 
             }
         }
     }
 }
+//////////////////////////////////////////
+// APP LOGIC
+//////////////////////////////////////////
+
+getTables()
+
+// decalre json location data globally 
+vizMap(locationsJSON);

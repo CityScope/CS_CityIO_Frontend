@@ -78,7 +78,6 @@ async function update() {
 }
 
 
-
 async function viz(jsonData) {
     let cells = document.getElementsByClassName('vizCell');
 
