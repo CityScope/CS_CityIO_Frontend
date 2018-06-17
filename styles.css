@@ -58,6 +58,10 @@
 /* MODAL  */
 /* ______________ */
 
+.modal-lg {
+  max-width: 90% !important;
+}
+
   .modal-content {
     background-color: #2D393E !important;
   }

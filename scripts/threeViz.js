@@ -1,47 +1,46 @@
 import * as THREE from 'THREE';
 
-export function threeViz(jsonData) {
-    // global holder for theme colors 
-    var globalColors = [
-        '#ED5066',
-        '#F4827D',
-        '#F4B99E',
-        '#FDCAA2',
-        '#F6ECD4',
-        '#CCD9CE',
-        '#A5BBB9',
-        '#A3BFA2',
-        '#80ADA9',
-        '#668a87',
-        '#405654',
-        '#263C3A',
-        '#263C3A',
-        '#14181a'
-    ];
-
-    ///////////////SETUP SCENE///////////////////////
-
-    var CANVAS_WIDTH = '350';
-    var CANVAS_HEIGHT = '350';
-
-    var frustumSize = 10;
-    var camera = null;
-    var scene = null;
-    var renderer = null;
-    var mesh = null;
-    var holder = [];
-    var light = null;
-    var lightAmb = null;
-    var gridHelper = null;
-    var aspect = null;
-    var timer = null;
-    var geometry = null;
-    var material = null;
+export function threeViz(tableData) {
 
     init();
-    animate();
+    // animate();
 
     function init() {
+
+        ///////////////SETUP SCENE///////////////////////
+        // global holder for theme colors 
+        var globalColors = [
+            '#ED5066',
+            '#F4827D',
+            '#F4B99E',
+            '#FDCAA2',
+            '#F6ECD4',
+            '#CCD9CE',
+            '#A5BBB9',
+            '#A3BFA2',
+            '#80ADA9',
+            '#668a87',
+            '#405654',
+            '#263C3A',
+            '#263C3A',
+            '#14181a'
+        ];
+
+        var CANVAS_WIDTH = '350';
+        var CANVAS_HEIGHT = '350';
+
+        var frustumSize = 10;
+        var camera = null;
+        var scene = null;
+        var renderer = null;
+        var mesh = null;
+        var holder = [];
+        var light = null;
+        var lightAmb = null;
+        var gridHelper = null;
+        var aspect = null;
+        var geometry = null;
+        var material = null;
 
         //set up the camera
         aspect = window.innerWidth / window.innerHeight;
@@ -89,42 +88,40 @@ export function threeViz(jsonData) {
         var i = 0;
         var voxelDim = 1;
         var thisCol;
-        for (var x = 0; x < Math.sqrt(jsonData.grid.length); x++) {
-            for (var y = 0; y < Math.sqrt(jsonData.grid.length); y++) {
-                geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (jsonData.grid[i].type + 6) / 3, voxelDim * 0.8);
-                if (jsonData.grid[i].type > -1 && jsonData.grid[i].type < 10) {
-                    thisCol = globalColors[jsonData.grid[i].type];
-                } else {
-                    thisCol = 'gray'
-                }
-                material = new THREE.MeshStandardMaterial({
-                    color: thisCol
-                });
-                mesh = new THREE.Mesh(geometry, material);
-                mesh.position.set(x * voxelDim, (jsonData.grid[i].type + 3) / 2 / 2, y * voxelDim);
-                mesh.castShadow = true; //default is false
-                mesh.receiveShadow = true; //default
-                holder.push(mesh);
-                scene.add(mesh);
-                i += 1;
+
+        for (var x = 0; x < Math.sqrt(tableData.grid.length); x++) {
+            for (var y = 0; y < Math.sqrt(tableData.grid.length); y++) {
+                geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (tableData.grid[i].type + 6) / 3, voxelDim * 0.8);
+                thisCol = globalColors[tableData.grid[i].type];
             }
+
+            material = new THREE.MeshStandardMaterial({
+                color: thisCol
+            });
+            mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(x * voxelDim, (tableData.grid[i].type + 3) / 2 / 2, y * voxelDim);
+            mesh.castShadow = true; //default is false
+            mesh.receiveShadow = true; //default
+            holder.push(mesh);
+            scene.add(mesh);
+            i += 1;
         }
+        //put to div
+        document.getElementById('threeDiv').appendChild(renderer.domElement);
     }
-
-    /////////////// ANIMATION ///////////////////////
-    // var direction = new THREE.Vector3(0.2, 0, 0); // amount to move per frame
-    function animate() {
-        requestAnimationFrame(animate);
-        render();
-    }
-    function render() {
-        timer = Date.now() * 0.00025;
-        camera.position.x = Math.sin(timer) * 1000;
-        camera.position.z = Math.cos(timer) * 1000;
-        camera.lookAt(new THREE.Vector3(7.5, 2.5, 5));
-        renderer.render(scene, camera);
-    }
-
-    //put to div
-    document.getElementById('threeDiv').appendChild(renderer.domElement);
 }
+
+/////////////// ANIMATION ///////////////////////
+function animate() {
+    requestAnimationFrame(animate);
+    render();
+}
+function render() {
+    let timer = Date.now() * 0.00025;
+    camera.position.x = Math.sin(timer) * 1000;
+    camera.position.z = Math.cos(timer) * 1000;
+    camera.lookAt(new THREE.Vector3(7.5, 2.5, 5));
+    renderer.render(scene, camera);
+}
+
+

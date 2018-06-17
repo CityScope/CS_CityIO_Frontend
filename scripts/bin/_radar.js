@@ -1,3 +1,5 @@
+//taken from: http://bl.ocks.org/TennisVisuals/c591445c3e6773c6eb6f
+
 import * as d3 from 'd3';
 console.log("d3 version: ", d3.version);
 
@@ -8,11 +10,6 @@ export function initRadar(jsonData) {
     ////////////////////////////////////////////////////////////// 
     //////////////////////// Set-Up ////////////////////////////// 
     ////////////////////////////////////////////////////////////// 
-
-    var margin = { top: 50, right: 50, bottom: 50, left: 50 },
-        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
-        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
-
     var globalColors = [
         '#ED5066',
         '#F4827D',
@@ -30,21 +27,25 @@ export function initRadar(jsonData) {
         '#14181a'
     ];
 
+    var margin = { top: 50, right: 50, bottom: 50, left: 50 },
+        width = Math.min(400, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
     ////////////////////////////////////////////////////////////// 
     ////////////////////////// Data ////////////////////////////// 
     ////////////////////////////////////////////////////////////// 
 
+    function remap(value, lowOrg, highOrg, lowDest, highDest) {
+        return lowDest + (highDest - lowDest) * (value - lowOrg) / (highOrg - lowOrg);
+    }
+
     var data = [
         [
-            { axis: "Slider", value: jsonData.objects.slider1 },
-            { axis: "Deep Learning", value: 0.48 },
-            { axis: "Tactilness", value: 0.29 },
+            { axis: "Slider", value: 0.3 },
+            { axis: "Deep Learning", value: 0.4 },
             { axis: "Matrixness", value: 0.37 },
             { axis: "Blockchain level", value: 0.22 },
             { axis: "Mars travel ready", value: 0.32 },
-            { axis: "Best city for Tinder", value: 0.5 },
-            { axis: "Matrixness", value: 0.77 },
-            { axis: "Blockchain level", value: 0.22 },
             { axis: "Mars travel ready", value: 0.02 },
             { axis: "Best city for Tinder", value: 0.21 },
             { axis: "Amenities", value: 0.50 }
@@ -78,8 +79,8 @@ export function initRadar(jsonData) {
 
 function RadarChart(id, data, options) {
     var cfg = {
-        w: 600,				//Width of the circle
-        h: 600,				//Height of the circle
+        w: 500,				//Width of the circle
+        h: 500,				//Height of the circle
         margin: { top: 20, right: 20, bottom: 20, left: 20 }, //The margins of the SVG
         levels: 3,				//How many levels or inner circles should there be drawn
         maxValue: 0, 			//What is the value that the biggest circle will represent

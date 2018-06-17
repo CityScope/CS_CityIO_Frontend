@@ -6,9 +6,11 @@ import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
 import * as threeViz from '../scripts/threeViz'
-import * as radarViz from '../scripts/radarViz'
+import * as radar from '../scripts/radar'
 
 ////////////////////////////////////////////////////////////////////////////////////
+
+var updateInterval = 1000;
 
 async function getCityIO(cityIOurl) {
     // GET method 
@@ -26,16 +28,22 @@ async function getCityIO(cityIOurl) {
         }
     });
 }
+
+function clearNames(url) {
+    return url.toString().replace("https://cityio.media.mit.edu/api/table/", "");
+
+}
 ////////////////////////////////////////////////////////////////////////////////////
 
 async function getTables() {
     let tableArray = [];
     let cityIOurl = "https://cityio.media.mit.edu/api/tables/list";
     const tables = await getCityIO(cityIOurl);
-    console.log(tables.length + " total CS tables");
 
     for (let i = 0; i < tables.length; i++) {
         let thisTable = await getCityIO(tables[i]);
+        console.log(+ i + ' of ' + tables.length + " total tables: " + clearNames(tables[i]));
+
 
         //check id API v2 [to replace with proper check later] 
         if (thisTable.header) {
@@ -92,9 +100,11 @@ function makeMap(tablesArray) {
 
     // add icons to cities from locationsData JSON
     for (var i = 0; i < tablesArray.length; i++) {
-
-        let url = (tablesArray[i].url.toString()).replace("https://cityio.media.mit.edu/api/table/", "");
-
+        //clear names of tables 
+        let url = tablesArray[i].url;
+        url = clearNames(url);
+        console.log("mapping only cityIO tables " + i + ') ' + clearNames(url));
+        //create map marker 
         let marker = new L.marker(
             [tablesArray[i].lat, tablesArray[i].lon],
             { icon: IOIcon })
@@ -108,23 +118,37 @@ function makeMap(tablesArray) {
         marker.on('mouseout', function () {
             this.closePopup();
         });
-        marker.on('click', function (e) {
-            onClick(marker, e);
+        marker.on('click', function () {
+            //pass the marker data to setup method
+            modalSetup(marker);
         });
     }
 
     // click event handler to creat a chart and show it in the popup
-    function onClick(m, e) {
+    async function modalSetup(m) {
+        //get the binded props 
         let tableMeta = m.properties;
+        //get the divs for content 
         var infoDiv = document.getElementById('infoDiv');
         var threeDiv = document.getElementById('threeDiv');
+        //put prj name in div 
         infoDiv.innerHTML = m.properties.name;
-        //clearing the divs 
+        //clearing the three div
         threeDiv.innerHTML = "";
+        //open up the modal 
         $('#modal').modal('toggle');
-        //fix set interval that way: 
+        //setup threeJS
+        const cityIOjson = await getCityIO(m.properties.url);
+        // threeViz.threeViz(cityIOjson);
+        radar.radarInit();
+        //start interval fix set interval that way: 
         //http://onezeronull.com/2013/07/12/function-is-not-defined-when-using-setinterval-or-settimeout/
-        setInterval(function () { update(tableMeta.url) }, 1000);
+        var refreshIntervalId = setInterval(function () { update(tableMeta.url) }, updateInterval);
+
+        //stop update on modal close
+        $("#modal").on("hide.bs.modal", function () {
+            clearInterval(refreshIntervalId);
+        });
     }
 }
 
@@ -132,11 +156,14 @@ function makeMap(tablesArray) {
 
 async function update(url) {
     const cityIOjson = await getCityIO(url);
-    console.log(cityIOjson.grid.length);
+    console.log(cityIOjson.timestamp);
     //should fix with THREE setup and Update 
-    threeViz.threeViz(cityIOjson);
+    // threeViz.threeViz(cityIOjson);
+    radar.radarUpdate();
 
 }
+
+
 
 //////////////////////////////////////////
 // APP LOGIC
