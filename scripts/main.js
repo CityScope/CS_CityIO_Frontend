@@ -55,7 +55,7 @@ async function getTables() {
             });
         }
     }
-    vizMap(tableArray);
+    makeMap(tableArray);
 
     // let urls = d.toString();
     // urls = urls.replace("https://cityio.media.mit.edu/api/tables/", "");
@@ -66,7 +66,7 @@ async function getTables() {
     // // radarViz.initRadar(jsonData);
 }
 
-function vizMap(tablesArray) {
+function makeMap(tablesArray) {
     var map = L.map('map').setView([51.505, -0.09], 1);
     // setup the map API
     L.tileLayer(
@@ -106,34 +106,51 @@ function vizMap(tablesArray) {
 
     // add icons to cities from locationsData JSON
     for (var i = 0; i < tablesArray.length; i++) {
-        new L.marker([tablesArray[i].lat, tablesArray[i].lon], { icon: IOIcon })
-            .title(tablesArray[i].name)
-            // .bindPopup(tablesArray[i].name)
-            .addTo(map).on('click', onClick);
+
+        let url = (tablesArray[i].url.toString()).replace("https://cityio.media.mit.edu/api/table/", "");
+
+        let marker = new L.marker(
+            [tablesArray[i].lat, tablesArray[i].lon],
+            { icon: IOIcon })
+            .bindPopup('CityScope: ' + url)
+            .addTo(map)
+        marker.properties = tablesArray[i];
+
+        marker.on('mouseover', function () {
+            this.openPopup();
+        });
+        marker.on('mouseout', function () {
+            this.closePopup();
+        });
+        marker.on('click', function (e) {
+            onClick(marker, e);
+        });
     }
 
     // click event handler to creat a chart and show it in the popup
-    function onClick(e) {
-        console.log(e);
-
+    function onClick(m, e) {
+        let tableMeta = m.properties;
         var infoDiv = document.getElementById('infoDiv');
         var threeDiv = document.getElementById('threeDiv');
+        infoDiv.innerHTML = m.properties.name;
         //clearing the divs 
         threeDiv.innerHTML = "";
-
         $('#modal').modal('toggle');
-
-        //find inside JSON using only text string 
-        infoDiv.innerHTML = tablesArray[i].name;
-        // vizSetup.getCityIO();
-
-
-
+        //fix set interval that way: 
+        //http://onezeronull.com/2013/07/12/function-is-not-defined-when-using-setinterval-or-settimeout/
+        setInterval(function () { update(tableMeta.url) }, 500);
     }
 }
+
+async function update(url) {
+    const cityIOjson = await getCityIO(url);
+    console.log(cityIOjson);
+
+}
+
+
+
 //////////////////////////////////////////
 // APP LOGIC
 //////////////////////////////////////////
-
 getTables()
-// decalre json location data globally 
