@@ -1,3 +1,24 @@
+////////////////////////////////////////////////////////////////////////////////////
+//a class to preform calc on data arriving from table 
+class radarFeatures {
+    constructor(data) {
+        this._data = data;
+    }
+
+    uniqueTypes() {
+        var uniqueItems = Array.from(new Set(this._data.grid))
+        return uniqueItems.length / this._data.grid.length;
+    }
+
+    density() {
+
+    }
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
 //taken from http://bl.ocks.org/TennisVisuals/c591445c3e6773c6eb6f
 // <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.3.0/d3-legend.js" charset="utf-8"></script>
 
@@ -41,20 +62,20 @@ export function radarInit() {
 
 // controls radar updates from cityIO  
 export function radarUpdate(cityIOjson) {
-    console.log(cityIOjson);
+    const tableData = new radarFeatures(cityIOjson);
 
     var data =
         [
             {
                 "key": "Kendall Sq.",
                 "values": [
-                    { "axis": "Density", "value": 0.26 },
-                    { "axis": "Diversity", "value": 0.10 },
-                    { "axis": "Proximity", "value": 0.30 },
-                    { "axis": "Amenities", "value": 0.26 },
-                    { "axis": "Energy", "value": 0.10 },
-                    { "axis": "Mix use", "value": 0.30 },
-                    { "axis": "Land Value", "value": 0.26 }
+                    { "axis": "Density", "value": tableData.uniqueTypes() },
+                    { "axis": "Diversity", "value": tableData.uniqueTypes() },
+                    { "axis": "Proximity", "value": tableData.uniqueTypes() },
+                    { "axis": "Amenities", "value": tableData.uniqueTypes() },
+                    { "axis": "Energy", "value": tableData.uniqueTypes() },
+                    { "axis": "Mix use", "value": tableData.uniqueTypes() },
+                    { "axis": "Land Value", "value": tableData.uniqueTypes() }
                 ]
             },
             //fixed values to compare 
@@ -79,6 +100,11 @@ export function radarUpdate(cityIOjson) {
     radarChartMethod.options({ 'legend': { display: true } });
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+
+// temp fn for random changes 
 function randomData(data) {
     let chart_data = JSON.parse(JSON.stringify(data));
     chart_data.forEach(function (e) {
@@ -89,10 +115,12 @@ function randomData(data) {
     return chart_data;
 }
 
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 
 export function RadarChart() {
 

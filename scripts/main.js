@@ -6,7 +6,7 @@ import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
 import * as threeViz from '../scripts/threeViz'
-import * as radarHandler from '../scripts/radarHandler'
+import * as radarHandler from '../scripts/radarChart'
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -156,15 +156,14 @@ function makeMap(tablesArray) {
 
 async function update(url) {
     const cityIOjson = await getCityIO(url);
-    //should fix with THREE setup and Update 
-    // threeViz.threeViz(cityIOjson);
     radarHandler.radarUpdate(cityIOjson);
 
+    //should fix with THREE setup and Update 
+    // threeViz.threeViz(cityIOjson);
 }
 
 
-
 //////////////////////////////////////////
-// APP LOGIC
+// APP START
 //////////////////////////////////////////
 getTables()
