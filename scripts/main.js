@@ -8,14 +8,7 @@ import * as shadow from '/img/shadow.png';
 import * as threeViz from '../scripts/threeViz'
 import * as radarViz from '../scripts/radarViz'
 
-/*logic: run call to cityIO for all tables. 
-get only header and parse only API v2.
-On icon click, render table grid 
-*/
-
-// console.log([Object.keys(images)[0]]);
-
-/////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 
 async function getCityIO(cityIOurl) {
     // GET method 
@@ -33,7 +26,7 @@ async function getCityIO(cityIOurl) {
         }
     });
 }
-
+////////////////////////////////////////////////////////////////////////////////////
 
 async function getTables() {
     let tableArray = [];
@@ -56,15 +49,8 @@ async function getTables() {
         }
     }
     makeMap(tableArray);
-
-    // let urls = d.toString();
-    // urls = urls.replace("https://cityio.media.mit.edu/api/tables/", "");
-    // console.log(urls);
-    // // console.log("cityIO read at: ", new Date(jsonData.timestamp)); //print date of cityIO data
-    // ///
-    // // threeViz.threeViz(jsonData);
-    // // radarViz.initRadar(jsonData);
 }
+////////////////////////////////////////////////////////////////////////////////////
 
 function makeMap(tablesArray) {
     var map = L.map('map').setView([51.505, -0.09], 1);
@@ -138,17 +124,19 @@ function makeMap(tablesArray) {
         $('#modal').modal('toggle');
         //fix set interval that way: 
         //http://onezeronull.com/2013/07/12/function-is-not-defined-when-using-setinterval-or-settimeout/
-        setInterval(function () { update(tableMeta.url) }, 500);
+        setInterval(function () { update(tableMeta.url) }, 1000);
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////
+
 async function update(url) {
     const cityIOjson = await getCityIO(url);
-    console.log(cityIOjson);
+    console.log(cityIOjson.grid.length);
+    //should fix with THREE setup and Update 
+    threeViz.threeViz(cityIOjson);
 
 }
-
-
 
 //////////////////////////////////////////
 // APP LOGIC

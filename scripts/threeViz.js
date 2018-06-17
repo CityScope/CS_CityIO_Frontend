@@ -24,7 +24,6 @@ export function threeViz(jsonData) {
     var CANVAS_WIDTH = '350';
     var CANVAS_HEIGHT = '350';
 
-
     var frustumSize = 10;
     var camera = null;
     var scene = null;
@@ -125,17 +124,6 @@ export function threeViz(jsonData) {
         camera.lookAt(new THREE.Vector3(7.5, 2.5, 5));
         renderer.render(scene, camera);
     }
-    // //window resizing method
-    // window.addEventListener('resize', onWindowResize, false);
-    // function onWindowResize() {
-    //     aspect = window.innerWidth / window.innerHeight;
-    //     camera.left = -frustumSize * aspect / 2;
-    //     camera.right = frustumSize * aspect / 2;
-    //     camera.top = frustumSize / 2;
-    //     camera.bottom = -frustumSize / 2;
-    //     camera.updateProjectionMatrix();
-    //     renderer.setSize(document.getElementById('threeDiv').clientWidth, document.getElementById('threeDiv').clientHeight);
-    // }
 
     //put to div
     document.getElementById('threeDiv').appendChild(renderer.domElement);
