@@ -101,7 +101,6 @@
   }
 
   #threeDiv {
-
     z-index: 100;
     font-family: "Roboto Condensed";
     color: rgb(99, 122, 131);
@@ -111,7 +110,6 @@
   svg {
     display: block;
   }
-
 
   /* ______________ */
   /* leaflet design */

@@ -1,4 +1,5 @@
 //taken from http://bl.ocks.org/TennisVisuals/c591445c3e6773c6eb6f
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.3.0/d3-legend.js" charset="utf-8"></script>
 
 import * as d3 from 'd3';
 console.log("d3 version: ", d3.version);
@@ -9,6 +10,7 @@ let radarChartMethod;
 export function radarInit() {
     var globalColors = [
         '#ED5066',
+        '#A3BFA2',
         '#F4827D',
         '#F4B99E',
         '#FDCAA2',
@@ -22,6 +24,7 @@ export function radarInit() {
         '#263C3A',
         '#263C3A',
         '#14181a'
+
     ];
     var color = d3.scale.ordinal().range(globalColors);
     var radarChartOptions = {
@@ -37,7 +40,9 @@ export function radarInit() {
 }
 
 // controls radar updates from cityIO  
-export function radarUpdate() {
+export function radarUpdate(cityIOjson) {
+    console.log(cityIOjson);
+
     var data =
         [
             {
@@ -46,31 +51,50 @@ export function radarUpdate() {
                     { "axis": "Density", "value": 0.26 },
                     { "axis": "Diversity", "value": 0.10 },
                     { "axis": "Proximity", "value": 0.30 },
+                    { "axis": "Amenities", "value": 0.26 },
+                    { "axis": "Energy", "value": 0.10 },
+                    { "axis": "Mix use", "value": 0.30 },
+                    { "axis": "Land Value", "value": 0.26 }
                 ]
             },
             //fixed values to compare 
             {
                 "key": "HafenCity, Hamburg",
                 "values": [
-                    { "axis": "Density", "value": 0.27 },
-                    { "axis": "Diversity", "value": 0.16 },
-                    { "axis": "Proximity", "value": 0.35 },
+                    { "axis": "Density", "value": 0.26 },
+                    { "axis": "Diversity", "value": 0.10 },
+                    { "axis": "Proximity", "value": 0.30 },
+                    { "axis": "Amenities", "value": 0.26 },
+                    { "axis": "Energy", "value": 0.10 },
+                    { "axis": "Mix use", "value": 0.30 },
+                    { "axis": "Land Value", "value": 0.26 }
                 ]
             }
         ];
-    let chart_data = JSON.parse(JSON.stringify(data));
-
-    chart_data.forEach(function (e) { e.values.forEach(function (v) { v.value = (Math.random() * .6) + .2; }) });
 
     radarChartMethod
-        .data(chart_data)
+        .data(data)
         .duration(250)
         .update();
+    radarChartMethod.options({ 'legend': { display: true } });
+}
+
+function randomData(data) {
+    let chart_data = JSON.parse(JSON.stringify(data));
+    chart_data.forEach(function (e) {
+        e.values.forEach(function (v) {
+            v.value = (Math.random() * .6) + .2;
+        })
+    });
+    return chart_data;
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-function RadarChart() {
+
+
+
+
+export function RadarChart() {
 
     //Remove whatever chart with the same id/class was present before
     d3.select("svg").remove();
@@ -345,7 +369,7 @@ function RadarChart() {
                 update_axis_legends.enter()
                     .append("text")
                     .attr("class", "axis_legend")
-                    .style("font-size", "14px")
+                    .style("font-size", "10px")
                     .attr("fill", "#ffffff")
                     .attr("text-anchor", "middle")
                     .attr("dy", "0.35em")
@@ -1065,4 +1089,3 @@ function RadarChart() {
 
     return chart;
 }
-
