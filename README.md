@@ -8,4 +8,4 @@ This page provides a front-end interface for cityIO backend server. This can be 
 ![alt text](/img/cityIOfe.png "cityIO frontend")
 
 ____
-[Contributors](https://github.com/CityScope/CS_CityIO_Frontend/graphs/contributors)
+[Contributors [GH ]](https://github.com/CityScope/CS_CityIO_Frontend/graphs/contributors)
