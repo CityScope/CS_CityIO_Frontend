@@ -25,6 +25,7 @@ async function getCityIO(cityIOurl) {
         // or error 
         error: function (e) {
             console.log('GET error: ' + e.status.toString());
+            infoDiv('GET error: ' + e.status.toString());
         }
     });
 }
@@ -36,13 +37,15 @@ function clearNames(url) {
 ////////////////////////////////////////////////////////////////////////////////////
 
 async function getTables() {
+    infoDiv('Starting Applet Logger>>>')
+
     let tableArray = [];
     let cityIOurl = "https://cityio.media.mit.edu/api/tables/list";
     const tables = await getCityIO(cityIOurl);
 
     for (let i = 0; i < tables.length; i++) {
         let thisTable = await getCityIO(tables[i]);
-        console.log(+ i + ' of ' + tables.length + " total tables: " + clearNames(tables[i]));
+        infoDiv(+ i + ' of ' + tables.length + " tables: " + clearNames(tables[i]));
 
 
         //check id API v2 [to replace with proper check later] 
@@ -61,6 +64,7 @@ async function getTables() {
 ////////////////////////////////////////////////////////////////////////////////////
 
 function makeMap(tablesArray) {
+    infoDiv('----making map----')
     var map = L.map('map').setView([51.505, -0.09], 1);
     // setup the map API
     L.tileLayer(
@@ -103,12 +107,14 @@ function makeMap(tablesArray) {
         //clear names of tables 
         let url = tablesArray[i].url;
         url = clearNames(url);
-        console.log("mapping only cityIO tables " + i + ') ' + clearNames(url));
+        //type in log div
+        infoDiv("mapping only cityIO tables " + i + ') ' + clearNames(url));
+
         //create map marker 
         let marker = new L.marker(
             [tablesArray[i].lat, tablesArray[i].lon],
             { icon: IOIcon })
-            .bindPopup('CityScope: ' + url)
+            .bindPopup('CityScope ' + url)
             .addTo(map)
         marker.properties = tablesArray[i];
 
@@ -121,6 +127,8 @@ function makeMap(tablesArray) {
         marker.on('click', function () {
             //pass the marker data to setup method
             modalSetup(marker);
+            infoDiv('clicked ' + url);
+
         });
     }
 
@@ -128,11 +136,12 @@ function makeMap(tablesArray) {
     async function modalSetup(m) {
         //get the binded props 
         let tableMeta = m.properties;
+
         //get the divs for content 
         var infoDiv = document.getElementById('infoDiv');
         var threeDiv = document.getElementById('threeDiv');
         //put prj name in div 
-        infoDiv.innerHTML = m.properties.name;
+        infoDiv.innerHTML = clearNames(m.properties.url);
         //clearing the three div
         threeDiv.innerHTML = "";
         //open up the modal 
@@ -162,6 +171,20 @@ async function update(url) {
     // threeViz.threeViz(cityIOjson);
 }
 
+////////////////////////////////////////////////////////////////////////////////////
+//make info div [on screen console] or add text to it 
+function infoDiv(text) {
+    let d = document.getElementById('log')
+
+    // clear div if too much text 
+    if (d.scrollHeight > 1000) {
+        d.innerHTML = null;
+    } else {
+        d.innerHTML += text.toString() + '<p></p>';
+        d.scrollTop = d.scrollHeight;
+    }
+    return;
+}
 
 //////////////////////////////////////////
 // APP START

@@ -10,10 +10,14 @@ class radarFeatures {
         return uniqueItems.length / this._data.grid.length;
     }
 
-    density() {
-
+    housingRatio() {
+        let housingArr = [];
+        let d = this._data.grid;
+        for (let i = 0; i < d.length; i++) {
+            if (d[i]) {
+            }
+        }
     }
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -30,8 +34,8 @@ let radarChartMethod;
 
 export function radarInit() {
     var globalColors = [
-        '#ED5066',
         '#A3BFA2',
+        '#ED5066',
         '#F4827D',
         '#F4B99E',
         '#FDCAA2',
