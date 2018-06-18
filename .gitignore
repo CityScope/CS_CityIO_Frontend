@@ -1,9 +1,5 @@
 /.vscode
 /node_modules 
 /.cache
-/dist
 .DS_Store
 .vscode
-dist/
-dist/
-dist/
