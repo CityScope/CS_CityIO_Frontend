@@ -56,8 +56,8 @@ export function radarInit() {
     ];
     var color = d3.scale.ordinal().range(globalColors);
     var radarChartOptions = {
-        width: 700,
-        height: 700,
+        width: 400,
+        height: 400,
         color: color
     };
     radarChartMethod = RadarChart();

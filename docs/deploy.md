@@ -29,7 +29,7 @@ git add dist -f
 Remember to commit!
 
 ```sh
-git commit -m "gh-pages first commit!"
+git commit -m "gh-pages commit"
 ```
 
 ### Step 3
