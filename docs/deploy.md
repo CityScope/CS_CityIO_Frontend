@@ -85,17 +85,23 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 ### Setup
 
-`$ rm -rf dist
+```$ rm -rf dist
+
 $ echo "dist/" >> .gitignore
-$ git worktree add dist gh-pages`
+
+$ git worktree add dist gh-pages
+```
 
 ### Making changes
 
-`$ make # or what ever you run to populate dist
+```
+$ make # or what ever you run to populate dist
 $ cd dist
 $ git add --all
 $ git commit -m "Deploy to gh-pages"
 $ git push origin gh-pages
-$ cd ..`
+$ cd ..
+```
+
 ### Notes
 git worktree feature has its own garbage collection so if dist is deleted it will not affect much and can be recreated as needed. If you want it to go away you can use git worktree prune See man pages on it.
