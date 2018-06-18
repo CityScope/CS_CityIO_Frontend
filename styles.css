@@ -78,11 +78,21 @@ background-color: #2D393E;
 max-width: 90% !important;
 }
 
-.modal-content {
-background-color: #2D393E !important;
+
+/* https://gist.github.com/AnnoyingTechnology/191e888988242371699fb7870f0e379e */
+body.modal-open > :not(.modal) {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
 }
 
-.tableInfo {
+.modal-content {
+background-color: rgba(19, 24, 26, 0.733) !important;
+}
+
+.tableInfo { 
 margin: 1rem;
 font-family: "Press Start 2P";
 color: rgb(180, 180, 180);

@@ -1,5 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 //a class to preform calc on data arriving from table 
+////////////////////////////////////////////////////////////////////////////////////
+
 class radarFeatures {
     constructor(data) {
         this._data = data;
@@ -10,18 +12,19 @@ class radarFeatures {
         return uniqueItems.length / this._data.grid.length;
     }
 
-    housingRatio() {
-        let housingArr = [];
+    typeRatio(type) {
+        let ratioCount = 0;
         let d = this._data.grid;
         for (let i = 0; i < d.length; i++) {
-            if (d[i]) {
+            if (d[i] === type) {
+                ratioCount++;
             }
         }
+        return (ratioCount / d.length);
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-
 
 //taken from http://bl.ocks.org/TennisVisuals/c591445c3e6773c6eb6f
 // <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.3.0/d3-legend.js" charset="utf-8"></script>
@@ -53,8 +56,8 @@ export function radarInit() {
     ];
     var color = d3.scale.ordinal().range(globalColors);
     var radarChartOptions = {
-        width: 500,
-        height: 500,
+        width: 700,
+        height: 700,
         color: color
     };
     radarChartMethod = RadarChart();
@@ -74,12 +77,12 @@ export function radarUpdate(cityIOjson) {
                 "key": "Kendall Sq.",
                 "values": [
                     { "axis": "Density", "value": tableData.uniqueTypes() },
-                    { "axis": "Diversity", "value": tableData.uniqueTypes() },
-                    { "axis": "Proximity", "value": tableData.uniqueTypes() },
-                    { "axis": "Amenities", "value": tableData.uniqueTypes() },
-                    { "axis": "Energy", "value": tableData.uniqueTypes() },
-                    { "axis": "Mix use", "value": tableData.uniqueTypes() },
-                    { "axis": "Land Value", "value": tableData.uniqueTypes() }
+                    { "axis": "Diversity", "value": tableData.typeRatio('type_2') },
+                    { "axis": "Proximity", "value": tableData.typeRatio('2x2_2') },
+                    { "axis": "Amenities", "value": tableData.typeRatio('2x2_4') },
+                    { "axis": "Energy", "value": tableData.typeRatio('2x2_1') },
+                    { "axis": "Mix use", "value": tableData.typeRatio('type_7') },
+                    { "axis": "Land Value", "value": tableData.typeRatio('type_8') }
                 ]
             },
             //fixed values to compare 
@@ -88,11 +91,11 @@ export function radarUpdate(cityIOjson) {
                 "values": [
                     { "axis": "Density", "value": 0.26 },
                     { "axis": "Diversity", "value": 0.10 },
-                    { "axis": "Proximity", "value": 0.30 },
+                    { "axis": "Proximity", "value": 0.14 },
                     { "axis": "Amenities", "value": 0.26 },
                     { "axis": "Energy", "value": 0.10 },
-                    { "axis": "Mix use", "value": 0.30 },
-                    { "axis": "Land Value", "value": 0.26 }
+                    { "axis": "Mix use", "value": 0.05 },
+                    { "axis": "Land Value", "value": 0.1 }
                 ]
             }
         ];
@@ -108,7 +111,7 @@ export function radarUpdate(cityIOjson) {
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
-// temp fn for random changes 
+// NOT IN USE --- temp fn for random changes 
 function randomData(data) {
     let chart_data = JSON.parse(JSON.stringify(data));
     chart_data.forEach(function (e) {

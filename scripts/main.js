@@ -6,7 +6,7 @@ import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
 import * as threeViz from '../scripts/threeViz'
-import * as radarHandler from '../scripts/radarChart'
+import * as radarChart from '../scripts/radarChart'
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -149,7 +149,7 @@ function makeMap(tablesArray) {
         //setup threeJS
         const cityIOjson = await getCityIO(m.properties.url);
         // threeViz.threeViz(cityIOjson);
-        radarHandler.radarInit();
+        radarChart.radarInit();
         //start interval fix set interval that way: 
         //http://onezeronull.com/2013/07/12/function-is-not-defined-when-using-setinterval-or-settimeout/
         var refreshIntervalId = setInterval(function () { update(tableMeta.url) }, updateInterval);
@@ -167,7 +167,9 @@ async function update(url) {
     const cityIOjson = await getCityIO(url);
     infoDiv('last update: ' + new Date(cityIOjson.timestamp))
 
-    radarHandler.radarUpdate(cityIOjson);
+    radarChart.radarUpdate(cityIOjson);
+    console.log(cityIOjson);
+
 
     //should fix with THREE setup and Update 
     // threeViz.threeViz(cityIOjson);
