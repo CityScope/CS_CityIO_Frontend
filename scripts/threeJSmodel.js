@@ -10,6 +10,7 @@ export class threeJSmodel {
     init(tableData) {
         // global holder for theme colors 
         var globalColors = [
+            '#A3BFA2',
             '#ED5066',
             '#F4827D',
             '#F4B99E',
@@ -26,8 +27,8 @@ export class threeJSmodel {
             '#14181a'
         ];
 
-        var CANVAS_WIDTH = '600';
-        var CANVAS_HEIGHT = '600';
+        var CANVAS_WIDTH = '500';
+        var CANVAS_HEIGHT = '500';
 
         var frustumSize = 10;
         var camera = null;
@@ -61,8 +62,6 @@ export class threeJSmodel {
             .appendChild(renderer.domElement);
         renderer.setSize(CANVAS_WIDTH, CANVAS_HEIGHT);
 
-        gridHelper = new THREE.GridHelper(100, 100, 'white', '#404040');
-        scene.add(gridHelper);
 
         /////////////// LIGHTS ///////////////////////
 
@@ -85,36 +84,49 @@ export class threeJSmodel {
         scene.add(lightAmb);
 
         /////////////// GEOMETRY CREATE ///////////////////////
-        var i = 0;
         var voxelDim = 1;
         var thisCol;
-
+        let i = 0;
         for (var x = 0; x < Math.sqrt(tableData.grid.length); x++) {
             for (var y = 0; y < Math.sqrt(tableData.grid.length); y++) {
-                geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (tableData.grid[i] + 6) / 3, voxelDim * 0.8);
-                thisCol = globalColors[0];
-            }
 
-            material = new THREE.MeshStandardMaterial({
-                color: thisCol
-            });
-            mesh = new THREE.Mesh(geometry, material);
-            mesh.position.set(x * voxelDim, (tableData.grid[i] + 3) / 2, y * voxelDim);
-            mesh.castShadow = true; //default is false
-            mesh.receiveShadow = true; //default
-            holder.push(mesh);
-            scene.add(mesh);
-            i += 1;
+                //return the location [key] of this obj value 
+                let keyByVal = getKeyByValue(tableData.objects.types, tableData.grid[i]);
+
+                //
+                geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, keyByVal / 6, voxelDim * 0.8);
+                // random colors for now
+                thisCol = globalColors[Math.floor(Math.random() * globalColors.length)];
+
+                //
+                material = new THREE.MeshStandardMaterial({
+                    color: thisCol
+                });
+                //
+                mesh = new THREE.Mesh(geometry, material);
+                mesh.position.set(x * voxelDim, keyByVal / 12, y * voxelDim);
+                mesh.castShadow = true; //default is false
+                mesh.receiveShadow = true; //default
+                holder.push(mesh);
+                scene.add(mesh);
+                i++;
+            }
         }
+
+        function getKeyByValue(object, value) {
+            return Object.keys(object).find(key => object[key] === value);
+        }
+
         //put to div
         document.getElementById('threeDiv').appendChild(renderer.domElement);
-
+        //call loop when done
         animate();
-
+        //loop
         function animate() {
             requestAnimationFrame(animate);
             render();
         }
+        //render 
         function render() {
             let timer = Date.now() * 0.00025;
             camera.position.x = Math.sin(timer) * 1000;

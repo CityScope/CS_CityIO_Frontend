@@ -171,8 +171,6 @@ async function update(url) {
     infoDiv('last update: ' + new Date(cityIOjson.timestamp))
 
     radarChart.radarUpdate(cityIOjson);
-    console.log(cityIOjson);
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
