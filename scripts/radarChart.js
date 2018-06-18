@@ -69,20 +69,20 @@ export function radarInit() {
 
 // controls radar updates from cityIO  
 export function radarUpdate(cityIOjson) {
-    const tableData = new radarFeatures(cityIOjson);
+    const tableFeatures = new radarFeatures(cityIOjson);
 
     var data =
         [
             {
                 "key": "Kendall Sq.",
                 "values": [
-                    { "axis": "Density", "value": tableData.uniqueTypes() },
-                    { "axis": "Diversity", "value": tableData.typeRatio('type_2') },
-                    { "axis": "Proximity", "value": tableData.typeRatio('2x2_2') },
-                    { "axis": "Amenities", "value": tableData.typeRatio('2x2_4') },
-                    { "axis": "Energy", "value": tableData.typeRatio('2x2_1') },
-                    { "axis": "Mix use", "value": tableData.typeRatio('type_7') },
-                    { "axis": "Land Value", "value": tableData.typeRatio('type_8') }
+                    { "axis": "Density", "value": tableFeatures.uniqueTypes() },
+                    { "axis": "Diversity", "value": tableFeatures.typeRatio('type_2') },
+                    { "axis": "Proximity", "value": tableFeatures.typeRatio('2x2_2') },
+                    { "axis": "Amenities", "value": tableFeatures.typeRatio('2x2_4') },
+                    { "axis": "Energy", "value": tableFeatures.typeRatio('2x2_1') },
+                    { "axis": "Mix use", "value": tableFeatures.typeRatio('type_7') },
+                    { "axis": "Land Value", "value": tableFeatures.typeRatio('type_8') }
                 ]
             },
             //fixed values to compare 

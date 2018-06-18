@@ -5,7 +5,7 @@ import 'bootstrap';
 import * as lego from '/img/lego.png';
 import * as legoIO from '/img/legoio.png';
 import * as shadow from '/img/shadow.png';
-import * as threeViz from '../scripts/threeViz'
+import * as threeJSmodel from '../scripts/threeJSmodel'
 import * as radarChart from '../scripts/radarChart'
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -148,6 +148,9 @@ function makeMap(tablesArray) {
         $('#modal').modal('toggle');
         //setup threeJS
         const cityIOjson = await getCityIO(m.properties.url);
+        let threeJSmodelClass = new threeJSmodel.threeJSmodel(cityIOjson);
+        threeJSmodelClass.init(cityIOjson);
+
         // threeViz.threeViz(cityIOjson);
         radarChart.radarInit();
         //start interval fix set interval that way: 
@@ -170,9 +173,6 @@ async function update(url) {
     radarChart.radarUpdate(cityIOjson);
     console.log(cityIOjson);
 
-
-    //should fix with THREE setup and Update 
-    // threeViz.threeViz(cityIOjson);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

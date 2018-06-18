@@ -1,13 +1,13 @@
 import * as THREE from 'THREE';
 
-export function threeViz(tableData) {
+export class threeJSmodel {
+    constructor(data) {
+        this._data = data;
+    }
 
-    init();
-    // animate();
+    ///////////////SETUP SCENE///////////////////////
 
-    function init() {
-
-        ///////////////SETUP SCENE///////////////////////
+    init(tableData) {
         // global holder for theme colors 
         var globalColors = [
             '#ED5066',
@@ -26,8 +26,8 @@ export function threeViz(tableData) {
             '#14181a'
         ];
 
-        var CANVAS_WIDTH = '350';
-        var CANVAS_HEIGHT = '350';
+        var CANVAS_WIDTH = '600';
+        var CANVAS_HEIGHT = '600';
 
         var frustumSize = 10;
         var camera = null;
@@ -84,22 +84,22 @@ export function threeViz(tableData) {
         // Add the light to the scene
         scene.add(lightAmb);
 
-        /////////////// GEOMETRY ///////////////////////
+        /////////////// GEOMETRY CREATE ///////////////////////
         var i = 0;
         var voxelDim = 1;
         var thisCol;
 
         for (var x = 0; x < Math.sqrt(tableData.grid.length); x++) {
             for (var y = 0; y < Math.sqrt(tableData.grid.length); y++) {
-                geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (tableData.grid[i].type + 6) / 3, voxelDim * 0.8);
-                thisCol = globalColors[tableData.grid[i].type];
+                geometry = new THREE.BoxBufferGeometry(voxelDim * 0.8, (tableData.grid[i] + 6) / 3, voxelDim * 0.8);
+                thisCol = globalColors[0];
             }
 
             material = new THREE.MeshStandardMaterial({
                 color: thisCol
             });
             mesh = new THREE.Mesh(geometry, material);
-            mesh.position.set(x * voxelDim, (tableData.grid[i].type + 3) / 2 / 2, y * voxelDim);
+            mesh.position.set(x * voxelDim, (tableData.grid[i] + 3) / 2, y * voxelDim);
             mesh.castShadow = true; //default is false
             mesh.receiveShadow = true; //default
             holder.push(mesh);
@@ -108,20 +108,31 @@ export function threeViz(tableData) {
         }
         //put to div
         document.getElementById('threeDiv').appendChild(renderer.domElement);
+
+        animate();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            render();
+        }
+        function render() {
+            let timer = Date.now() * 0.00025;
+            camera.position.x = Math.sin(timer) * 1000;
+            camera.position.z = Math.cos(timer) * 1000;
+            camera.lookAt(new THREE.Vector3(7.5, 2.5, 5));
+            renderer.render(scene, camera);
+        }
     }
+
+    /////////////// ANIMATION ///////////////////////
+
 }
 
-/////////////// ANIMATION ///////////////////////
-function animate() {
-    requestAnimationFrame(animate);
-    render();
-}
-function render() {
-    let timer = Date.now() * 0.00025;
-    camera.position.x = Math.sin(timer) * 1000;
-    camera.position.z = Math.cos(timer) * 1000;
-    camera.lookAt(new THREE.Vector3(7.5, 2.5, 5));
-    renderer.render(scene, camera);
-}
+
+
+
+
+
+
 
 
