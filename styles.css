@@ -75,7 +75,7 @@ background-color: #2D393E;
 /* ______________ */
 
 .modal-lg {
-max-width: 90% !important;
+max-width: 80% !important;
 }
 
 
@@ -117,11 +117,8 @@ background-color: rgb(138, 138, 138);
 
 #threeDiv {
 z-index: 100;
-font-family: "Roboto Condensed";
-color: rgb(99, 122, 131);
-text-shadow: 5px 5px 20px #000000;
-width: 30%; 
-height: 100%;
+width: 30vw;
+height: 30vw;
 }
 
 svg {
@@ -149,7 +146,7 @@ height: 100%;
 }
 
 .leaflet-container {
-background-color: #2D393E;
+background-color: rgb(28, 36, 39);
 }
 
 .leaflet-bar.disabled,

@@ -132,6 +132,7 @@ function makeMap(tablesArray) {
         });
     }
 
+
     // click event handler to creat a chart and show it in the popup
     async function modalSetup(m) {
         //get the binded props 
@@ -148,10 +149,9 @@ function makeMap(tablesArray) {
         $('#modal').modal('toggle');
         //setup threeJS
         const cityIOjson = await getCityIO(m.properties.url);
-        let threeJSmodelClass = new threeJSmodel.threeJSmodel(cityIOjson);
-        threeJSmodelClass.init(cityIOjson);
-
-        // threeViz.threeViz(cityIOjson);
+        //init threejs
+        new threeJSmodel.threeJSmodel().init(cityIOjson);
+        //init radar 
         radarChart.radarInit();
         //start interval fix set interval that way: 
         //http://onezeronull.com/2013/07/12/function-is-not-defined-when-using-setinterval-or-settimeout/
@@ -169,7 +169,7 @@ function makeMap(tablesArray) {
 async function update(url) {
     const cityIOjson = await getCityIO(url);
     infoDiv('last update: ' + new Date(cityIOjson.timestamp))
-
+    //update radar 
     radarChart.radarUpdate(cityIOjson);
 }
 
