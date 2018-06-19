@@ -33,6 +33,13 @@
   box-shadow: 0px 0px 61px 1px rgba(0, 0, 0, 0.75);
   padding: 1vw;
 }
+.log a:link {
+  color: #ed5066;
+}
+
+.log a:visited {
+  color: #ed5066;
+}
 
 h1 {
   font-family: "Press Start 2P";
