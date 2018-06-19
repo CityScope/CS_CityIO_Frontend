@@ -71,6 +71,7 @@ async function getTables() {
 
 function makeMap(tablesArray) {
   infoDiv("----making map----");
+
   var map = L.map("map").setView([51.505, -0.09], 1);
   // setup the map API
   L.tileLayer(
@@ -114,12 +115,14 @@ function makeMap(tablesArray) {
   });
 
   // add icons to cities from locationsData JSON
+  infoDiv("mapping only cityIO API v2 tables");
+
   for (var i = 0; i < tablesArray.length; i++) {
     //clear names of tables
     let url = tablesArray[i].url;
     url = clearNames(url);
     //type in log div
-    infoDiv("mapping only cityIO tables " + i + ") " + clearNames(url));
+    infoDiv(i + ". " + clearNames(url));
 
     //create map marker
     let marker = new L.marker([tablesArray[i].lat, tablesArray[i].lon], {
