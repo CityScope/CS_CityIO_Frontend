@@ -135,32 +135,40 @@ function makeMap(tablesArray) {
 
     // click event handler to creat a chart and show it in the popup
     async function modalSetup(m) {
-        //get the binded props 
-        let tableMeta = m.properties;
 
         //get the divs for content 
         var infoDiv = document.getElementById('infoDiv');
-        var threeDiv = document.getElementById('threeDiv');
+        //get the binded props 
+        let tableMeta = m.properties;
         //put prj name in div 
         infoDiv.innerHTML = clearNames(m.properties.url);
-        //clearing the three div
-        threeDiv.innerHTML = "";
-        //open up the modal 
-        $('#modal').modal('toggle');
-        //setup threeJS
-        const cityIOjson = await getCityIO(m.properties.url);
-        //init threejs
-        new threeJSmodel.threeJSmodel().init(cityIOjson);
+
+
+
         //init radar 
         radarChart.radarInit();
-        //start interval fix set interval that way: 
-        //http://onezeronull.com/2013/07/12/function-is-not-defined-when-using-setinterval-or-settimeout/
-        var refreshIntervalId = setInterval(function () { update(tableMeta.url) }, updateInterval);
+
+
+        async function threeSetup() {
+            var threeDiv = document.getElementById('threeDiv');
+            // setup threeJS
+            const cityIOjson = await getCityIO(m.properties.url);
+            // clearing the three div
+            threeDiv.innerHTML = "";
+            // init threejs
+            new threeJSmodel.threeJSmodel().init(cityIOjson);
+        }
 
         //stop update on modal close
         $("#modal").on("hide.bs.modal", function () {
             clearInterval(refreshIntervalId);
         });
+
+        //start interval fix set interval that way: 
+        //http://onezeronull.com/2013/07/12/function-is-not-defined-when-using-setinterval-or-settimeout/
+        var refreshIntervalId = setInterval(function () { update(tableMeta.url) }, updateInterval);
+        //open up the modal 
+        $('#modal').modal('toggle');
     }
 }
 
