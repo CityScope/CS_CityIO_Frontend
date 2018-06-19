@@ -1,14 +1,13 @@
-## how to build using `parcel` for GH pages
+## how to build with `parcel` for GitHub pages
+
+### Building production into `dist` folder
 
 `parcel build index.html --public-url https://cityscope.github.io/CS_CityIO_Frontend/`
 
-[might need this to fix missing plugin note: npm install babel-plugin-transform-runtime]
+Note: in some cases might need this to fix missing plugin note:
+`npm install babel-plugin-transform-runtime`
 
-## Deploying a subfolder [dist] to GitHub Pages
-
-Sometimes you want to have a subdirectory on the `master` branch be the root directory of a repository’s `gh-pages` branch. Here's how to do it:
-
-For the sake of this example, let’s pretend the subfolder containing your site is named `dist`.
+## Deploying `dist` to GitHub Pages
 
 ### Step 1
 
@@ -28,7 +27,7 @@ or force-add it if you don't want to change your `.gitignore`
 git add dist -f
 ```
 
-Remember to commit!
+Commit!
 
 ```sh
 git commit -m "gh-pages commit"
@@ -42,7 +41,11 @@ Use subtree push to send it to the `gh-pages` branch on GitHub.
 git subtree push --prefix dist origin gh-pages
 ```
 
-Boom. If your folder isn’t called `dist`, then you’ll need to change that in each of the commands above.
+If this gets an error [see below], try `force` push:
+
+```sh
+git push origin `git subtree split --prefix dist master`:gh-pages --force
+```
 
 ---
 
@@ -66,11 +69,9 @@ git gh-deploy path/to/your/site
 
 ---
 
-# How to fix:
+# How to fix
 
-https://gist.github.com/cobyism/4730490#gistcomment-2337463
-
-### `"Updates were rejected because a pushed branch tip is behind its remote"`
+### `Updates were rejected because a pushed branch tip is behind its remote`
 
 ### full error msg:
 
@@ -101,10 +102,12 @@ $ make # or what ever you run to populate dist
 $ cd dist
 $ git add --all
 $ git commit -m "Deploy to gh-pages"
-$ git push origin gh-pages
+$ git push origin gh-pages [or: git push -f origin <branch> for force commit]
 $ cd ..
 ```
 
 ### Notes
 
 git worktree feature has its own garbage collection so if dist is deleted it will not affect much and can be recreated as needed. If you want it to go away you can use `git worktree prune` See man pages on it.
+
+https://gist.github.com/cobyism/4730490#gistcomment-2337463
