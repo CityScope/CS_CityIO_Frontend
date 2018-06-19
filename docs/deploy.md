@@ -107,4 +107,4 @@ $ cd ..
 
 ### Notes
 
-git worktree feature has its own garbage collection so if dist is deleted it will not affect much and can be recreated as needed. If you want it to go away you can use git worktree prune See man pages on it.
+git worktree feature has its own garbage collection so if dist is deleted it will not affect much and can be recreated as needed. If you want it to go away you can use `git worktree prune` See man pages on it.
