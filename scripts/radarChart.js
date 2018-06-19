@@ -58,7 +58,6 @@ export function radarInit() {
 
   var color = d3.scale.ordinal().range(globalColors);
   let docRatio = window.innerHeight / window.innerWidth;
-  console.log(docRatio);
 
   var radarChartOptions = {
     width: window.innerWidth * docRatio,

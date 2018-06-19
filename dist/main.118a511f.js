@@ -84565,7 +84565,6 @@ function radarInit() {
 
   var color = d3.scale.ordinal().range(globalColors);
   var docRatio = window.innerHeight / window.innerWidth;
-  console.log(docRatio);
 
   var radarChartOptions = {
     width: window.innerWidth * docRatio,
@@ -85944,7 +85943,7 @@ function clearNames(url) {
 // APP START
 //////////////////////////////////////////
 getTables();
-},{"babel-runtime/regenerator":21,"babel-runtime/helpers/asyncToGenerator":14,"leaflet":12,"jquery":13,"bootstrap":15,"/img/lego.png":6,"/img/legoio.png":7,"/img/shadow.png":8,"../scripts/threeJSmodel":9,"../scripts/radarChart":10}],119:[function(require,module,exports) {
+},{"babel-runtime/regenerator":21,"babel-runtime/helpers/asyncToGenerator":14,"leaflet":12,"jquery":13,"bootstrap":15,"/img/lego.png":6,"/img/legoio.png":7,"/img/shadow.png":8,"../scripts/threeJSmodel":9,"../scripts/radarChart":10}],123:[function(require,module,exports) {
 
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -86113,5 +86112,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[119,4])
+},{}]},{},[123,4])
 //# sourceMappingURL=/main.118a511f.map
