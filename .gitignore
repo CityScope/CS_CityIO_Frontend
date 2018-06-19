@@ -5,3 +5,8 @@
 .vscode
 dist/
 /dist
+dist
+dist/*.*
+dist/*
+dist/.*
+/Volumes/WORK/GIT/17_CS_cityIO_Frontend/dist
