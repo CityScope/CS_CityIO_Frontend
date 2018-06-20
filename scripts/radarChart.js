@@ -78,13 +78,6 @@ export function radarUpdate(cityIOjson) {
     {
       key: "Kendall Sq.",
       values: [
-        { axis: "0", value: tableFeatures.typeRatio("2x2_5") },
-        { axis: "1", value: tableFeatures.typeRatio("type_2") },
-        { axis: "2", value: tableFeatures.typeRatio("2x2_2") },
-        { axis: "3", value: tableFeatures.typeRatio("2x2_2") },
-        { axis: "4", value: tableFeatures.typeRatio("2x2_1") },
-        { axis: "5", value: tableFeatures.uniqueTypes() },
-        { axis: "6", value: tableFeatures.typeRatio("type_8") },
         { axis: "Density", value: tableFeatures.uniqueTypes() },
         { axis: "Diversity", value: tableFeatures.typeRatio("type_2") },
         { axis: "Proximity", value: tableFeatures.typeRatio("2x2_3") },
@@ -98,13 +91,6 @@ export function radarUpdate(cityIOjson) {
     {
       key: "HafenCity, Hamburg",
       values: [
-        { axis: "0", value: 0.26 },
-        { axis: "1", value: 0.1 },
-        { axis: "2", value: 0.14 },
-        { axis: "3", value: 0.06 },
-        { axis: "4", value: 0.1 },
-        { axis: "5", value: 0.05 },
-        { axis: "6", value: 0.05 },
         { axis: "Density", value: 0.26 },
         { axis: "Diversity", value: 0.1 },
         { axis: "Proximity", value: 0.14 },
@@ -169,7 +155,7 @@ export function RadarChart() {
       levels: 5,
       maxValue: 0,
       labelFactor: 1.25,
-      opacity: 0.1,
+      opacity: 0.05,
       fill: "#CDCDCD",
       color: "#CDCDCD"
     },
@@ -178,7 +164,7 @@ export function RadarChart() {
       colors: {}, // color lookup by key
       opacity: 0.35,
       borderWidth: 2,
-      rounded: true,
+      rounded: false,
       dotRadius: 4,
       sort: true, // sort layers by approximation of size, smallest on top
       filter: []
@@ -186,7 +172,7 @@ export function RadarChart() {
 
     axes: {
       lineColor: "white",
-      lineWidth: "1px",
+      lineWidth: "0.25px",
       wrapWidth: 60, // The number of pixels after which a label needs to be given a new line
       filter: [],
       invert: [],
