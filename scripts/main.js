@@ -51,7 +51,11 @@ async function getTables() {
         " of " +
         tables.length +
         " tables: " +
-        clearNames(tables[i]).link(tables[i])
+        clearNames(tables[i]).link(tables[i]) +
+        " || Remove Table".link(
+          "https://cityio.media.mit.edu/api/table/clear/" +
+            clearNames(tables[i])
+        )
     );
 
     //check id API v2 [to replace with proper check later]
@@ -156,15 +160,15 @@ function makeMap(tablesArray) {
 
     //init radar
     radarChart.radarInit();
+    threeSetup();
 
     async function threeSetup() {
-      var threeDiv = document.getElementById("threeDiv");
+      $("#threeDiv").empty();
+
       // setup threeJS
       const cityIOjson = await getCityIO(m.properties.url);
-      // clearing the three div
-      threeDiv.innerHTML = "";
       // init threejs
-      new threeJSmodel.threeJSmodel().init(cityIOjson);
+      threeJSmodel.threeJSmodel(cityIOjson);
     }
 
     //stop update on modal close
@@ -187,6 +191,7 @@ function makeMap(tablesArray) {
 async function update(url) {
   const cityIOjson = await getCityIO(url);
   infoDiv("last update: " + new Date(cityIOjson.timestamp));
+
   //update radar
   radarChart.radarUpdate(cityIOjson);
 }

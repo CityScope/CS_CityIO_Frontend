@@ -60,8 +60,8 @@ export function radarInit() {
   let docRatio = window.innerHeight / window.innerWidth;
 
   var radarChartOptions = {
-    width: window.innerWidth * docRatio,
-    height: window.innerHeight * 0.7,
+    width: window.innerWidth * docRatio *0.7,
+    height: window.innerWidth * docRatio *0.7,
     color: color
   };
   radarChartMethod = RadarChart();

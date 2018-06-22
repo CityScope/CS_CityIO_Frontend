@@ -74,11 +74,11 @@ body {
   background-color: #2d393e;
 }
 
-/* ______________ */
 /* MODAL  */
-/* ______________ */
 
 .modal-lg {
+  margin: auto !important;
+  padding: 0% !important;
   max-width: 90% !important;
   max-height: 90% !important;
 }
@@ -93,31 +93,41 @@ body.modal-open > :not(.modal) {
 }
 
 .modal-content {
-  background-color: rgba(19, 24, 26, 0.733) !important;
-  text-align: center;
+  background-color: #1f3f4783 !important;
+  /* text-align: center; */
 }
+.close {
+  text-align: right;
+  color: white;
+  font-size: 4vw;
+  margin: 1vw;
+}
+
+/* content  */
 
 .tableInfo {
   margin: 1rem;
   font-family: "Press Start 2P";
-  color: rgb(180, 180, 180);
-  font-size: 14px;
+  color: rgb(218, 218, 218);
+  font-size: 30px;
   line-height: 1.5em;
   z-index: 999;
 }
 
-.threeDiv {
-  z-index: 100;
-  margin: 0 auto;
-}
-
 .radarDiv {
-  z-index: 100;
-  margin: 0 auto;
+  left: 0% !important;
+  -webkit-transform: translateX(0%) !important;
+  -ms-transform: translateX(0%) !important;
+  transform: translateX(00%) !important;
 }
 
-svg {
-  display: block;
+.threeDiv {
+  width: 500;
+  height: 600;
+  left: 0% !important;
+  -webkit-transform: translateX(0%) !important;
+  -ms-transform: translateX(0%) !important;
+  transform: translateX(0%) !important;
 }
 
 ::-webkit-scrollbar {
@@ -132,9 +142,8 @@ svg {
 ::-webkit-scrollbar-thumb:vertical {
   background-color: rgb(138, 138, 138);
 }
-/* ______________ */
+
 /* leaflet map design */
-/* _______________*/
 
 .leaflet-popup-content-wrapper {
   font-family: "Roboto Condensed";
