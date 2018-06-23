@@ -1,6 +1,8 @@
 import * as THREE from "THREE";
 
 export function threeJSmodel(tableData) {
+  console.log(tableData);
+
   // global holder for theme colors
   var globalColors = [
     "#A3BFA2",
@@ -79,20 +81,22 @@ export function threeJSmodel(tableData) {
 
   /////////////// GEOMETRY CREATE ///////////////////////
   var voxelDim = 1;
+  //get center of model for camera
+  var centerOfModel = tableData.header.spatial.ncols * voxelDim;
   var thisCol;
   let i = 0;
-  for (var x = 0; x < Math.sqrt(tableData.grid.length); x++) {
-    for (var y = 0; y < Math.sqrt(tableData.grid.length); y++) {
-      //return the location [key] of this obj value
-      let keyByVal = getKeyByValue(tableData.objects.types, tableData.grid[i]);
+  for (var x = 0; x < tableData.header.spatial.ncols; x++) {
+    for (var y = 0; y < tableData.header.spatial.ncols; y++) {
+      let keyByVal = tableData.grid[i] + 1;
+
       //
       geometry = new THREE.BoxBufferGeometry(
         voxelDim * 0.8,
-        keyByVal / 12,
+        keyByVal / 6,
         voxelDim * 0.8
       );
       // random colors for now
-      thisCol = globalColors[Math.floor(Math.random() * globalColors.length)];
+      thisCol = globalColors[tableData.grid[i] + 1];
       //
       material = new THREE.MeshStandardMaterial({
         color: thisCol
@@ -108,9 +112,11 @@ export function threeJSmodel(tableData) {
     }
   }
 
-  function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
-  }
+  //return the location [key] of this obj value
+  // let keyByVal = getKeyByValue(tableData.objects.types, tableData.grid[i]);
+  // function getKeyByValue(object, value) {
+  //   return Object.keys(object).find(key => object[key] === value);
+  // }
 
   //put to div
   threeDiv.appendChild(renderer.domElement);
@@ -129,10 +135,10 @@ export function threeJSmodel(tableData) {
   /////////////// ANIMATION ///////////////////////
   //render
   function render() {
-    let timer = Date.now() * 0.0001;
+    let timer = Date.now() * 0.001;
     camera.position.x = Math.sin(timer) * 1000;
     camera.position.z = Math.cos(timer) * 1000;
-    camera.lookAt(new THREE.Vector3(0, 0, 0));
+    camera.lookAt(new THREE.Vector3(centerOfModel / 2, 0, centerOfModel / 2));
     renderer.render(scene, camera);
   }
 
