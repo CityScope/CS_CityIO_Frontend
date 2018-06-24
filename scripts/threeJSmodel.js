@@ -62,16 +62,16 @@ export function threeJSmodel(tableData) {
   /////////////// LIGHTS ///////////////////////
 
   //Create a PointLight and turn on shadows for the light
-  light = new THREE.PointLight(0xf4eaea, 1, 500);
-  light.position.set(0, 30, 45);
+  light = new THREE.PointLight(0xf4eaea, 1, 100);
+  light.position.set(10, 10, 10);
   light.up = new THREE.Vector3(0, 1, 1);
   light.lookAt(new THREE.Vector3(0, 0, 0));
   light.castShadow = true; // default false
   scene.add(light);
 
   //Set up shadow properties for the light
-  light.shadow.mapSize.width = 256; // default
-  light.shadow.mapSize.height = 256; // default
+  light.shadow.mapSize.width = 512; // default
+  light.shadow.mapSize.height = 512; // default
   light.shadow.camera.near = 1; // default
   light.shadow.camera.far = 500; // default
 
@@ -92,10 +92,10 @@ export function threeJSmodel(tableData) {
       //
       geometry = new THREE.BoxBufferGeometry(
         voxelDim * 0.8,
-        keyByVal / 6,
+        keyByVal / 12,
         voxelDim * 0.8
       );
-      // random colors for now
+      // color
       thisCol = globalColors[tableData.grid[i] + 1];
       //
       material = new THREE.MeshStandardMaterial({
@@ -126,7 +126,7 @@ export function threeJSmodel(tableData) {
   //loop
   function animate() {
     //keep size updated
-    renderer.setSize($(threeDiv).width(), $(threeDiv).height());
+    renderer.setSize($(threeDiv).width(), $(threeDiv).width());
     //loop
     requestAnimationFrame(animate);
     render();
@@ -135,10 +135,11 @@ export function threeJSmodel(tableData) {
   /////////////// ANIMATION ///////////////////////
   //render
   function render() {
-    let timer = Date.now() * 0.001;
+    let timer = Date.now() * 0.00005;
     camera.position.x = Math.sin(timer) * 1000;
     camera.position.z = Math.cos(timer) * 1000;
     camera.lookAt(new THREE.Vector3(centerOfModel / 2, 0, centerOfModel / 2));
+
     renderer.render(scene, camera);
   }
 

@@ -2,7 +2,9 @@
 
 ### Building production into `dist` folder
 
-`parcel build index.html --public-url https://cityscope.github.io/CS_CityIO_Frontend/`
+<!-- `parcel build index.html --public-url https://cityscope.github.io/CS_CityIO_Frontend/` -->
+
+`parcel build index.html --public-url https://cityscope.media.mit.edu/CS_CityIO_Frontend/`
 
 Note: in some cases might need this to fix missing plugin note:
 `npm install babel-plugin-transform-runtime`

@@ -6,6 +6,7 @@ import * as legoIO from "/img/legoio.png";
 import * as shadow from "/img/shadow.png";
 import * as threeJSmodel from "../scripts/threeJSmodel";
 import * as radarChart from "../scripts/radarChart";
+import * as axios from "axios";
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -15,7 +16,7 @@ async function getCityIO(cityIOurl) {
   // GET method
   return $.ajax({
     url: cityIOurl,
-    dataType: "JSONP",
+    dataType: "JSON",
     callback: "jsonData",
     type: "GET",
     success: function(d) {
@@ -28,7 +29,6 @@ async function getCityIO(cityIOurl) {
     }
   });
 }
-
 function clearNames(url) {
   return url.toString().replace("https://cityio.media.mit.edu/api/table/", "");
 }
@@ -190,7 +190,8 @@ function makeMap(tablesArray) {
 
 async function update(url) {
   const cityIOjson = await getCityIO(url);
-  infoDiv("last update: " + new Date(cityIOjson.timestamp));
+
+  infoDiv("last update: " + new Date(cityIOjson.meta.timestamp));
 
   //update radar
   radarChart.radarUpdate(cityIOjson);
