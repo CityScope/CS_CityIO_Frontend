@@ -16,11 +16,11 @@ class radarFeatures {
     let ratioCount = 0;
     let d = this._data.grid;
     for (let i = 0; i < d.length; i++) {
-      if (d[i] === type) {
+      if (d[i].toString() === type) {
         ratioCount += 2;
       }
     }
-    return ratioCount / d.length;
+    return (ratioCount * 2) / d.length;
   }
 }
 
@@ -39,7 +39,7 @@ let radarChartMethod;
 
 export function radarInit() {
   var globalColors = [
-    "#A3BFA2",
+    "#668a87",
     "#ED5066",
     "#F4827D",
     "#F4B99E",
@@ -72,19 +72,25 @@ export function radarInit() {
 
 // controls radar updates from cityIO
 export function radarUpdate(cityIOjson) {
+  console.log(cityIOjson);
+
   const tableFeatures = new radarFeatures(cityIOjson);
 
   var data = [
     {
       key: "Kendall Sq.",
       values: [
-        { axis: "Density", value: tableFeatures.uniqueTypes() },
-        { axis: "Diversity", value: tableFeatures.typeRatio("-1") },
-        { axis: "Proximity", value: tableFeatures.typeRatio("20") },
-        { axis: "Amenities", value: tableFeatures.typeRatio("1") },
-        { axis: "Energy", value: tableFeatures.typeRatio("20") },
+        { axis: "Density", value: tableFeatures.typeRatio("1") },
+        { axis: "Diversity", value: tableFeatures.typeRatio("2") },
+        { axis: "Proximity", value: tableFeatures.typeRatio("3") },
+        { axis: "Amenities", value: tableFeatures.typeRatio("4") },
+        { axis: "Energy", value: tableFeatures.typeRatio("5") },
         { axis: "Mix use", value: tableFeatures.uniqueTypes() },
-        { axis: "Land Value", value: tableFeatures.typeRatio("5") }
+        { axis: "Land Value", value: tableFeatures.typeRatio("6") },
+        { axis: "Mobility", value: tableFeatures.typeRatio("4") },
+        { axis: "Temp.", value: tableFeatures.typeRatio("5") },
+        { axis: "Public Space", value: tableFeatures.uniqueTypes() },
+        { axis: "Coolness", value: tableFeatures.typeRatio("6") }
       ]
     },
     //fixed values to compare
@@ -97,7 +103,11 @@ export function radarUpdate(cityIOjson) {
         { axis: "Amenities", value: 0.26 },
         { axis: "Energy", value: 0.1 },
         { axis: "Mix use", value: 0.05 },
-        { axis: "Land Value", value: 0.1 }
+        { axis: "Land Value", value: 0.1 },
+        { axis: "Mobility", value: tableFeatures.typeRatio("4") },
+        { axis: "Temp.", value: tableFeatures.typeRatio("5") },
+        { axis: "Public Space", value: tableFeatures.uniqueTypes() },
+        { axis: "Coolness", value: tableFeatures.typeRatio("6") }
       ]
     }
   ];

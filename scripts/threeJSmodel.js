@@ -19,6 +19,36 @@ export function threeJSmodel(tableData) {
     "#405654",
     "#263C3A",
     "#263C3A",
+    "#14181a",
+    "#A3BFA2",
+    "#ED5066",
+    "#F4827D",
+    "#F4B99E",
+    "#FDCAA2",
+    "#F6ECD4",
+    "#CCD9CE",
+    "#A5BBB9",
+    "#A3BFA2",
+    "#80ADA9",
+    "#668a87",
+    "#405654",
+    "#263C3A",
+    "#263C3A",
+    "#14181a",
+    "#A3BFA2",
+    "#ED5066",
+    "#F4827D",
+    "#F4B99E",
+    "#FDCAA2",
+    "#F6ECD4",
+    "#CCD9CE",
+    "#A5BBB9",
+    "#A3BFA2",
+    "#80ADA9",
+    "#668a87",
+    "#405654",
+    "#263C3A",
+    "#263C3A",
     "#14181a"
   ];
   let threeDiv = document.getElementById("threeDiv");
@@ -62,7 +92,7 @@ export function threeJSmodel(tableData) {
   /////////////// LIGHTS ///////////////////////
 
   //Create a PointLight and turn on shadows for the light
-  light = new THREE.PointLight(0xf4eaea, 1, 100);
+  light = new THREE.PointLight(0xf4eaea, 0.8, 100);
   light.position.set(10, 10, 10);
   light.up = new THREE.Vector3(0, 1, 1);
   light.lookAt(new THREE.Vector3(0, 0, 0));
