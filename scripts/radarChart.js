@@ -17,7 +17,7 @@ class radarFeatures {
     let d = this._data.grid;
     for (let i = 0; i < d.length; i++) {
       if (d[i] === type) {
-        ratioCount++;
+        ratioCount += 2;
       }
     }
     return ratioCount / d.length;
@@ -79,12 +79,12 @@ export function radarUpdate(cityIOjson) {
       key: "Kendall Sq.",
       values: [
         { axis: "Density", value: tableFeatures.uniqueTypes() },
-        { axis: "Diversity", value: tableFeatures.typeRatio("type_2") },
-        { axis: "Proximity", value: tableFeatures.typeRatio("2x2_3") },
-        { axis: "Amenities", value: tableFeatures.typeRatio("2x2_2") },
-        { axis: "Energy", value: tableFeatures.typeRatio("2x2_1") },
+        { axis: "Diversity", value: tableFeatures.typeRatio("-1") },
+        { axis: "Proximity", value: tableFeatures.typeRatio("20") },
+        { axis: "Amenities", value: tableFeatures.typeRatio("1") },
+        { axis: "Energy", value: tableFeatures.typeRatio("20") },
         { axis: "Mix use", value: tableFeatures.uniqueTypes() },
-        { axis: "Land Value", value: tableFeatures.typeRatio("type_8") }
+        { axis: "Land Value", value: tableFeatures.typeRatio("5") }
       ]
     },
     //fixed values to compare
