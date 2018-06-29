@@ -72,8 +72,6 @@ export function radarInit() {
 
 // controls radar updates from cityIO
 export function radarUpdate(cityIOjson) {
-  console.log(cityIOjson);
-
   const tableFeatures = new radarFeatures(cityIOjson);
 
   var data = [
@@ -256,7 +254,7 @@ export function RadarChart() {
       //////////// Create the container SVG and children g /////////////
       var svg = dom
         .append("svg")
-        .attr("class", "svg-class")
+        .attr("class", "svg-radar")
         .attr("width", options.width)
         .attr("height", options.height);
 
