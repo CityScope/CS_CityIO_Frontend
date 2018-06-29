@@ -14,6 +14,6 @@ This repo provides a front-end interface for cityIO backend server. This can be 
 ## for forking and deploying on your own server/GH-pages 
 [See doc here](https://github.com/CityScope/CS_CityIO_Frontend/blob/master/docs/deploy.md)
 ____
-Credits: [Ariel Noyman](http://arielnoyman.com)
+Maintained by [Ariel Noyman](http://arielnoyman.com)
 
 [Repo Contributors](https://github.com/CityScope/CS_CityIO_Frontend/graphs/contributors)
