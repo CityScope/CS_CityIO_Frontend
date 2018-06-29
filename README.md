@@ -1,7 +1,7 @@
 # cityIO API Frontend 
-## Live Data Visualization Dashboard for MIT CityScope Deployments
+## Live Dashboard for MIT CityScope Worldwide Deployments
 
-This repo provides a front-end interface for cityIO backend server. This can be used to display an overview of current active CityScope deployments around the world and a real-time dashboard of the cityIO API data for each table. 
+This repo provides the code for a front-end interface of the cityIO backend server. This code can be used to display an overview of current active CityScope deployments around the world and show a real-time dashboard of the cityIO API Data Visualization for each table. 
 
 ![alt text](/docs/cityIOfe.png "cityIO frontend")
 
