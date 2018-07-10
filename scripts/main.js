@@ -6,7 +6,6 @@ import * as legoIO from "/img/legoio.png";
 import * as shadow from "/img/shadow.png";
 import * as threeJSmodel from "../scripts/threeJSmodel";
 import * as radarChart from "../scripts/radarChart";
-import * as axios from "axios";
 
 ////////////////////////////////////////////////////////////////////////////////////
 
