@@ -1,7 +1,7 @@
 {
   "name": "17_cs_cityio_frontend",
   "version": "1.0.0",
-  "description": "Front end for cityIO endpoint",
+  "description": "Front end for cityIO",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/RELNO/cityIO_Forntend.git"
   },
-  "author": "",
+  "author": "Ariel Noyman",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/RELNO/cityIO_Forntend/issues"
