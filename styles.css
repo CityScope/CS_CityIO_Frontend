@@ -79,7 +79,7 @@ body {
 .modal-lg {
   margin: auto !important;
   padding: 0% !important;
-  max-width: 90% !important;
+  max-width: 60% !important;
   max-height: 90% !important;
 }
 
@@ -122,12 +122,17 @@ body.modal-open > :not(.modal) {
 }
 
 .threeDiv {
-  width: 500;
-  height: 600;
+  font-family: "Roboto Condensed";
+  color: rgb(173, 184, 187);
+  font-size: 2vw;
+  /* width: 500; */
+  height: 500;
+  width: 100%;
   left: 0% !important;
   -webkit-transform: translateX(0%) !important;
   -ms-transform: translateX(0%) !important;
   transform: translateX(0%) !important;
+  overflow: auto;
 }
 
 ::-webkit-scrollbar {
@@ -169,4 +174,24 @@ body.modal-open > :not(.modal) {
 .leaflet-bar button.disabled {
   opacity: 0;
   border: none;
+}
+
+pre {
+  padding: 5px;
+  margin: 5px;
+}
+.string {
+  color: rgb(150, 150, 150);
+}
+.number {
+  color: #ed5066;
+}
+.boolean {
+  color: rgb(180, 159, 128);
+}
+.null {
+  color: rgb(99, 125, 134);
+}
+.key {
+  color: rgb(221, 221, 221);
 }

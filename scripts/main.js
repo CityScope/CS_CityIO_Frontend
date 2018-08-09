@@ -150,6 +150,7 @@ function makeMap(tablesArray) {
 
   // click event handler to creat a chart and show it in the popup
   async function modalSetup(m) {
+    const cityIOjson = await getCityIO(m.properties.url);
     //get the divs for content
     var infoDiv = document.getElementById("infoDiv");
     //get the binded props
@@ -158,16 +159,13 @@ function makeMap(tablesArray) {
     infoDiv.innerHTML = clearNames(m.properties.url);
 
     //init radar
-    radarChart.radarInit();
-    threeSetup();
+    // radarChart.radarInit();
+    // threeSetup();
 
     async function threeSetup() {
       $("#threeDiv").empty();
-
-      // setup threeJS
-      const cityIOjson = await getCityIO(m.properties.url);
       // init threejs
-      threeJSmodel.threeJSmodel(cityIOjson);
+      // threeJSmodel.threeJSmodel(cityIOjson);
     }
 
     //stop update on modal close
@@ -193,7 +191,41 @@ async function update(url) {
   infoDiv("last update: " + new Date(cityIOjson.meta.timestamp));
 
   //update radar
-  radarChart.radarUpdate(cityIOjson);
+  // radarChart.radarUpdate(cityIOjson);
+
+  let cityIOjsonString = JSON.stringify(cityIOjson, null, 2);
+  let threeDiv = document.getElementById("threeDiv");
+  threeDiv.innerHTML = "";
+  function output(inp) {
+    threeDiv.appendChild(document.createElement("pre")).innerHTML = inp;
+  }
+
+  function syntaxHighlight(json) {
+    json = json
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+    return json.replace(
+      /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+      function(match) {
+        var cls = "number";
+        if (/^"/.test(match)) {
+          if (/:$/.test(match)) {
+            cls = "key";
+          } else {
+            cls = "string";
+          }
+        } else if (/true|false/.test(match)) {
+          cls = "boolean";
+        } else if (/null/.test(match)) {
+          cls = "null";
+        }
+        return '<span class="' + cls + '">' + match + "</span>";
+      }
+    );
+  }
+
+  output(syntaxHighlight(cityIOjsonString));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
