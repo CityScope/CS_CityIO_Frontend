@@ -124,7 +124,6 @@ body.modal-open > :not(.modal) {
 .threeDiv {
   font-family: "Roboto Condensed";
   color: rgb(173, 184, 187);
-  font-size: 2vw;
   /* width: 500; */
   height: 500;
   width: 100%;
@@ -136,12 +135,13 @@ body.modal-open > :not(.modal) {
 }
 
 ::-webkit-scrollbar {
-  width: 3px;
-  height: 10px;
+  width: 10px;
+  height: 70px;
+  background-color: rgb(28, 36, 39);
 }
 
 ::-webkit-scrollbar-track-piece {
-  background-color: rgba(85, 85, 85, 0);
+  background-color: rgba(141, 141, 141, 0);
 }
 
 ::-webkit-scrollbar-thumb:vertical {

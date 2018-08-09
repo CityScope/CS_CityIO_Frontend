@@ -4,8 +4,13 @@ import "bootstrap";
 import * as lego from "/img/lego.png";
 import * as legoIO from "/img/legoio.png";
 import * as shadow from "/img/shadow.png";
-// import * as threeJSmodel from "../scripts/threeJSmodel";
-// import * as radarChart from "../scripts/radarChart";
+/*
+import * as threeJSmodel from "../scripts/threeJSmodel";
+import * as radarChart from "../scripts/radarChart";
+"d3": "^3.5.6",
+"d3-svg-legend": "^2.25.6",
+"three": "^0.91.0",
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -87,8 +92,7 @@ function makeMap(tablesArray) {
   //hide leaflet link
   document.getElementsByClassName(
     "leaflet-control-attribution"
-  )[0].style.display =
-    "none";
+  )[0].style.display = "none";
   document.getElementsByClassName("leaflet-top leaflet-left")[0].style.display =
     "none";
   //lock map to relevant area view
@@ -186,6 +190,7 @@ function makeMap(tablesArray) {
 ////////////////////////////////////////////////////////////////////////////////////
 
 async function update(url) {
+  //http://caldwell.github.io/renderjson/
   const cityIOjson = await getCityIO(url);
 
   infoDiv("last update: " + new Date(cityIOjson.meta.timestamp));
@@ -196,10 +201,15 @@ async function update(url) {
   let cityIOjsonString = JSON.stringify(cityIOjson, null, 2);
   let threeDiv = document.getElementById("threeDiv");
   threeDiv.innerHTML = "";
+  //
+
+  output(syntaxHighlight(cityIOjsonString));
+
+  //
   function output(inp) {
     threeDiv.appendChild(document.createElement("pre")).innerHTML = inp;
   }
-
+  //
   function syntaxHighlight(json) {
     json = json
       .replace(/&/g, "&amp;")
@@ -224,8 +234,6 @@ async function update(url) {
       }
     );
   }
-
-  output(syntaxHighlight(cityIOjsonString));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
