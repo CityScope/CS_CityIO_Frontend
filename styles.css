@@ -177,6 +177,8 @@ body.modal-open > :not(.modal) {
 }
 
 pre {
+  color: rgb(130, 145, 153);
+
   padding: 5px;
   margin: 5px;
 }
@@ -190,7 +192,7 @@ pre {
   color: rgb(180, 159, 128);
 }
 .null {
-  color: rgb(99, 125, 134);
+  color: #722a34;
 }
 .key {
   color: rgb(221, 221, 221);

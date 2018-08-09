@@ -4,8 +4,8 @@ import "bootstrap";
 import * as lego from "/img/lego.png";
 import * as legoIO from "/img/legoio.png";
 import * as shadow from "/img/shadow.png";
-import * as threeJSmodel from "../scripts/threeJSmodel";
-import * as radarChart from "../scripts/radarChart";
+// import * as threeJSmodel from "../scripts/threeJSmodel";
+// import * as radarChart from "../scripts/radarChart";
 
 ////////////////////////////////////////////////////////////////////////////////////
 
