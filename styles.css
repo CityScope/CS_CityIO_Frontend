@@ -79,7 +79,7 @@ body {
 .modal-lg {
   margin: auto !important;
   padding: 0% !important;
-  max-width: 60% !important;
+  max-width: 80% !important;
   max-height: 90% !important;
 }
 
@@ -124,14 +124,13 @@ body.modal-open > :not(.modal) {
 .threeDiv {
   font-family: "Roboto Condensed";
   color: rgb(173, 184, 187);
-  /* width: 500; */
-  height: 500;
   width: 100%;
+  height: 50%;
   left: 0% !important;
   -webkit-transform: translateX(0%) !important;
   -ms-transform: translateX(0%) !important;
   transform: translateX(0%) !important;
-  overflow: auto;
+  overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
@@ -178,9 +177,6 @@ body.modal-open > :not(.modal) {
 
 pre {
   color: rgb(130, 145, 153);
-
-  padding: 5px;
-  margin: 5px;
 }
 .string {
   color: rgb(150, 150, 150);
