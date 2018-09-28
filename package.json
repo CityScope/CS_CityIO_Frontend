@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/RELNO/cityIO_Forntend#readme",
   "dependencies": {
-    "bootstrap": "^4.1.1",
+    "bootstrap": "^4.1.2",
     "eslint": "^4.19.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
