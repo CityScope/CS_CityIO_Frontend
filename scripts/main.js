@@ -51,7 +51,7 @@ async function getTables() {
   for (let i = 0; i < tables.length; i++) {
     let thisTable = await getCityIO(tables[i]);
     infoDiv(
-      i +
+      i + 1 +
         " of " +
         tables.length +
         " tables: " +
@@ -129,7 +129,7 @@ function makeMap(tablesArray) {
     let url = tablesArray[i].url;
     url = clearNames(url);
     //type in log div
-    infoDiv(i + ". " + clearNames(url));
+    infoDiv(i + 1 + ". " + clearNames(url));
 
     //create map marker
     let marker = new L.marker([tablesArray[i].lat, tablesArray[i].lon], {
