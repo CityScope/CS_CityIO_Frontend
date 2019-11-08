@@ -1,3 +1,8 @@
+____
+# cityIO Frontend is now mergerd into cityIO main repo and will not be further developed here 
+____
+
+
 # cityIO API Frontend 
 ## Live Dashboard for MIT CityScope Worldwide Deployments
 
